@@ -26,6 +26,7 @@ export default function Home() {
       <main className={`${inter.className}`}>
         <h1>Kualify App</h1>
       </main>
+      
     </>
   )
 }
