@@ -1,11 +1,29 @@
 import Image from 'next/image'
 import Head from 'next/head'
-
+import {useState, useEffect} from 'react'
 import { Inter } from 'next/font/google'
+import axios from "axios"
+import Router, { useRouter } from 'next/router';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  const handleGetUser = async () => {  
+        const credentials = { email, password } 
+        const user = await axios.post("/api/auth/checkAuth", credentials)
+        //console.log(user.data)
+        if (user.data.message == "Cookie not found") {
+          Router.push("/login")
+        }
+  }
+    useEffect(() => {
+      handleGetUser();
+
+    }, []);
   return (
     <>
       <Head>
