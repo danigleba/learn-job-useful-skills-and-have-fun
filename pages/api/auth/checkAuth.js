@@ -7,7 +7,7 @@ const crypto = require('crypto')
 
 export default async function(req, res) {
     const { cookies } = req
-    const jwt = cookies.kualifyWeb
+    const jwt = cookies.kualifyApp
     if (!jwt) {
         res.json({message: "Cookie not found"})
         return

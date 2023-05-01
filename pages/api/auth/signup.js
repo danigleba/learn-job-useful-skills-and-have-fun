@@ -38,7 +38,7 @@ export default async function (req, res) {
                 },
                 secret
                 )
-                const serializedCookie = serialize("kualifyWeb", token, {
+                const serializedCookie = serialize("kualifyApp", token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV !== "development",
                 sameSite: "strict", 

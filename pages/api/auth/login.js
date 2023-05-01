@@ -4,7 +4,6 @@ import { getFirestore, collection, doc, getDoc, getDocs, query, where} from "fir
 import crypyo from "crypto";
 import {db} from '../../../firebase/index'
 
-//THE: {allow read, write if false } HAS BEEN SET TO {true} IN THE FIREBASE CONSOLE FOR TESTING --> CHANGE BEFORE DEPLOYMENT!!!!!!!
 const secret = process.env.SECRET;
 const crypto = require('crypto')
 
@@ -35,7 +34,7 @@ export default async function (req, res) {
       },
       secret
       )
-      const serializedCookie = serialize("kualifyWeb", token, {
+      const serializedCookie = serialize("kualifyApp", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV !== "development",
         sameSite: "strict",
