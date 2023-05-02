@@ -4,6 +4,9 @@ import {useState, useEffect} from 'react'
 import { Inter } from 'next/font/google'
 import axios from "axios"
 import Router, { useRouter } from 'next/router';
+import {storage} from '../firebase/index'
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import Feed from '../components/Feed.js'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,9 +24,8 @@ export default function Home() {
         }
   }
     useEffect(() => {
-      handleGetUser();
-
-    }, []);
+      handleGetUser()
+    }, [])
   return (
     <>
       <Head>
@@ -42,7 +44,8 @@ export default function Home() {
       </Head>
 
       <main className={`${inter.className}`}>
-        <h1>Kualify App</h1>
+        <h1 className='text-3xl'>Kualify App</h1>
+        <Feed />
       </main>
       
     </>

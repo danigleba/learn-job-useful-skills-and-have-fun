@@ -15,7 +15,7 @@ export default async function (req, res) {
   const queryUserSnap = await getDocs(userSnap)
   let userFound = false
   queryUserSnap.forEach((doc) => {
-    console.log(doc.id, " => ", doc.data())
+    //console.log(doc.id, " => ", doc.data())
     try {    
       if (doc.id !== "") {
           userFound = true

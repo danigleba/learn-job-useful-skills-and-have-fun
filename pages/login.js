@@ -17,7 +17,6 @@ export default function Home() {
         e.preventDefault()
         const credentials = { email, password} 
         const user = await axios.post("/api/auth/login", credentials)
-        console.log(user)
         if (user.data.message == 'User found in database!') {
             Router.push('/')
         }
