@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [loggedIn, setLoggedIn] = useState(false)
+  //const [loggedIn, setLoggedIn] = useState(false)
 
   const handleGetUser = async () => {  
         const credentials = { email, password } 
