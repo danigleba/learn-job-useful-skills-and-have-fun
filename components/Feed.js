@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 
+
 export default function Feed() {
     const [courses, setCourses] = useState([])    
     const [cover_url, setCoverUrl] = useState("")
@@ -9,7 +10,6 @@ export default function Feed() {
         fetch(src)
           .then(response => response.json())
           .then(data => setCoverUrl(data.url))
-          console.log(cover_url)
     }, [cover_url])
 
     useEffect(() => {
@@ -29,7 +29,6 @@ export default function Feed() {
                                     <div className="rounded-2xl inline-block overflow-hidden p-4 cursor-pointer">
                                         <div className="relative group w-full overflow-hidden bg-black h-32 rounded-md h-48">
                                             <img
-                                                id="cover"
                                                 src={cover_url}
                                                 className="object-cover w-full h-full transform duration-700"
                                             />
@@ -48,6 +47,7 @@ export default function Feed() {
                                                         ))
                                                     }
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
