@@ -2,10 +2,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link';
 import React, { useRef } from 'react';
-import {useState} from "react";
 import axios from "axios"
 import Router, { useRouter } from 'next/router';
 import { Inter } from 'next/font/google'
+import { useEffect, useState } from 'react';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,7 +21,6 @@ export default function Home() {
             Router.push('/')
         }
       }
-
   return (
     <>
       <Head>

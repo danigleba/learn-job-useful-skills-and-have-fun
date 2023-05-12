@@ -43,6 +43,7 @@ export default function Home() {
 
       <main className={`${inter.className}`}>
         <h1 className='text-3xl'>Kualify App</h1>
+        <img width="100" height="100" src="https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/profile%2F1.png?alt=media&token=24e34565-6693-475a-8a72-f691e8d5ca4d"></img>
         <Feed />
       </main>
       

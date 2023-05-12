@@ -2,8 +2,7 @@ import Head from 'next/head'
 import Router, { useRouter } from 'next/router';
 import Image from 'next/image'
 import Link from 'next/link';
-import React, { useEffect, useRef } from 'react';
-import {useState} from "react";
+import { useEffect, useState } from 'react';
 import axios from "axios"
 import { Inter } from 'next/font/google'
 
@@ -15,10 +14,16 @@ export default function Home() {
     const [first_name, setFistName] = useState("")
     const [last_name, setLastName] = useState("")
     const [password, setPassword] = useState("")
+    const [language, setLanguage] = useState("")
+
+    useEffect(() => {
+        const lang = navigator.language
+        setLanguage(lang)
+    }, [])
 
     const newUser = async (e) => {  
         e.preventDefault()
-        const credentials = {email, password, first_name, last_name} 
+        const credentials = {email, password, first_name, last_name, language} 
         if (email !== "" && password !== "" && first_name && last_name !== "") {
             const user = await axios.post('/api/auth/signup', credentials)
             if (user.data.message == 'User added to database') {

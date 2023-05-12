@@ -3,15 +3,7 @@ import { useState, useEffect } from "react"
 
 export default function Feed() {
     const [courses, setCourses] = useState([])    
-    const [cover_url, setCoverUrl] = useState("")
-
-    useEffect(() => {
-        const src ='/api/courses/getCourses?cover_url=' + cover_url
-        fetch(src)
-          .then(response => response.json())
-          .then(data => setCoverUrl(data.url))
-    }, [cover_url])
-
+   
     useEffect(() => {
         const url ='/api/courses/getCourses'
         fetch(url)
@@ -29,7 +21,7 @@ export default function Feed() {
                                     <div className="rounded-2xl inline-block overflow-hidden p-4 cursor-pointer">
                                         <div className="relative group w-full overflow-hidden bg-black h-32 rounded-md h-48">
                                             <img
-                                                src={cover_url}
+                                                src={item.cover_url}
                                                 className="object-cover w-full h-full transform duration-700"
                                             />
                                         </div>

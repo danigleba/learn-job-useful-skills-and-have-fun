@@ -8,7 +8,9 @@ const secret = process.env.SECRET;
 const crypto = require('crypto')
 
 export default async function (req, res) {
-    const { email, password, first_name, last_name } = req.body
+    const seed = Math.floor(Math.random() * 4) + 1
+    const profile_url = `https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/profile%2F${seed}.png?alt=media&token=24e34565-6693-475a-8a72-f691e8d5ca4d`
+    const { email, password, first_name, last_name, language } = req.body
     const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
     //check weather email is alrady registred in database
     const usersRef = collection(db, "users")
@@ -16,7 +18,6 @@ export default async function (req, res) {
     const queryUserSnap = await getDocs(userSnap)
     let userExists = false
     queryUserSnap.forEach((doc) => {
-        //console.log(doc.id)
         if (doc.id !== "") {
             userExists = true
         }})
@@ -28,7 +29,10 @@ export default async function (req, res) {
                     email: email,
                     password: hashedPassword,
                     first_name: first_name,
-                    last_name: last_name
+                    last_name: last_name,
+                    country: language,
+                    profile_url: profile_url,
+                    premium: false
             })
             //create a cookie
             const token = sign(
