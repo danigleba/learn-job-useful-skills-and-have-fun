@@ -16,7 +16,7 @@ export default function Feed() {
             <h1 className="flex justify-center text-4xl mt-12">Find your next course</h1>
             <div className="pt-8 md:grid md:grid-cols-3 md:px-12 md:gap-4">
                         {courses?.map(item => (
-                            <a href={"/"+item.id} key={item.id}>
+                            <a href={"/"+item.id+"/start"} key={item.id}>
                                 <div className="flex justify-center mb-8 active:scale-95 transition-transform cursor-pointer hover:scale-105">
                                     <div className="rounded-2xl inline-block overflow-hidden p-4 cursor-pointer">
                                         <div className="relative group w-full overflow-hidden bg-black h-32 rounded-md h-48">
