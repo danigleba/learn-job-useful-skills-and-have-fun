@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router'
+import {useEffect, useState} from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -8,9 +9,20 @@ export default function Home() {
     const router = useRouter()
     const { id_course } = router.query
 
+    const [course, setCourse] = useState({})
     function goIndex() {
         router.push("/")
     }
+
+    useEffect(() => {
+      if (!id_course) {
+          return
+      }
+      var url = "/api/courses/getCourse?id_course=" + id_course
+      fetch(url)
+        .then(response => response.json())
+        .then(data => setCourse(data.course))
+  }, [id_course])
   return (
     <>
       <Head>
@@ -29,8 +41,12 @@ export default function Home() {
       </Head>
 
       <main className={`${inter.className}`}>
-       <h1>Congrats, you finished the course</h1>
-       <button className='bg-blue-400' onClick={goIndex}>Go to feed</button>
+        <div className='h-ful bg-gray-200 justify-center'>
+          <h1 className='text-3xl font-bold text-center'>Felicidades! <br /> Has completado el curso: <br /> {course.title}</h1>
+          <div className='pt-6'>
+            <button className='bg-red-400 w-32 h-12 rounded-md font-bold text-white' onClick={goIndex}>Go to feed</button>
+          </div>
+       </div>
       </main>
       
     </>

@@ -22,7 +22,7 @@ export default function Id() {
         playerVars: {
           start: course && course.steps && course.steps[activeStep] && course.steps[activeStep].video.start_time, 
           end: course && course.steps && course.steps[activeStep] && course.steps[activeStep].video.end_time,
-          controls: 1,
+          controls: 0,
           showinfo: 0,
           rel: 0,
           disablekb: 1,

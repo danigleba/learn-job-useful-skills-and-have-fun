@@ -13,7 +13,7 @@ export default function Feed() {
     
     return (
         <div>
-            <h1 className="flex justify-center text-4xl mt-12">Find your next course</h1>
+            <h1 className="flex justify-center text-4xl mt-12 font-bold">Find your next course</h1>
             <div className="pt-8 md:grid md:grid-cols-3 md:px-12 md:gap-4">
                         {courses?.map(item => (
                             <a href={"/"+item.id+"/start"} key={item.id}>
