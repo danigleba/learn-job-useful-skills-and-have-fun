@@ -7,12 +7,20 @@ import Router, { useRouter } from 'next/router';
 import {storage} from '../firebase/index'
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import Feed from '../components/Feed.js'
+import Navbar from '@/components/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [user, setUser] = useState([])
+   
+  useEffect(() => {
+      fetch("api/user/getUser")
+        .then(response => response.json())
+        .then(data => setUser(data.data))
+  }, [])
 
   const handleGetUser = async () => {  
         const credentials = { email, password } 
@@ -21,6 +29,7 @@ export default function Home() {
           Router.push("/login")
         }
   }
+ 
     useEffect(() => {
       handleGetUser()
     }, [])
@@ -42,7 +51,11 @@ export default function Home() {
       </Head>
 
       <main className={`${inter.className}`}>
-        <Feed />
+        <Navbar />
+        <div className='pt-12 text-[#1A1C1F]'>
+          <h1 className='text-center text-3xl font-semibold pb-8'>👋 Hola, {user.username}</h1>
+          <Feed />
+        </div>
       </main>
       
     </>

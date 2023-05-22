@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import YouTube from 'react-youtube'
+import Feed from '@/components/Feed'
+import Navbar from '@/components/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -55,33 +57,30 @@ export default function Home() {
           <meta property="og:image" content="https://example.com/og-image.jpg" />
           
       </Head>
-
-      <main className="bg-gray-200">
-                <div className="pt-6 justify-center">
-                    <div className="pl-10 pr-10 md:flex justify-between">
-                        <h2 className="text-4xl font-bold content-center">{course.title}</h2>
-                        {course.tags?.map(item => (
-                            <a key={item}>
-                               <div className="inline-block">
-                                  <p className="tag" >{item}</p>
-                                </div>
-                            </a>))} 
-                    </div>
-                    <div className="justify-center p-6 md:flex md:gap-8">
-                        <div className="bg-white md:w-1/2 pl-8 pr-8 pt-6 rounded-lg bg-blue-300">   
-                            <div className="pt-4">
-                                <a className="">{course.description}</a>
-                            </div> 
-                            <div className="w-28">
-                                <button onClick={startCourse} className="bg-blue-500 w-28 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Empezar curso</button>
-                            </div>   
+        <main className="text-center text-[#1A1C1F]">
+            <Navbar />
+                    <div className="justify-center">
+                        <div className="pl-10 pr-10 pb-6">
+                            {course.tags?.map(item => (
+                                <a key={item}>
+                                <div className="inline-block pb-4">
+                                    <p className="font-semibold py-1.5 px-6 badge rounded-md bg-[#1A1C1F] cursor-pointer text-white" >{item}</p>
+                                    </div>
+                                </a>))} 
+                            <h2 className="text-4xl font-bold content-center">{course.title}</h2>
+                            <h2 className="text-xl font-semibold pt-4">Introducción</h2>
                         </div>
-                        <div className="rounded-lg overflow-hidden md:h-full">
-                            <YouTube opts={videoOpts} videoId={course && course.intro_video && course.intro_video.url}></YouTube>
+                        <div className="justify-center p-6 flex md:gap-8">
+                            <div className="rounded-lg overflow-hidden md:w-max shadow-md">
+                                <YouTube opts={videoOpts} videoId={course && course.intro_video && course.intro_video.url}/>
+                            </div>
                         </div>
+                        <div className="pb-20 pt-6">
+                            <button className="bg-[#1A1C1F] text-white w-96 py-3 rounded-md hover:bg-[#2C3036] font-bold shadow-md" onClick={startCourse}>Empezar curso</button>
+                        </div>
+                        <Feed />
                     </div>
-                </div>
-            </main>
+        </main>
     </>
   )
 }

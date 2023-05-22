@@ -5,6 +5,7 @@ import Image from "next/image"
 import axios from "axios"
 import YouTube from 'react-youtube'
 import { Dialog, Transition } from '@headlessui/react'
+import Navbar from '@/components/Navbar'
 
 export default function Id() {
     const router = useRouter()
@@ -67,7 +68,7 @@ export default function Id() {
 
     useEffect(() => {
         if ((activeStep +1) > courseLenght) {
-            router.push(`/${id_course}/end`)
+            router.push(`/${id_course}/outro`)
         }}, [activeStep])
     
     function closeModal() {
@@ -85,30 +86,27 @@ export default function Id() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/icon.png" />
             </Head>    
-            <main className="bg-gray-200">
-                <div className="pt-6 justify-center">
-                    <div className="pl-10 pr-10 md:flex justify-between">
-                        <h2 className="text-4xl font-bold content-center">{course.title}</h2>
+            <main className="text-center">
+                <Navbar />
+                <div className="justify-center">
+                    <div className="pl-10 pr-10 pb-6">
                         {course.tags?.map(item => (
                             <a key={item}>
-                               <div className="inline-block">
-                                  <p className="tag" >{item}</p>
+                               <div className="inline-block pb-4 text-gray-800">
+                                  <p className="font-semibold py-1.5 px-6 badge rounded-md bg-[#1A1C1F] cursor-pointer text-white">{item}</p>
                                 </div>
                             </a>))} 
+                        <h2 className="text-4xl font-bold content-center text-gray-800">{course.title}</h2>
+                        <h2 className="text-xl text-gray-800 font-semibold pt-4">{activeStep + 1}. {course && course.steps && course.steps[activeStep] && course.steps[activeStep].title}</h2>
                     </div>
-                    <div className="justify-center p-6 md:flex md:gap-8">
-                        <div className="bg-white md:w-1/2 pl-8 pr-8 pt-6 rounded-lg bg-blue-300">   
-                            <h2 className="text-2xl font-bold pt-4">{activeStep + 1}. {course && course.steps && course.steps[activeStep] && course.steps[activeStep].title}</h2>
-                            <div className="pt-4">
-                                <a className="">{course && course.steps && course.steps[activeStep] && course.steps[activeStep].description}</a>
-                            </div>
-                            <div className="w-28">
-                                <button onClick={openModal} className="bg-blue-500 w-28 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lo tengo!</button>
-                            </div>     
-                        </div>
-                        <div className="rounded-lg overflow-hidden md:h-full">
+                    <div className="justify-center p-6 flex md:gap-8">
+                        <div className="rounded-lg overflow-hidden md:w-max shadow-md">
                             <YouTube key={videoKey} opts={videoOpts} videoId={course && course.steps && course.steps[activeStep] && course.steps[activeStep].video.url}/>
                         </div>
+                    </div>
+                    <div className="pb-16 pt-6">
+                        <button className="bg-[#1A1C1F] text-white w-96 py-3 rounded-md hover:bg-[#2C3036] font-bold shadow-md" onClick={openModal}>Continuar</button>
+                    </div>
                         <Transition appear show={isOpen} as={Fragment}>
                             <Dialog as="div" className="relative z-10" onClose={closeModal}>
                             <Transition.Child
@@ -123,7 +121,7 @@ export default function Id() {
                                 <div className="fixed inset-0 bg-black bg-opacity-25" />
                             </Transition.Child>
 
-                            <div className="fixed inset-0 overflow-y-auto">
+                            <div className="fixed inset-0 overflow-y-auto w-full">
                                 <div className="flex min-h-full items-center justify-center p-4 text-center">
                                 <Transition.Child
                                     as={Fragment}
@@ -134,32 +132,34 @@ export default function Id() {
                                     leaveFrom="opacity-100 scale-100"
                                     leaveTo="opacity-0 scale-95"
                                 >
-                                    <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                    <Dialog.Panel className="w-2/3 wtransform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle transition-all">
                                         <Dialog.Title
                                             as="h5"
-                                            className="text-2xl font-bold leading-6 text-gray-900 text-center"
+                                            className="text-2xl font-bold leading-6 text-gray-900 text-center pt-2"
                                         >
-                                            Un repasito...
+                                            Antes de continuar...
                                         </Dialog.Title>
                                         
-                                        <div>
-                                            <h2 className="text-center text-xl pt-4">¿Por que el binario es la base de la programación?</h2>
+                                        <div className="pt-2">
+                                            <h2 className="text-center text-xl font-semibold  pt-4">¿Por que el binario es la base de la programación?</h2>
                                         </div>
                                         <div className="justify-center">
-                                            <div className="p-2 pt-8">
-                                                <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:bg-green-400">Example for 1 answer</button>
+                                            <div className="grid content-center grid-cols-2 mx-2 pt-12">
+                                                <div className="p-2 text-right">
+                                                    <button className="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:bg-green-400">Example for 1 answer</button>
+                                                </div>
+                                                <div className="p-2 text-left">
+                                                    <button className="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:bg-green-400">Example for 1 answer</button>
+                                                </div>
+                                                <div className="p-2 text-right">
+                                                    <button className="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:bg-green-400">Example for 1 answer</button>
+                                                </div>
+                                                <div className="p-2 text-left">
+                                                    <button className="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:bg-green-400">Example for 1 answer</button>
+                                                </div>
                                             </div>
-                                            <div className="p-2">
-                                                <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:bg-green-400">Example for 1 answer</button>
-                                            </div>
-                                            <div className="p-2">
-                                                <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:bg-green-400">Example for 1 answer</button>
-                                            </div>
-                                            <div className="p-2">
-                                                <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:bg-green-400">Example for 1 answer</button>
-                                            </div>
-                                            <div className="p-2">
-                                                <button onClick={nextStep} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Vamos!</button>
+                                            <div className="p-2 flex justify-center">
+                                                <button onClick={nextStep} className="bg-[#1A1C1F] text-white w-96 py-3 rounded-md hover:bg-[#2C3036] font-bold shadow-md">Vamos!</button>
                                             </div>
                                         </div>
                                     </Dialog.Panel>
@@ -168,7 +168,6 @@ export default function Id() {
                             </div>
                             </Dialog>
                         </Transition>
-                    </div>
                 </div>
             </main>
         </>

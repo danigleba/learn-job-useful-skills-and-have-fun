@@ -12,14 +12,14 @@ export default function Feed() {
     }, [])
     
     return (
-        <div>
-            <h1 className="flex justify-center text-4xl mt-12 font-bold">Find your next course</h1>
-            <div className="pt-8 md:grid md:grid-cols-3 md:px-12 md:gap-4">
+        <div className="text-[#1A1C1F]">
+            <h1 className="flex justify-center  text-center text-4xl  font-bold">¿Qué quieres aprender hoy?</h1>
+            <div className="pt-12 pb-12 md:grid md:grid-cols-3 md:px-12 md:gap-4">
                         {courses?.map(item => (
-                            <a href={"/"+item.id+"/start"} key={item.id}>
+                            <a href={"/"+item.id+"/intro"} key={item.id}>
                                 <div className="flex justify-center mb-8 active:scale-95 transition-transform cursor-pointer hover:scale-105">
                                     <div className="rounded-2xl inline-block overflow-hidden p-4 cursor-pointer">
-                                        <div className="relative group w-full overflow-hidden bg-black h-32 rounded-md h-48">
+                                        <div className="shadow-md relative group w-full overflow-hidden bg-black h-32 rounded-md h-48">
                                             <img
                                                 src={item.cover_url}
                                                 className="object-cover w-full h-full transform duration-700"
@@ -27,15 +27,15 @@ export default function Feed() {
                                         </div>
                                         <div className="p-2 rounded-b-2xl">
                                             <div className="text-center px-3 pb-4 pt-2">
-                                                <h1 className="font-bold text-2xl text-black mb-2 cursor-pointer">
+                                                <h1 className="font-bold text-2xl mb-2 cursor-pointer">
                                                     {item.title}
                                                 </h1>
                                             </div>
-                                            <div className="flex justify-center pb-3 text-[#f4f4f4]">
-                                                <div className="text-center mr-3 border-r last:border-r-0 gap-4 cursor-pointer ">
+                                            <div className="flex justify-center pb-3">
+                                                <div className="text-center border-rast:border-r-0 gap-4 cursor-pointer">
                                                     {
                                                         item.tags.map(tags => (
-                                                            <span key={tags} className="font-semibold pr-4 pl-4 pt-1.5 pb-1.5 badge mr-2 rounded-md bg-[#f4f4f4] cursor-pointer text-black">{tags}</span>
+                                                            <span key={tags} className="font-semibold py-2 px-6 badge mr-2 rounded-md bg-[#1A1C1F] cursor-pointer text-white">{tags}</span>
                                                         ))
                                                     }
                                                 </div>

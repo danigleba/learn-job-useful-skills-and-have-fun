@@ -2,6 +2,8 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router'
 import {useEffect, useState} from 'react'
+import Feed from "@/components/Feed"
+import Navbar from '@/components/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -41,11 +43,14 @@ export default function Home() {
       </Head>
 
       <main className={`${inter.className}`}>
-        <div className='h-ful bg-gray-200 justify-center'>
-          <h1 className='text-3xl font-bold text-center'>Felicidades! <br /> Has completado el curso: <br /> {course.title}</h1>
-          <div className='pt-6'>
-            <button className='bg-red-400 w-32 h-12 rounded-md font-bold text-white' onClick={goIndex}>Go to feed</button>
+        <Navbar />
+        <div className='justify-center pt-12 text-[#1A1C1F]'>
+          <h1 className='text-3xl font-bold text-center'>¡Felicidades! 🎉</h1>
+            <h1 className='text-xl text-center font-semibold pt-2'>Has completado el curso: {course.title}</h1>
+          <div className='pt-8 pb-16 flex justify-center'>
+            <button className="bg-[#1A1C1F] text-white w-96 py-3 rounded-md hover:bg-[#2C3036] font-bold shadow-md" onClick={goIndex}>Volver</button>
           </div>
+          <Feed />
        </div>
       </main>
       
