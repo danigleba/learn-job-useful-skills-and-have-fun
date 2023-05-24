@@ -17,7 +17,7 @@ export default async function (req, res) {
     try {
     queryUserSnap.forEach((doc) => {
         res.status(200).json({data: doc.data()})
-        //console.log(doc.id, " => ", doc.data())
+        return
     })
         } catch (error) {
             console.log(error)

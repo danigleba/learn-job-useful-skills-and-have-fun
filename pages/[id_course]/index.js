@@ -17,9 +17,60 @@ export default function Id() {
     const [isOpen, setIsOpen] = useState(false)
     const [videoKey, setVideoKey] = useState("")
     const courseLenght = course && course.steps && course.steps.length
-    
+
+    const [videoWidth, setVideoWidth] = useState("")
+    const [videoHeight, setVideoHeight] = useState("")
+
+    const [screenWidth, setScreenWidth] = useState(null);
+    const [screenBreackpoint, setScreenBreackpoint] = useState("")
+
+    useEffect(() => {
+      const handleResize = () => {
+        setScreenWidth(window.innerWidth);
+      };
+  
+      setScreenWidth(window.innerWidth);
+  
+      window.addEventListener('resize', handleResize);
+  
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
+  
+    useEffect(() => {
+      if (screenWidth && screenWidth < 768) {
+        setScreenBreackpoint("sm")
+        setVideoWidth(screenWidth - 40)
+        setVideoHeight((screenWidth - 40) / (16/9))
+        setVideoKey(videoKey + 1)
+      } else if (768 < screenWidth && screenWidth < 1024) {
+        setScreenBreackpoint("md")
+      } else {
+        setScreenBreackpoint("lg")
+      }
+    }, [screenWidth]);
+
+    useEffect(() => {
+      if (screenBreackpoint == "sm") {
+        setVideoWidth(screenWidth - 40)
+        setVideoHeight((screenWidth - 40) / (16/9))
+        setVideoKey(videoKey + 1)
+      } else if (screenBreackpoint == "md") {
+        setVideoWidth("625")
+        setVideoHeight("351.5625")
+        setVideoKey(videoKey + 1)
+      } else if (screenBreackpoint == "lg") {
+        setVideoWidth("700")
+        setVideoHeight("393.75")
+        setVideoKey(videoKey + 1)
+      }
+
+    }, [screenBreackpoint]);
 
     const videoOpts = {
+        width: videoWidth,
+        height: videoHeight,
         playerVars: {
           start: course && course.steps && course.steps[activeStep] && course.steps[activeStep].video.start_time, 
           end: course && course.steps && course.steps[activeStep] && course.steps[activeStep].video.end_time,
@@ -87,8 +138,8 @@ export default function Id() {
                 <link rel="icon" href="/icon.png" />
             </Head>    
             <main className="text-center">
-                <Navbar />
-                <div className="justify-center">
+            <Navbar />
+                <div className="justify-center pt-12">
                     <div className="pl-10 pr-10 pb-6">
                         {course.tags?.map(item => (
                             <a key={item}>
@@ -100,12 +151,12 @@ export default function Id() {
                         <h2 className="text-xl text-gray-800 font-semibold pt-4">{activeStep + 1}. {course && course.steps && course.steps[activeStep] && course.steps[activeStep].title}</h2>
                     </div>
                     <div className="justify-center p-6 flex md:gap-8">
-                        <div className="rounded-lg overflow-hidden md:w-max shadow-md">
+                        <div className="rounded-lg overflow-hidden sm:w-max shadow-md">
                             <YouTube key={videoKey} opts={videoOpts} videoId={course && course.steps && course.steps[activeStep] && course.steps[activeStep].video.url}/>
                         </div>
                     </div>
-                    <div className="pb-16 pt-6">
-                        <button className="bg-[#1A1C1F] text-white w-96 py-3 rounded-md hover:bg-[#2C3036] font-bold shadow-md" onClick={openModal}>Continuar</button>
+                    <div className="pb-16 pt-6 mx-4">
+                        <button className="bg-[#1A1C1F] text-white w-full px-6 sm:w-96 py-3 rounded-md hover:bg-[#2C3036] font-bold shadow-md" onClick={openModal}>Continuar</button>
                     </div>
                         <Transition appear show={isOpen} as={Fragment}>
                             <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -121,7 +172,7 @@ export default function Id() {
                                 <div className="fixed inset-0 bg-black bg-opacity-25" />
                             </Transition.Child>
 
-                            <div className="fixed inset-0 overflow-y-auto w-full">
+                            <div className="fixed inset-0 overflow-y-auto w-full ">
                                 <div className="flex min-h-full items-center justify-center p-4 text-center">
                                 <Transition.Child
                                     as={Fragment}
@@ -132,36 +183,36 @@ export default function Id() {
                                     leaveFrom="opacity-100 scale-100"
                                     leaveTo="opacity-0 scale-95"
                                 >
-                                    <Dialog.Panel className="w-2/3 wtransform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle transition-all">
+                                    <Dialog.Panel className="sm:w-full md:w-1/2 wtransform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle transition-all">
                                         <Dialog.Title
                                             as="h5"
-                                            className="text-2xl font-bold leading-6 text-gray-900 text-center pt-2"
+                                            className="text-2xl font-bold leading-6 text-[#1A1C1F] text-center pt-2"
                                         >
                                             Antes de continuar...
                                         </Dialog.Title>
                                         
-                                        <div className="pt-2">
-                                            <h2 className="text-center text-xl font-semibold  pt-4">¿Por que el binario es la base de la programación?</h2>
-                                        </div>
-                                        <div className="justify-center">
-                                            <div className="grid content-center grid-cols-2 mx-2 pt-12">
-                                                <div className="p-2 text-right">
-                                                    <button className="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:bg-green-400">Example for 1 answer</button>
-                                                </div>
-                                                <div className="p-2 text-left">
-                                                    <button className="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:bg-green-400">Example for 1 answer</button>
-                                                </div>
-                                                <div className="p-2 text-right">
-                                                    <button className="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:bg-green-400">Example for 1 answer</button>
-                                                </div>
-                                                <div className="p-2 text-left">
-                                                    <button className="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:bg-green-400">Example for 1 answer</button>
-                                                </div>
+                                            <div className="pt-2">
+                                                <h2 className="text-center text-xl font-semibold  pt-4">¿Por que el binario es la base de la programación?</h2>
                                             </div>
-                                            <div className="p-2 flex justify-center">
-                                                <button onClick={nextStep} className="bg-[#1A1C1F] text-white w-96 py-3 rounded-md hover:bg-[#2C3036] font-bold shadow-md">Vamos!</button>
-                                            </div>
-                                        </div>
+                                            <div className="justify-center text-[#1A1C1F]">
+                                                <div className="grid content-center grid-cols-2 mx-2 pt-12">
+                                                    <div className="p-2 pl-0 text-right">
+                                                        <button className="w-full bg-[#EDEFF2] hover:bg-[#1A1C1F] hover:text-white  font-bold py-4 px-4 text-center rounded">Examsssple for</button>
+                                                    </div>
+                                                    <div className="p-2 pr-0 text-left">
+                                                        <button className="w-full bg-[#EDEFF2] hover:bg-[#1A1C1F] hover:text-white font-bold py-4 px-4 rounded focus:bg-green-400">Manjera y operar datos</button>
+                                                    </div>
+                                                    <div className="p-2 pl-0 text-right">
+                                                        <button className="w-full bg-[#EDEFF2] hover:bg-[#1A1C1F] hover:text-white  font-bold py-4 px-4 rounded focus:bg-green-400">Example for 1 answer</button>
+                                                    </div>
+                                                    <div className="p-2 pr-0 text-left">
+                                                        <button className="w-full bg-[#EDEFF2] hover:bg-[#1A1C1F] hover:text-white font-bold py-4 px-4 rounded focus:bg-green-400">Example for 1 answer</button>
+                                                    </div>
+                                                </div>
+                                                <div className="p-2 pt-12 flex justify-center w-full">
+                                                    <button onClick={nextStep} className="bg-[#1A1C1F] w-full text-white w-96 py-3 rounded-md hover:bg-[#2C3036] font-bold shadow-md">delete this later</button>
+                                                </div>   
+                                            </div>       
                                     </Dialog.Panel>
                                 </Transition.Child>
                                 </div>

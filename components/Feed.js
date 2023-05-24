@@ -12,9 +12,9 @@ export default function Feed() {
     }, [])
     
     return (
-        <div className="text-[#1A1C1F]">
-            <h1 className="flex justify-center  text-center text-4xl  font-bold">¿Qué quieres aprender hoy?</h1>
-            <div className="pt-12 pb-12 md:grid md:grid-cols-3 md:px-12 md:gap-4">
+        <div className="text-[#1A1C1F] mx-4 sm:mx-12">
+            <h1 className="flex justify-center text-center text-4xl font-bold">¿Qué quieres aprender hoy?</h1>
+            <div className="pt-12 pb-12 md:grid md:grid-cols-3  md:gap-4">
                         {courses?.map(item => (
                             <a href={"/"+item.id+"/intro"} key={item.id}>
                                 <div className="flex justify-center mb-8 active:scale-95 transition-transform cursor-pointer hover:scale-105">

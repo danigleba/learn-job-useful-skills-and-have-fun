@@ -4,7 +4,7 @@ export default function Navbar() {
     const [user, setUser] = useState([])
    
     useEffect(() => {
-        fetch("api/user/getUser")
+        fetch("/api/user/getUser")
           .then(response => response.json())
           .then(data => setUser(data.data))
     }, [])
