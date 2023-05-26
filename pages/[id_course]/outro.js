@@ -1,17 +1,21 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import {useEffect, useState} from 'react'
 import Feed from "@/components/Feed"
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
+import axios from "axios"
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
     const router = useRouter()
     const { id_course } = router.query
-
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     const [course, setCourse] = useState({})
+
     function goIndex() {
         router.push("/")
     }
@@ -25,6 +29,18 @@ export default function Home() {
         .then(response => response.json())
         .then(data => setCourse(data.course))
   }, [id_course])
+
+  const handleGetUser = async () => {  
+    const credentials = { email, password } 
+    const user = await axios.post("/api/auth/checkAuth", credentials)
+    if (user.data.message == "Cookie not found") {
+      Router.push("/login")
+    }
+  }
+
+  useEffect(() => {
+    handleGetUser()
+  }, [])
   return (
     <>
       <Head>
@@ -32,7 +48,7 @@ export default function Home() {
           <title>Kualify App</title>
           <meta name="description" content="Your meta description goes here" />
           <meta name="author" content="Kualify App" />
-          <link rel="icon" href="/path/to/favicon.ico" />
+          <link rel="icon" href="/icon.png" />
 
           <link rel="canonical" href="https://app.kualify.es/" />
 
@@ -53,6 +69,7 @@ export default function Home() {
             </div>
           </div>
           <Feed />
+          <Footer />
        </div>
       </main>
       

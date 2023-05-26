@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import axios from "axios"
 import { Inter } from 'next/font/google'
+import Footer from '@/components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,6 +15,8 @@ export default function Home() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [language, setLanguage] = useState("")
+    const [wrongUserAlert, setWrongUserAlert] = useState("")
+
 
     useEffect(() => {
         const lang = navigator.language
@@ -27,7 +30,11 @@ export default function Home() {
             const user = await axios.post('/api/auth/signup', credentials)
             if (user.data.message == 'User added to database') {
                 Router.push('/')
+            } else {
+                setWrongUserAlert("Este usuario ya existe")
             }
+        } else {
+            setWrongUserAlert("Responde a todo para crear tu cuenta")
         }
     } 
     return (
@@ -36,7 +43,7 @@ export default function Home() {
           <title>Kualify App</title>
           <meta name="description" content="Your meta description goes here" />
           <meta name="author" content="Kualify App" />
-          <link rel="icon" href="/path/to/favicon.ico" />
+          <link rel="icon" href="/icon.png" />
           <link rel="canonical" href="https://app.kualify.es/" />
           <meta property="og:title" content="Kualify App" />
           <meta propertƒy="og:description" content="Your meta description goes here" />
@@ -59,18 +66,24 @@ export default function Home() {
                             <label htmlFor="email" className="block mb-2 text-sm font-medium dark:text-white">Correo</label>
                             <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="nombre@gmail.com" required="" />
                         </div>
-                        <div>
+                        <div className='pb-2'>
                             <label htmlFor="password" className="block mb-2 text-sm font-medium dark:text-white">Contraseña</label>
                             <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                         </div>
-                        <div className='flex-1 flex flex-col items-center pt-4'>
+                        <div className='h-0 text-center'>
+                            <a className='text-sm text-red-400'>{wrongUserAlert}</a>
+                        </div>
+                        <div className='flex-1 flex flex-col items-center pt-2'>
                             <button onClick={newUser} type="submit" className='shadow-md bg-[#1A1C1F] rounded-md pt-2 pb-2 w-full text-white font-bold'>Crear mi cuenta</button>
                         </div>
-                        <p className="text-center text-sm font-light text-gray-500 dark:text-gray-400">
-                            Ya tienes una cuenta? <a href="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Entra aquí</a>
+                        <p className="pt-2 md:pt-0 text-center text-sm font-light text-gray-500 dark:text-gray-400">
+                            ¿Ya tienes una cuenta? <a href="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Entra aquí</a>
                         </p>
                     </form>
                 </div>
+            </div>
+            <div className='w-full absolute bottom-0' >
+                <Footer />
             </div>
         </div>
     </section>

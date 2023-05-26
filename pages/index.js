@@ -8,6 +8,7 @@ import {storage} from '../firebase/index'
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import Feed from '../components/Feed.js'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -40,7 +41,7 @@ export default function Home() {
           <title>Kualify App</title>
           <meta name="description" content="Your meta description goes here" />
           <meta name="author" content="Kualify App" />
-          <link rel="icon" href="/path/to/favicon.ico" />
+          <link rel="icon" href="/icon.png" />
 
           <link rel="canonical" href="https://app.kualify.es/" />
 
@@ -50,11 +51,12 @@ export default function Home() {
           
       </Head>
 
-      <main className={`${inter.className}`}>
+      <main>
         <Navbar />
         <div className='pt-12 text-[#1A1C1F]'>
           <h1 className='text-center text-3xl font-semibold pb-8'>👋 Hola, {user.username}</h1>
           <Feed />
+          <Footer />
         </div>
       </main>
       

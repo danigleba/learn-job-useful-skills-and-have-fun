@@ -6,6 +6,7 @@ import axios from "axios"
 import YouTube from 'react-youtube'
 import { Dialog, Transition } from '@headlessui/react'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
 export default function Id() {
     const router = useRouter()
@@ -14,10 +15,15 @@ export default function Id() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [activeStep, setActiveStep] = useState(0)
+    const [quiz, setQuiz] = useState({})
     const [isOpen, setIsOpen] = useState(false)
     const [videoKey, setVideoKey] = useState("")
     const courseLenght = course && course.steps && course.steps.length
 
+    const [answColor, setAnswColor] = useState("")
+    const botton_style = `focus:${answColor} w-full h-full bg-[#EDEFF2] hover:bg-[#1A1C1F] hover:text-white  font-bold py-4 px-4 text-center rounded`
+
+    //Video loading + video responsive
     const [videoWidth, setVideoWidth] = useState("")
     const [videoHeight, setVideoHeight] = useState("")
 
@@ -25,16 +31,14 @@ export default function Id() {
     const [screenBreackpoint, setScreenBreackpoint] = useState("")
 
     useEffect(() => {
+      handleGetUser()
       const handleResize = () => {
         setScreenWidth(window.innerWidth);
-      };
-  
+      }
       setScreenWidth(window.innerWidth);
-  
-      window.addEventListener('resize', handleResize);
-  
+      window.addEventListener('resize', handleResize)
       return () => {
-        window.removeEventListener('resize', handleResize);
+        window.removeEventListener('resize', handleResize)
       };
     }, []);
   
@@ -84,10 +88,15 @@ export default function Id() {
         },
       };
 
-    function nextStep() {
-        setActiveStep(activeStep + 1)
-        setIsOpen(false)
-        setVideoKey(videoKey + 1)
+    //Quiz
+    function getQuiz() {
+        if (!id_course) {
+            return
+        }
+        var url = "/api/quizzes/getQuiz?id_course=" + id_course
+        fetch(url)
+          .then(response => response.json())
+          .then(data => setQuiz(data.data))
     }
 
     function goIndex() {
@@ -97,13 +106,13 @@ export default function Id() {
     const handleGetUser = async () => {  
         const credentials = { email, password } 
         const user = await axios.post("/api/auth/checkAuth", credentials)
-        console.log(email)
         if (user.data.message == "Cookie not found") {
           Router.push("/login")
         }
     }
 
     useEffect(() => {
+        getQuiz()
         if (!id_course) {
             return
         }
@@ -112,10 +121,6 @@ export default function Id() {
           .then(response => response.json())
           .then(data => setCourse(data.course))
     }, [id_course])
-
-    useEffect(() => {
-        handleGetUser()
-    }, [])
 
     useEffect(() => {
         if ((activeStep +1) > courseLenght) {
@@ -128,7 +133,25 @@ export default function Id() {
     
       function openModal() {
         setIsOpen(true)
+
       }
+
+      const getAnswer = (e) => {
+        if (e.target.value == "true") {
+            setIsOpen(false)
+            setAnswColor("bg-green-400")
+            console.log(answColor)
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+                setActiveStep(activeStep + 1)
+                setVideoKey(videoKey + 1)
+                
+              }, 300)
+        } else {
+            setAnswColor("bg-red-400")
+            console.log(answColor)
+        }
+    }
     return (
         <>
             <Head>
@@ -186,32 +209,41 @@ export default function Id() {
                                     <Dialog.Panel className="sm:w-full md:w-1/2 wtransform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle transition-all">
                                         <Dialog.Title
                                             as="h5"
-                                            className="text-2xl font-bold leading-6 text-[#1A1C1F] text-center pt-2"
+                                            className="text-xl font-semibold leading-6 text-[#1A1C1F] text-center pt-2"
                                         >
                                             Antes de continuar...
                                         </Dialog.Title>
                                         
                                             <div className="pt-2">
-                                                <h2 className="text-center text-xl font-semibold  pt-4">¿Por que el binario es la base de la programación?</h2>
+                                                <h2 className="text-center text-2xl font-bold  pt-4">{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].title}</h2>
                                             </div>
                                             <div className="justify-center text-[#1A1C1F]">
                                                 <div className="grid content-center grid-cols-2 mx-2 pt-12">
                                                     <div className="p-2 pl-0 text-right">
-                                                        <button className="w-full bg-[#EDEFF2] hover:bg-[#1A1C1F] hover:text-white  font-bold py-4 px-4 text-center rounded">Examsssple for</button>
+                                                        <button 
+                                                        onClick={getAnswer}
+                                                        value={quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[0] && quiz.questions[activeStep].answers[0].value}
+                                                        className={botton_style}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[0].title}</button>
                                                     </div>
                                                     <div className="p-2 pr-0 text-left">
-                                                        <button className="w-full bg-[#EDEFF2] hover:bg-[#1A1C1F] hover:text-white font-bold py-4 px-4 rounded focus:bg-green-400">Manjera y operar datos</button>
+                                                        <button 
+                                                        onClick={getAnswer}
+                                                        value={quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[1] && quiz.questions[activeStep].answers[1].value}
+                                                        className={botton_style}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[1].title}</button>
                                                     </div>
                                                     <div className="p-2 pl-0 text-right">
-                                                        <button className="w-full bg-[#EDEFF2] hover:bg-[#1A1C1F] hover:text-white  font-bold py-4 px-4 rounded focus:bg-green-400">Example for 1 answer</button>
+                                                        <button 
+                                                        onClick={getAnswer}
+                                                        value={quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[2] && quiz.questions[activeStep].answers[2].value}                                                        
+                                                        className={botton_style}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[2].title}</button>
                                                     </div>
                                                     <div className="p-2 pr-0 text-left">
-                                                        <button className="w-full bg-[#EDEFF2] hover:bg-[#1A1C1F] hover:text-white font-bold py-4 px-4 rounded focus:bg-green-400">Example for 1 answer</button>
+                                                        <button 
+                                                        onClick={getAnswer}
+                                                        value={quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[3] && quiz.questions[activeStep].answers[3].value}                                                           
+                                                        className={botton_style}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[3].title}</button>
                                                     </div>
                                                 </div>
-                                                <div className="p-2 pt-12 flex justify-center w-full">
-                                                    <button onClick={nextStep} className="bg-[#1A1C1F] w-full text-white w-96 py-3 rounded-md hover:bg-[#2C3036] font-bold shadow-md">delete this later</button>
-                                                </div>   
                                             </div>       
                                     </Dialog.Panel>
                                 </Transition.Child>
@@ -220,6 +252,7 @@ export default function Id() {
                             </Dialog>
                         </Transition>
                 </div>
+                <Footer />
             </main>
         </>
     )

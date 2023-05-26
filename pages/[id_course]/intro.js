@@ -1,16 +1,20 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { useState, useEffect, useRef } from 'react'
 import YouTube from 'react-youtube'
 import Feed from '@/components/Feed'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
+import axios from "axios"
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
     const router = useRouter()
     const { id_course } = router.query
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     const [course, setCourse] = useState({})
     const [videoKey, setVideoKey] = useState("")
 
@@ -66,7 +70,7 @@ export default function Home() {
 
 
     function startCourse() {
-        router.push(`/${id_course}`);
+        Router.push("/" + id_course)
     } 
    
     useEffect(() => {
@@ -79,21 +83,29 @@ export default function Home() {
           .then(data => setCourse(data.course))
         }
     }, [id_course])
+
+      const handleGetUser = async () => {  
+        const credentials = { email, password } 
+        const user = await axios.post("/api/auth/checkAuth", credentials)
+        if (user.data.message == "Cookie not found") {
+          Router.push("/login")
+        }
+  }
+
+    useEffect(() => {
+      handleGetUser()
+    }, [])
   return (
     <>
       <Head>
-        
           <title>Kualify App</title>
           <meta name="description" content="Your meta description goes here" />
           <meta name="author" content="Kualify App" />
-          <link rel="icon" href="/path/to/favicon.ico" />
-
+          <link rel="icon" href="/icon.png" />
           <link rel="canonical" href="https://app.kualify.es/" />
-
           <meta property="og:title" content="Kualify App" />
           <meta property="og:description" content="Your meta description goes here" />
           <meta property="og:image" content="https://example.com/og-image.jpg" />
-          
       </Head>
         <main className="text-center text-[#1A1C1F]">
             <Navbar />
@@ -135,6 +147,7 @@ export default function Home() {
                             <button className="bg-[#1A1C1F] text-white w-full px-6 sm:w-96 py-3 rounded-md hover:bg-[#2C3036] font-bold shadow-md" onClick={startCourse}>Empezar curso</button>
                         </div>
                         <Feed />
+                        <Footer />
                     </div>
         </main>
     </>
