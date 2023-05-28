@@ -22,6 +22,7 @@ export default function Id() {
           .then(response => response.json())
           .then(data => setCourse(data.course))
     }, [id_course])
+    
     return (
         <>
             <Head>

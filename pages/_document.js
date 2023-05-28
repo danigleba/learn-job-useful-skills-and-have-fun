@@ -5,7 +5,9 @@ import { Html, Head, Main, NextScript } from 'next/document'
 export default function Document() {
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+        <link rel="manifest" href="/manifest/manifest.json" />
+      </Head>
       <body className='bg-[#F4F4F5]'>
         <Main />
         <NextScript />
