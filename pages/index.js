@@ -31,7 +31,7 @@ export default function Home() {
           <title>Kualify App</title>
           <meta name="description" content="Your meta description goes here" />
           <meta name="author" content="Kualify App" />
-          <link rel="icon" href="/path/to/favicon.ico" />
+          <link rel="icon" href="/kualify_logo.png" />
 
           <link rel="canonical" href="https://app.kualify.es/" />
 

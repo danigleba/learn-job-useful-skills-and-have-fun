@@ -1,0 +1,9 @@
+{
+    "theme_color" : "#fff",
+    "background_color" : "#fff",
+    "display" : "standalone",
+    "scope" : "/",
+    "start_url" : "/",
+    "name" : "Kualify",
+    "short_name" : "Kualify"
+}
