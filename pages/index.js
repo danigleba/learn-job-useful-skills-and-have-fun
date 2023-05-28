@@ -39,19 +39,29 @@ export default function Home() {
           <title>Kualify App</title>
           <meta name="description" content="Your meta description goes here" />
           <meta name="author" content="Kualify App" />
+<<<<<<< HEAD
           <link rel="icon" href="/icon.png" />
+=======
+          <link rel="icon" href="/kualify_logo.png" />
+
+>>>>>>> 5c614a77f31efec2a01f42d126b4acdb29591f8d
           <link rel="canonical" href="https://app.kualify.es/" />
           <meta property="og:title" content="Kualify App" />
           <meta property="og:description" content="Your meta description goes here" />
           <meta property="og:image" content="https://example.com/og-image.jpg" />
       </Head>
       <main>
+        
         <Navbar />
         <div className='pt-12 text-[#1A1C1F]'>
           <h1 className='text-center text-3xl font-semibold pb-8'>👋 Hola, {user.username}</h1>
           <Feed />    
         </div>
+<<<<<<< HEAD
         <Footer />
+=======
+
+>>>>>>> 5c614a77f31efec2a01f42d126b4acdb29591f8d
       </main>
       
     </>
