@@ -24,6 +24,7 @@ export default function Home() {
         } else {
             setWrongPassAlert("Este email no tiene una cuenta de Kualify")
         }
+        
       }
   return (
     <>
