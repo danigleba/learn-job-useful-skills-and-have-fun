@@ -2,7 +2,6 @@ import Head from "next/head"
 import Image from "next/image"
 import Router, { useRouter } from "next/router"
 import { useState, useEffect, Fragment} from "react"
-import axios from "axios"
 import YouTube from 'react-youtube'
 import { Dialog, Transition } from '@headlessui/react'
 import Navbar from '@/components/Navbar'
@@ -28,12 +27,19 @@ export default function Id() {
     const bottonStyle = `focus:${answColor} w-full h-full bg-[#EDEFF2] hover:bg-[#1A1C1F] hover:text-white  font-bold py-4 px-4 text-center text-sm md:text-md rounded`
 
     const checkAuth = async () => {  
-        const credentials = { email, password } 
-        const user = await axios.post("/api/auth/checkAuth", credentials)
-        if (user.data.message == "Cookie not found") {
+        const credentials = { email, password }
+        const response = await fetch("/api/auth/checkAuth", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(credentials),
+        })  
+        const data = await response.json(); 
+        if (data.message == "Cookie not found") {
           Router.push("/login")
         }
-    }
+      } 
 
     function handleGetQuiz() {
         if (!id_course) {

@@ -5,7 +5,6 @@ import {useEffect, useState} from 'react'
 import Feed from "@/components/Feed"
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import axios from "axios"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -30,16 +29,23 @@ export default function Home() {
         .then(data => setCourse(data.course))
   }, [id_course])
 
-  const handleGetUser = async () => {  
-    const credentials = { email, password } 
-    const user = await axios.post("/api/auth/checkAuth", credentials)
-    if (user.data.message == "Cookie not found") {
+  const checkAuth = async () => {  
+    const credentials = { email, password }
+    const response = await fetch("/api/auth/checkAuth", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    })  
+    const data = await response.json(); 
+    if (data.message == "Cookie not found") {
       Router.push("/login")
     }
-  }
+  } 
 
   useEffect(() => {
-    handleGetUser()
+    checkAuth()
   }, [])
   return (
     <>

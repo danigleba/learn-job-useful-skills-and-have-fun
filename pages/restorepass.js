@@ -2,7 +2,6 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link';
 import React, { useRef } from 'react';
-import axios from "axios"
 import Router, { useRouter } from 'next/router';
 import { Inter } from 'next/font/google'
 import { useEffect, useState } from 'react';
@@ -15,17 +14,25 @@ export default function Home() {
     const [password, setPassword] = useState("")
     const [wrongPassAlert, setWrongPassAlert] = useState("")
 
-    async function sendPass() {
+    const sendPass = async (e) => {
         e.preventDefault()
-        const credentials = { email, password} 
-        const user = await axios.post("/api/auth/login", credentials)
-        if (user.data.message == 'User found in database!') {
-            setWrongPassAlert("Contraseña enviada. Revisa tu bandeja de entrada y de spam")
-        } else {
-            setWrongPassAlert("Este email no tiene una cuenta de Kualify")
-        }
+        const credentials = { email } 
+        const response = await fetch("/api/auth/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(credentials),
+          });
         
-      }
+          const data = await response.json();
+          if (data.message === "User found in database!") {
+            setWrongPassAlert("email sent")
+          } else {
+            setWrongPassAlert("Este email no tiene una cuenta de Kualify");
+          }
+        
+    }
   return (
     <>
       <Head>
