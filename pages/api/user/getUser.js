@@ -24,6 +24,6 @@ export default async function (req, res) {
             res.status(500).json({message: "Server error"})
         }
     } else {
-        res.status(401).json({message: "Token not found"})
+    res.status(401).json({message: "Token not found"})
     }
 }

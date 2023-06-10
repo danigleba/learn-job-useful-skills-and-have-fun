@@ -71,7 +71,7 @@ export default function Home() {
             <h1 className='text-3xl font-bold text-center'>¡Felicidades! 🎉</h1>
             <h1 className='text-xl text-center font-semibold pt-2'>Has completado el curso: {course.title}</h1>
             <div className='pt-8 pb-16 flex justify-center'>
-              <button className="bg-[#1A1C1F] text-white w-full sm:w-96 py-3 rounded-md hover:bg-[#2C3036] font-bold shadow-md" onClick={goIndex}>Volver</button>
+              <button className="btn-primary" onClick={goIndex}>Volver</button>
             </div>
           </div>
           <Feed />

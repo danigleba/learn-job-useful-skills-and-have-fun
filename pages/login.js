@@ -67,9 +67,6 @@ export default function Home() {
                                 </div>
                                 <div className='bloc space-y-4'>
                                     <div className="h-full text-center text-sm font-light text-gray-500 dark:text-gray-400">
-                                        ¿Has olvidado tu contraseña?<a href="/restorepass" className="font-medium text-primary-600 hover:underline dark:text-primary-500"> Recupera tu contraseña</a>
-                                    </div>
-                                    <div className="h-full text-center text-sm font-light text-gray-500 dark:text-gray-400">
                                         ¿Aún no tienes una cuenta? <a href="/registration" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Crea una aquí</a>
                                     </div>
                                 </div>

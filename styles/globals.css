@@ -6,6 +6,13 @@
 
 /* ______________________ */
  .tag {
-    @apply bg-[#f4f4f4] h-8  w-auto pl-6 pr-6 font-semibold rounded-md flex justify-center items-center inline-block;
+   @apply text-white font-semibold py-1.5 px-6 rounded-md bg-[#1A1C1F];
+ }
+ .btn-primary {
+   @apply bg-[#1A1C1F] text-white w-full px-6 sm:w-96 py-3 rounded-md hover:bg-[#2C3036] font-bold shadow-md;
+ }
+ 
+ .btn-quiz {
+   @apply w-full h-full bg-[#EDEFF2] hover:bg-[#1A1C1F] hover:text-white  font-bold py-4 px-4 text-center text-sm md:text-base	 rounded focus:shadow-md focus:text-white;
  }
 }

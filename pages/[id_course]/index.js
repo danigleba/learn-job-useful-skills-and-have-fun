@@ -1,7 +1,7 @@
 import Head from "next/head"
 import Image from "next/image"
 import Router, { useRouter } from "next/router"
-import { useState, useEffect, Fragment} from "react"
+import { useState, useEffect, useRef, Fragment} from "react"
 import YouTube from 'react-youtube'
 import { Dialog, Transition } from '@headlessui/react'
 import Navbar from '@/components/Navbar'
@@ -17,14 +17,17 @@ export default function Id() {
     const [quiz, setQuiz] = useState({})
     const [isOpen, setIsOpen] = useState(false)
     const [videoKey, setVideoKey] = useState("")
+    
+    const [answColor1, setAnswColor1] = useState("")
+    const [answColor2, setAnswColor2] = useState("")
+    const [answColor3, setAnswColor3] = useState("")
+    const [answColor4, setAnswColor4] = useState("")
+    const answColors = [setAnswColor1, setAnswColor2, setAnswColor3, setAnswColor4]
 
     const [screenWidth, setScreenWidth] = useState(null)
     const [screenBreackpoint, setScreenBreackpoint] = useState("")
     const [videoWidth, setVideoWidth] = useState("")
     const [videoHeight, setVideoHeight] = useState("")
-  
-    const [answColor, setAnswColor] = useState("")
-    const bottonStyle = `focus:${answColor} w-full h-full bg-[#EDEFF2] hover:bg-[#1A1C1F] hover:text-white  font-bold py-4 px-4 text-center text-sm md:text-md rounded`
 
     const checkAuth = async () => {  
         const credentials = { email, password }
@@ -45,7 +48,7 @@ export default function Id() {
         if (!id_course) {
             return
         }
-        const url = "/api/quizzes/getQuiz?id_course=" + id_course
+        var url = "/api/quizzes/getQuiz?id_course=" + id_course
         fetch(url)
           .then(response => response.json())
           .then(data => setQuiz(data.data))
@@ -63,16 +66,19 @@ export default function Id() {
 
     const handleNextStep = (e) => {
         if (e.target.value == "true") {
-            setIsOpen(false)
-            setAnswColor("bg-green-400")
-            //Waits 300mm to change the step only once the "Closing Modal" animation is over in order to make the transition between steps cleaner.
+            //Waits 600ms before closing the modal to make sure the users sees the answer has turned green
+            answColors[e.target.id]("focus:bg-green-400")
             setTimeout(() => {
+                setIsOpen(false)
+                 //Waits 300ms to change the step only once the "Closing Modal" animation is over in order to make the transition between steps cleaner
+                setTimeout(() => {
                 window.scrollTo(0, 0)
                 setActiveStep(activeStep + 1)
                 setVideoKey(videoKey + 1) 
               }, 300)
-        } else {
-            setAnswColor("bg-red-400")
+            }, 600)        
+        } if (e.target.value == "false")  {
+            answColors[e.target.id]("focus:bg-red-400")
         }
     }
 
@@ -97,14 +103,19 @@ export default function Id() {
         }
       }, [])
 
-      useEffect(() => {
+      useEffect(() => {       
         handleGetQuiz()
         handleGetCourse()
     }, [id_course])
     
     useEffect(() => {
+        //Resets the bg colors when clicked of the buttons
+        setAnswColor1("")
+        setAnswColor2("")
+        setAnswColor3("")
+        setAnswColor4("")
         //Goes to id_course/outro once the activeStep > lenght of the course array.
-        if ((activeStep +1) > (course && course.steps && course.steps.length)) {
+        if ((activeStep + 1) > (course && course.steps && course.steps.length)) {
             router.push(`/${id_course}/outro`)
         }}, [activeStep])
 
@@ -156,7 +167,7 @@ export default function Id() {
                         {course.tags?.map(item => (
                             <a key={item}>
                                <div className="inline-block pb-4">
-                                    <p className=" text-white font-semibold py-1.5 px-6 rounded-md bg-[#1A1C1F]">{item}</p>
+                                    <p className="tag">{item}</p>
                                 </div>
                             </a>))} 
                         <h2 className="text-4xl font-bold content-center text-gray-800">{course.title}</h2>
@@ -184,7 +195,7 @@ export default function Id() {
                         </div>
                     </div>
                     <div className="pb-16 pt-6 mx-4">
-                        <button className="text-white font-bold bg-[#1A1C1F] w-full px-6 sm:w-96 py-3 rounded-md hover:bg-[#2C3036] shadow-md" onClick={openModal}>Continuar</button>
+                        <button className="btn-primary" onClick={openModal}>Continuar</button>
                     </div>
                     <Transition appear show={isOpen} as={Fragment}>
                         <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -217,31 +228,37 @@ export default function Id() {
                                         <div className="pt-2">
                                             <h2 className="text-center text-2xl font-bold  pt-4">{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].title}</h2>
                                         </div>
+                                        {/*In order to delete the top-left's button's autoFocus, this invisible input is created and set to autoFocus instead*/}
+                                        <input type="text" autoFocus className="opacity-0 absolute"/>
                                         <div className="justify-center text-[#1A1C1F]">
                                             <div className="grid content-center grid-cols-2 mx-2 pt-12">
                                                 <div className="p-2 pl-0 text-right">
                                                     <button 
                                                         onClick={handleNextStep}
+                                                        id={0}
                                                         value={quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[0] && quiz.questions[activeStep].answers[0].value}
-                                                        className={bottonStyle}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[0].title}</button>
+                                                        className={`btn-quiz ${answColor1}`}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[0].title}</button>
                                                 </div>
                                                 <div className="p-2 pr-0 text-left">
                                                     <button 
                                                         onClick={handleNextStep}
+                                                        id={1}
                                                         value={quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[1] && quiz.questions[activeStep].answers[1].value}
-                                                        className={bottonStyle}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[1].title}</button>
+                                                        className={`btn-quiz ${answColor2}`}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[1].title}</button>
                                                 </div>
                                                 <div className="p-2 pl-0 text-right">
                                                     <button 
                                                         onClick={handleNextStep}
+                                                        id={2}
                                                         value={quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[2] && quiz.questions[activeStep].answers[2].value}                                                        
-                                                        className={bottonStyle}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[2].title}</button>
+                                                        className={`btn-quiz ${answColor3}`}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[2].title}</button>
                                                 </div>
                                                 <div className="p-2 pr-0 text-left">
                                                     <button 
                                                         onClick={handleNextStep}
+                                                        id={3}
                                                         value={quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[3] && quiz.questions[activeStep].answers[3].value}                                                           
-                                                        className={bottonStyle}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[3].title}</button>
+                                                        className={`btn-quiz ${answColor4}`}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[3].title}</button>
                                                 </div>
                                             </div>
                                         </div>       

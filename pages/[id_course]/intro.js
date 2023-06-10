@@ -120,7 +120,7 @@ export default function Home() {
                             {course.tags?.map(item => (
                                 <a key={item}>
                                 <div className="inline-block pb-4">
-                                    <p className="font-semibold py-1.5 px-6 badge rounded-md bg-[#1A1C1F] cursor-pointer text-white" >{item}</p>
+                                    <p className="tag" >{item}</p>
                                     </div>
                                 </a>))} 
                             <h2 className="text-4xl font-bold content-center">{course.title}</h2>
@@ -150,7 +150,7 @@ export default function Home() {
                             </div>
                         </div>
                         <div className="pb-20 pt-6 mx-4">
-                            <button className="bg-[#1A1C1F] text-white w-full px-6 sm:w-96 py-3 rounded-md hover:bg-[#2C3036] font-bold shadow-md" onClick={startCourse}>Empezar curso</button>
+                            <button className="btn-primary" onClick={startCourse}>Empezar curso</button>
                         </div>
                         <Feed />
                         <Footer />

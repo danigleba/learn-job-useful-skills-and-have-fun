@@ -6,7 +6,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/kualify-icon.png" />
       </Head>
       <body className='bg-[#F4F4F5]'>
         <Main />
@@ -15,3 +15,4 @@ export default function Document() {
     </Html>
   )
 }
+// <link rel="manifest" href="/manifest.json" />

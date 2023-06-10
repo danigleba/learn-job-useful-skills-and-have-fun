@@ -6,33 +6,25 @@ import Router, { useRouter } from 'next/router';
 import { Inter } from 'next/font/google'
 import { useEffect, useState } from 'react';
 import Footer from '@/components/Footer'
+import crypyo from "crypto";
 
+const crypto = require('crypto')
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [user, setUser] = useState({})
     const [wrongPassAlert, setWrongPassAlert] = useState("")
 
     const sendPass = async (e) => {
-        e.preventDefault()
-        const credentials = { email } 
-        const response = await fetch("/api/auth/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(credentials),
-          });
-        
-          const data = await response.json();
-          if (data.message === "User found in database!") {
-            setWrongPassAlert("email sent")
-          } else {
-            setWrongPassAlert("Este email no tiene una cuenta de Kualify");
-          }
-        
-    }
+        fetch("api/user/getUser")
+          .then(response => response.json())
+          .then(data => setUser(data.data))
+        setPassword(user)
+        console.log(password + "this is the password")
+      } 
+
   return (
     <>
       <Head>

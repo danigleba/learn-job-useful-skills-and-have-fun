@@ -11,10 +11,12 @@ export default async function (req, res) {
     queryQuizSnap.forEach((doc) => {
         try {
             if (doc.id !== "") {
-            res.status(200).json({data: doc.data()})
+                res.status(200).json({data: doc.data()})
+             } else {
+                res.status(401).json({message: "Quiz not found."})
              }
         } catch (error) {
-            res.status(401).json({message: error})
+            res.status(500).json({message: "Server error."})
         }
     })
         
