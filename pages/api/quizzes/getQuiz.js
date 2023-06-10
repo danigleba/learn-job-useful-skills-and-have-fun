@@ -12,12 +12,10 @@ export default async function (req, res) {
         try {
             if (doc.id !== "") {
                 res.status(200).json({data: doc.data()})
-             } else {
-                res.status(401).json({message: "Quiz not found."})
-             }
+                return
+             } 
         } catch (error) {
             res.status(500).json({message: "Server error."})
         }
-    })
-        
+    })      
 } 
