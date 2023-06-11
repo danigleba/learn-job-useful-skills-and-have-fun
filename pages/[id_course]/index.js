@@ -76,7 +76,7 @@ export default function Id() {
                 setActiveStep(activeStep + 1)
                 setVideoKey(videoKey + 1) 
               }, 300)
-            }, 600)        
+            }, 250)        
         } if (e.target.value == "false")  {
             answColors[e.target.id]("focus:bg-red-400")
         }
@@ -151,7 +151,7 @@ export default function Id() {
     return (
         <>
             <Head>
-                <title>Kualify App</title>
+                <title>Kualify | Aprende lo que la escuela no te enseñará.</title>
                 <meta name="description" content="Your meta description goes here" />
                 <meta name="author" content="Kualify App" />
                 <link rel="icon" href="/icon.png" />

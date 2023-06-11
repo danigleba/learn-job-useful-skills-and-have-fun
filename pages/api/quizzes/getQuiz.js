@@ -1,8 +1,6 @@
 import {db} from '../../../firebase/index'
 import { collection, query, where, getDocs, doc, getDoc } from 'firebase/firestore';
 
-const secret = process.env.SECRET;
-
 export default async function (req, res) {
     const id_course = req.query.id_course
     const quizRef = collection(db, "quizzes")
@@ -12,8 +10,9 @@ export default async function (req, res) {
         try {
             if (doc.id !== "") {
                 res.status(200).json({data: doc.data()})
-                return
-             } 
+             } else {
+                res.status(401).json({message: "Quiz not found in database."})
+             }
         } catch (error) {
             res.status(500).json({message: "Server error."})
         }

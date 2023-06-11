@@ -15,13 +15,11 @@ export default async function (req, res) {
   const queryUserSnap = await getDocs(userSnap)
   let userFound = false
   queryUserSnap.forEach((doc) => {
-    //console.log(doc.id, " => ", doc.data())
     try {    
       if (doc.id !== "") {
           userFound = true
       } 
     } catch (error) {
-      console.log(error);
       res.status(500).json({ message: "Server error" })
       }
   })
