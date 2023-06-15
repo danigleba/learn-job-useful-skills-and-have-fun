@@ -9,7 +9,7 @@
    @apply text-white font-semibold py-1.5 px-6 rounded-md bg-[#1A1C1F];
  }
  .btn-primary {
-   @apply bg-[#1A1C1F] text-white w-full px-6 sm:w-96 py-3 rounded-md hover:bg-[#2C3036] font-bold shadow-md;
+   @apply bg-[#1A1C1F] ring-transparent	text-white w-full px-6 sm:w-96 py-3 rounded-md hover:bg-[#2C3036] font-bold shadow-md;
  }
  
  .btn-quiz {

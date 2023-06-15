@@ -18,7 +18,7 @@ export default function Feed() {
                         {courses?.map(item => (
                             <a href={"/"+item.id+"/intro"} key={item.id}>
                                 <div className="flex justify-center mb-8 active:scale-95 transition-transform cursor-pointer hover:scale-105">
-                                    <div className="rounded-2xl inline-block overflow-hidden p-4 cursor-pointer">
+                                    <div className="w-full rounded-2xl inline-block overflow-hidden p-4 cursor-pointer">
                                         <div className="shadow-md relative group w-full overflow-hidden bg-black h-32 rounded-md h-48">
                                             <img
                                                 src={item.cover_url}

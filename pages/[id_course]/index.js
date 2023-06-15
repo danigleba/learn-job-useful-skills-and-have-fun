@@ -72,9 +72,13 @@ export default function Id() {
                 setIsOpen(false)
                  //Waits 300ms to change the step only once the "Closing Modal" animation is over in order to make the transition between steps cleaner
                 setTimeout(() => {
-                window.scrollTo(0, 0)
-                setActiveStep(activeStep + 1)
-                setVideoKey(videoKey + 1) 
+                if ((activeStep + 2)  > (course && course.steps && course.steps.length)) {
+                    router.push(`/${id_course}/outro`)
+                } else {
+                    window.scrollTo(0, 0)
+                    setActiveStep(activeStep + 1)
+                    setVideoKey(videoKey + 1) 
+                }
               }, 300)
             }, 250)        
         } if (e.target.value == "false")  {
@@ -113,11 +117,8 @@ export default function Id() {
         setAnswColor1("")
         setAnswColor2("")
         setAnswColor3("")
-        setAnswColor4("")
-        //Goes to id_course/outro once the activeStep > lenght of the course array.
-        if ((activeStep + 1) > (course && course.steps && course.steps.length)) {
-            router.push(`/${id_course}/outro`)
-        }}, [activeStep])
+        setAnswColor4("")        
+        }, [activeStep])
 
       useEffect(() => {
         if (screenWidth < 768) {
