@@ -171,7 +171,7 @@ export default function Id() {
                                     <p className="tag">{item}</p>
                                 </div>
                             </a>))} 
-                        <h2 className="text-4xl font-bold content-center text-gray-800">{course.title}</h2>
+                        <h2 className="text-3xl sm:text-4xl font-bold content-center text-gray-800">{course.title}</h2>
                         <h2 className="text-xl text-[#1A1C1F] font-semibold pt-4">{activeStep + 1}. {course && course.steps && course.steps[activeStep] && course.steps[activeStep].title}</h2>
                     </div>
                     <div className="flex justify-center p-6">

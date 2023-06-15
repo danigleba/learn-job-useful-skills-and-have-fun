@@ -123,7 +123,7 @@ export default function Home() {
                                     <p className="tag" >{item}</p>
                                     </div>
                                 </a>))} 
-                            <h2 className="text-4xl font-bold content-center">{course.title}</h2>
+                            <h2 className="text-3xl sm:text-4xl font-bold content-center">{course.title}</h2>
                             <h2 className="text-xl font-semibold pt-4">Introducción</h2>
                         </div>
                         <div className="justify-center py-6 mx-4 flex">
