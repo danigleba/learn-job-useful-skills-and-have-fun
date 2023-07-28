@@ -1,18 +1,12 @@
 /** @type {import('next').NextConfig} */
 
+/*
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'firebasestorage.googleapis.com',
-        port: '',
-        pathname: '/',
-      },
-    ],
+    domains: ['firebasestorage.googleapis.com'],
   },
-}
+}*/
 
 //module.exports = nextConfig
 
@@ -22,6 +16,13 @@ const withPWA = require('next-pwa')({
 })
 
 module.exports = withPWA({
+
   // next.js config
-  nextConfig
+  //nextConfig
+  
+  reactStrictMode: true,
+  images: {
+    domains: ['firebasestorage.googleapis.com'],
+  },
+  
 })
