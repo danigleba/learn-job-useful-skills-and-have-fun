@@ -178,7 +178,7 @@ export default function Id() {
 
                     <div className="flex justify-center p-6">
                         <div className="rounded-lg overflow-hidden shadow-md">
-                            <video width="750" height="500" controls >
+                            <video width="750" height="500" controls oncontextmenu="return false;" controlsList="nodownload">
                                 <source src={course && course.steps && course.steps[activeStep] && course.steps[activeStep].video.url} type="video/mp4"/>
                             </video>
                         </div>

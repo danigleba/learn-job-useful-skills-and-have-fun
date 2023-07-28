@@ -132,7 +132,7 @@ export default function Intro() {
 
                         <div className="flex justify-center p-6">
                             <div className="rounded-lg overflow-hidden shadow-md">
-                                <video width="1024" height="960" controls >
+                                <video width="1024" height="960" controls oncontextmenu="return false;" controlsList="nodownload">
                                     <source src={'https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/videos%2Ftest.mp4?alt=media&token=4b1fca2b-e849-424a-a075-6a3c10902f9f'} type="video/mp4"/>
                                 </video>
                             </div>
