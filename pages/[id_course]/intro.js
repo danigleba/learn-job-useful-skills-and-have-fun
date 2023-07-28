@@ -132,8 +132,8 @@ export default function Intro() {
 
                         <div className="flex justify-center p-6">
                             <div className="rounded-lg overflow-hidden shadow-md">
-                                <video width="1024" height="800" controls >
-                                    <source src={course && course.intro_video && course.intro_video.url} type="video/mp4"/>
+                                <video width="1024" height="960" controls >
+                                    <source src={'https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/videos%2Ftest.mp4?alt=media&token=4b1fca2b-e849-424a-a075-6a3c10902f9f'} type="video/mp4"/>
                                 </video>
                             </div>
                         </div>
