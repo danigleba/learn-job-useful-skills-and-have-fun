@@ -54,7 +54,7 @@ export default function Home() {
         
         <Navbar />
         <div className='pt-12 text-[#1A1C1F]'>
-          <h1 className='text-center text-3xl font-semibold pb-8'>👋 Hola, {user.username}</h1>
+          <h1 className='text-center text-3xl font-semibold pb-8'>👋 Hola, {user?.username}</h1>
           <Feed />    
         </div>
         <Footer />

@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { useState, useEffect } from "react"
 
 
@@ -20,8 +21,10 @@ export default function Feed() {
                                 <div className="flex justify-center mb-8 active:scale-95 transition-transform cursor-pointer hover:scale-105">
                                     <div className="w-full rounded-2xl inline-block overflow-hidden p-4 cursor-pointer">
                                         <div className="shadow-md relative group w-full overflow-hidden bg-black h-32 rounded-md h-48">
-                                            <img
+                                            <Image
                                                 src={item.cover_url}
+                                                height={1024}
+                                                width={960}
                                                 className="object-cover w-full h-full transform duration-700"
                                             />
                                         </div>
