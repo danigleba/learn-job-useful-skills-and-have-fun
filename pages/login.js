@@ -74,9 +74,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className='w-full absolute bottom-0' >
-                    <Footer />
-                </div>
+  
             </section>
         </main>
     </>

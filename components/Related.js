@@ -2,7 +2,7 @@ import Image from "next/image"
 import { useState, useEffect } from "react"
 
 
-export default function Feed() {
+export default function Related() {
     const [courses, setCourses] = useState([])    
    
     useEffect(() => {
@@ -22,7 +22,6 @@ export default function Feed() {
                                     <div className="w-full rounded-2xl inline-block overflow-hidden p-4 cursor-pointer">
                                         <div className="shadow-md relative group w-full overflow-hidden bg-black h-32 rounded-md h-48">
                                             <Image
-                                                alt={item.title}
                                                 src={item.cover_url}
                                                 height={1024}
                                                 width={1024}

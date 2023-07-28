@@ -64,7 +64,9 @@ export default function Home() {
       </Head>
 
       <main className={`${inter.className}`}>
+        
         <Navbar />
+
         <div className='justify-center pt-12 text-[#1A1C1F]'>
           <div className='mx-4'>
             <h1 className='text-3xl font-bold text-center'>¡Felicidades! 🎉</h1>
@@ -72,9 +74,10 @@ export default function Home() {
             <div className='pt-8 pb-16 flex justify-center'>
               <button className="btn-primary" onClick={goIndex}>Volver</button>
             </div>
-          </div>
-          <Feed />
-          <Footer />
+        </div>
+
+        <Feed />
+         
        </div>
       </main>
       

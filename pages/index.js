@@ -57,7 +57,7 @@ export default function Home() {
           <h1 className='text-center text-3xl font-semibold pb-8'>👋 Hola, {user?.username}</h1>
           <Feed />    
         </div>
-        <Footer />
+       
       </main>
       
     </>

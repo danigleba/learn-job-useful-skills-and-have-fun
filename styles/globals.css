@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
+html {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
 @layer base {
 
 /* ______________________ */
@@ -15,4 +22,5 @@
  .btn-quiz {
    @apply w-full h-full bg-[#EDEFF2] hover:bg-[#1A1C1F] hover:text-white  font-bold py-4 px-4 text-center text-sm md:text-base	 rounded focus:shadow-md focus:text-white;
  }
+
 }

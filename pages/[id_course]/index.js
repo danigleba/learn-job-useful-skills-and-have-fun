@@ -6,6 +6,7 @@ import YouTube from 'react-youtube'
 import { Dialog, Transition } from '@headlessui/react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import Related from "@/components/Related"
 
 export default function Id() {
     const router = useRouter()
@@ -174,27 +175,15 @@ export default function Id() {
                         <h2 className="text-3xl sm:text-4xl font-bold content-center text-gray-800">{course.title}</h2>
                         <h2 className="text-xl text-[#1A1C1F] font-semibold pt-4">{activeStep + 1}. {course && course.steps && course.steps[activeStep] && course.steps[activeStep].title}</h2>
                     </div>
+
                     <div className="flex justify-center p-6">
                         <div className="rounded-lg overflow-hidden shadow-md">
-                            <YouTube 
-                            key={videoKey} 
-                            opts={{
-                                width: videoWidth,
-                                height: videoHeight,
-                                playerVars: {
-                                  start: course && course.steps && course.steps[activeStep] && course.steps[activeStep].video.start_time, 
-                                  end: course && course.steps && course.steps[activeStep] && course.steps[activeStep].video.end_time,
-                                  controls: 0,
-                                  showinfo: 0,
-                                  rel: 0,
-                                  disablekb: 1,
-                                  iv_load_policy: 0,
-                                  modestbranding: 1,
-                                  showinfo: 0 
-                                }}}
-                            videoId={course && course.steps && course.steps[activeStep] && course.steps[activeStep].video.url}/>
+                            <video width="750" height="500" controls >
+                                <source src={course && course.steps && course.steps[activeStep] && course.steps[activeStep].video.url} type="video/mp4"/>
+                            </video>
                         </div>
                     </div>
+
                     <div className="pb-16 pt-6 mx-4">
                         <button className="btn-primary" onClick={openModal}>Continuar</button>
                     </div>
@@ -270,7 +259,8 @@ export default function Id() {
                         </Dialog>
                     </Transition>
                 </div>
-                <Footer />
+                <Related />
+               
             </main>
         </>
     )
