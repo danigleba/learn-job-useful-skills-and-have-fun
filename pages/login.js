@@ -13,7 +13,7 @@ export default function Home() {
     
     const getUser = async (e) => {
         e.preventDefault();
-        const credentials = { email, password };
+        const credentials = { email, password }
         const response = await fetch("/api/auth/login", {
           method: "POST",
           headers: {

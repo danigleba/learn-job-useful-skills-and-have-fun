@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import Link from 'next/link';
+import Link from 'next/link'
+
 export default function Navbar() {
     const [user, setUser] = useState([])
    
@@ -17,8 +18,8 @@ export default function Navbar() {
                     </div>
                 </Link>
                 <div className="flex text-lg font-semibold">
-                    <a className="pt-2 text-right pr-6">{user.username}</a>
-                  <img className="rounded-full h-12 w-12 bg-gray-900" src={user.profile_url} ></img>
+                    <a className="pt-2 text-right pr-6">{user?.username}</a>
+                  <img className="rounded-full h-12 w-12 bg-gray-900" src={user?.profile_url} ></img>
                 </div>
             </div>
         </nav>

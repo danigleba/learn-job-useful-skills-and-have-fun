@@ -23,7 +23,7 @@ export default function Home() {
       },
       body: JSON.stringify(credentials),
     })  
-    const data = await response.json(); 
+    const data = await response.json()
     if (data.message == "Cookie not found") {
       Router.push("/login")
     }
@@ -33,6 +33,9 @@ export default function Home() {
     fetch("api/user/getUser")
     .then(response => response.json())
     .then(data => setUser(data.data))
+    .catch(error => {
+      console.error("Error fetching user:", error)
+    })
   }
  
   useEffect(() => {
