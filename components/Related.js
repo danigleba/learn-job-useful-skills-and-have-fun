@@ -2,7 +2,7 @@ import Image from "next/image"
 import { useState, useEffect } from "react"
 
 
-export default function Feed() {
+export default function Related() {
     const [courses, setCourses] = useState([])    
    
     useEffect(() => {
@@ -13,16 +13,15 @@ export default function Feed() {
     }, [])
     
     return (
-        <div className="text-[#1A1C1F] mx-4 sm:mx-12">
-            <h1 className="flex justify-center text-center text-4xl font-bold">¿Qué quieres aprender hoy?</h1>
-            <div className="pt-12 pb-12 md:grid md:grid-cols-3  md:gap-4">
+        <div className="text-[#1A1C1F] p-4 bg-black bg-opacity-90 text-white">
+            <h1 className="flex text-4xl font-bold">¿Qué quieres aprender hoy?</h1>
+            <div className="pt-12 pb-12 md:grid md:grid-cols-8  md:gap-4">
                         {courses?.map(item => (
                             <a href={"/"+item.id+"/intro"} key={item.id}>
                                 <div className="flex justify-center mb-8 active:scale-95 transition-transform cursor-pointer hover:scale-105">
                                     <div className="w-full rounded-2xl inline-block overflow-hidden p-4 cursor-pointer">
                                         <div className="shadow-md relative group w-full overflow-hidden bg-black h-32 rounded-md h-48">
                                             <Image
-                                                alt={item.title}
                                                 src={item.cover_url}
                                                 height={1024}
                                                 width={1024}

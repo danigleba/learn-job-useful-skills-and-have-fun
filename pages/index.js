@@ -6,6 +6,7 @@ import Router from 'next/router';
 import Feed from '../components/Feed.js'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import Tags from '@/components/Tags.js';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -56,11 +57,14 @@ export default function Home() {
       <main>
         
         <Navbar />
+
+        <Tags />
+        
         <div className='pt-12 text-[#1A1C1F]'>
-          <h1 className='text-center text-3xl font-semibold pb-8'>👋 Hola, {user.username}</h1>
+          <h1 className='text-center text-3xl font-semibold pb-8'>👋 Hola, {user?.username}</h1>
           <Feed />    
         </div>
-        <Footer />
+       
       </main>
       
     </>

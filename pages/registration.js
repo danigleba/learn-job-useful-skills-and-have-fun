@@ -87,9 +87,7 @@ export default function Registration() {
                             </form>
                         </div>
                     </div>
-                    <div className='w-full absolute bottom-0' >
-                        <Footer />
-                    </div>
+
                 </div>
             </section>
         </main>
