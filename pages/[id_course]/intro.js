@@ -6,6 +6,7 @@ import YouTube from 'react-youtube'
 import Feed from '@/components/Feed'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import Related from '@/components/Related'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -142,6 +143,7 @@ export default function Intro() {
                         <div className="pb-20 pt-6 mx-4">
                             <button className="btn-primary" onClick={startCourse}>Empezar curso</button>
                         </div>
+                        <Related />
                         <Feed />
                         
                     </div>

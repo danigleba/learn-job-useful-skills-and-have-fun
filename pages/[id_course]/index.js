@@ -7,6 +7,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Related from "@/components/Related"
+import Feed from "@/components/Feed"
 
 export default function Id() {
     const router = useRouter()
@@ -260,6 +261,7 @@ export default function Id() {
                     </Transition>
                 </div>
                 <Related />
+                <Feed />
                
             </main>
         </>
