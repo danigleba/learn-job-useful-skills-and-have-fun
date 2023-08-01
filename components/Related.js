@@ -2,27 +2,29 @@ import Image from "next/image"
 import { useState, useEffect } from "react"
 
 
-export default function Related() {
-    const [courses, setCourses] = useState([])    
-   
+export default function Related(props) {
+    const [course, setCourse] = useState([])    
+
     useEffect(() => {
-        const url ='/api/courses/getCourses'
-        fetch(url)
-          .then(response => response.json())
-          .then(data => setCourses(data.data))
-    }, [])
+        if (props.id_course) {
+            const url ='/api/courses/getCourse?id_course='+props.id_course
+            fetch(url)
+              .then(response => response.json())
+              .then(data => setCourse(data.course))
+        }
+    }, [props.id_course])
     
     return (
         <div className="text-[#1A1C1F] p-4 bg-black bg-opacity-90 text-white">
             <h1 className="flex text-4xl font-bold">¿Qué quieres aprender hoy?</h1>
             <div className="pt-12 pb-12 md:grid md:grid-cols-8  md:gap-4">
-                        {courses?.map(item => (
-                            <a href={"/"+item.id+"/intro"} key={item.id}>
-                                <div className="flex justify-center mb-8 active:scale-95 transition-transform cursor-pointer hover:scale-105">
-                                    <div className="w-full rounded-2xl inline-block overflow-hidden p-4 cursor-pointer">
+                        {course?.steps?.map(item => (
+                            <a key={item.id}>
+                                <div className="flex justify-center mb-8 transition-transform">
+                                    <div className="w-full rounded-2xl inline-block overflow-hidden p-4">
                                         <div className="shadow-md relative group w-full overflow-hidden bg-black h-32 rounded-md h-48">
                                             <Image
-                                                src={item.cover_url}
+                                                src={item.url}
                                                 height={1024}
                                                 width={1024}
                                                 className="object-cover transform duration-700"
@@ -30,7 +32,7 @@ export default function Related() {
                                         </div>
                                         <div className="p-2 rounded-b-2xl">
                                             <div className="text-center px-3 pb-4 pt-2">
-                                                <h1 className="font-bold text-2xl mb-2 cursor-pointer">
+                                                <h1 className="font-bold text-2xl mb-2">
                                                     {item.title}
                                                 </h1>
                                             </div>
@@ -38,7 +40,7 @@ export default function Related() {
 
                                                 <div className="text-center border-rast:border-r-0 gap-4 cursor-pointer">
                                                     {
-                                                        item.tags.map(tags => (
+                                                        item?.tags?.map(tags => (
                                                             <span key={tags} className="font-semibold py-2 px-6 badge mr-2 rounded-md bg-[#1A1C1F] cursor-pointer text-white">{tags}</span>
                                                         ))
                                                     }

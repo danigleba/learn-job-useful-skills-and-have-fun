@@ -88,7 +88,7 @@ export default function Intro() {
                         <div className="pb-20 pt-6 mx-4">
                             <button className="btn-primary" onClick={startCourse}>Empezar curso</button>
                         </div>
-                        <Related />
+                        <Related id_course={id_course}/>
                         <Feed />
                         
                     </div>

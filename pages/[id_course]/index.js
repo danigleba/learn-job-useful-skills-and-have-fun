@@ -178,11 +178,9 @@ export default function Id() {
                     </div>
 
                     <div className="flex justify-center p-6">
-                        <div className="rounded-lg overflow-hidden shadow-md">
-                            <video width="750" height="500" controls oncontextmenu="return false;" controlsList="nodownload">
-                                <source src={course?.intro_video} type="video/mp4"/>
-                            </video>
-                        </div>
+                            <div className="rounded-lg overflow-hidden shadow-md">
+                                <video src={course?.intro_video} type="video/mp4" width="1024" height="960" controls oncontextmenu="return false;" controlsList="nodownload"></video>
+                            </div>
                     </div>
 
                     <div className="pb-16 pt-6 mx-4">
@@ -260,7 +258,7 @@ export default function Id() {
                         </Dialog>
                     </Transition>
                 </div>
-                <Related />
+                <Related id_course={router.query.id_course}/>
                 <Feed />
                
             </main>
