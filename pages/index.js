@@ -15,6 +15,28 @@ export default function Home() {
   const [password, setPassword] = useState("")
   const [user, setUser] = useState([])
    
+  const handleVerify = async () => {
+    try {
+      const response = await fetch('/api/auth/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+      console.log(data)
+      if (data.subscribed == true) {
+        return
+      } else {
+        Router.push("/login")
+      }
+    } catch (error) {
+      console.error('Error checking email:', error);
+    }
+  }
+
   const checkAuth = async () => {  
     const credentials = { email, password }
     const response = await fetch("/api/auth/checkAuth", {
@@ -38,11 +60,23 @@ export default function Home() {
       console.error("Error fetching user:", error)
     })
   }
- 
+  
+
   useEffect(() => {
-    checkAuth()
     handleGetUser()
   }, [])
+  useEffect(() => {
+    setEmail(user?.email)
+    console.log(email)
+  }, [user])
+
+  useEffect(() => {
+    checkAuth()
+    if (email != "") {
+      handleVerify()
+    }
+  }, [email])
+
   return (
     <>
       <Head>
@@ -55,9 +89,6 @@ export default function Home() {
           <meta property="og:image" content="https://example.com/og-image.jpg" />
       </Head>
       <main>
-        
-        <Navbar />
-
         <Tags />
         
         <div className='pt-12 text-[#1A1C1F]'>

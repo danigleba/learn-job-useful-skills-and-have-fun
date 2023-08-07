@@ -22,5 +22,4 @@ html {
  .btn-quiz {
    @apply w-full h-full bg-[#EDEFF2] hover:bg-[#1A1C1F] hover:text-white  font-bold py-4 px-4 text-center text-sm md:text-base	 rounded focus:shadow-md focus:text-white;
  }
-
 }

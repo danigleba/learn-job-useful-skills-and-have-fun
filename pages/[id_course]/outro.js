@@ -65,7 +65,6 @@ export default function Home() {
 
       <main className={`${inter.className}`}>
         
-        <Navbar />
 
         <div className='justify-center pt-12 text-[#1A1C1F]'>
           <div className='mx-4'>

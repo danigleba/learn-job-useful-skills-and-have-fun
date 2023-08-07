@@ -4,13 +4,13 @@ import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html lang="es">
       <Head>
         <link rel="icon" href="/kualify-icon.png" />
       </Head>
-      <body className='bg-[#F4F4F5]'>
+      <body className=''>
+        <Navbar />
         <Main />
-        <Footer />
         <NextScript />
       </body>
     </Html>

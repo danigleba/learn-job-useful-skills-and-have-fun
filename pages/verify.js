@@ -5,7 +5,6 @@ import { Rouge_Script } from 'next/font/google'
 
 export default function Verify() {
   const [email, setEmail] = useState('')
-  const [isSubscribed, setIsSubscribed] = useState()
   const router = useRouter()
 
   const handleVerify = async () => {

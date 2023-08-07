@@ -164,7 +164,6 @@ export default function Id() {
                 <meta property="og:image" content="https://example.com/og-image.jpg" />
             </Head>    
             <main className="text-center">
-                <Navbar />
                 <div className="pt-12">
                     <div className="pl-10 pr-10 pb-6">
                         {course.tags?.map(item => (

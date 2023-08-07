@@ -65,7 +65,6 @@ export default function Intro() {
       </Head>
         <main className="text-center text-[#1A1C1F]">
 
-            <Navbar />
                     <div className="justify-center pt-12">
                         <div className="mx-4 pb-4 sm:pb-6">
                             {course?.tags?.map(item => (
