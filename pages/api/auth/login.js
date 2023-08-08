@@ -4,7 +4,7 @@ import { getFirestore, collection, doc, getDoc, getDocs, query, where} from "fir
 import crypyo from "crypto";
 import {db} from '../../../firebase/index'
 
-const secret = process.env.SECRET;
+const secret = process.env.FIREBASE_KEY;
 const crypto = require('crypto')
 
 export default async function (req, res) {

@@ -3,7 +3,7 @@ import { collection, query, where, getDocs, doc, getDoc } from 'firebase/firesto
 import { verify } from 'jsonwebtoken';
 import { parse } from 'cookie';
 
-const secret = process.env.SECRET;
+const secret = process.env.FIREBASE_KEY;
 
 export default async function (req, res) {
   const token = parse(req.headers.cookie).kualifyApp;

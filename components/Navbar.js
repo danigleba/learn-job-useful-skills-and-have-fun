@@ -4,11 +4,6 @@ import Link from 'next/link'
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-  }
-  
   return (
       <nav className="my-3 mx-12 lg:mx-24">
         <div className='flex items-center justify-between'>
@@ -25,14 +20,13 @@ export default function Navbar() {
             </Link>
             <Link aria-label="Ir a la App de Kualify" href="https://kualify.es/precios">
               <div className='hidden lg:block py-2 px-6 text-white rounded-3xl font-semibold text-lg bg-[#333533]'>
-                <button>Empieza ahora</button>
+                <button>Crea tu cuenta</button>
               </div>
             </Link>
           </div>
           <div className='lg:hidden'>
             <button
               aria-label="Mobile menu"
-              onClick={toggleMobileMenu}            
               className="w-10 flex justify-center items-center h-8 rounded text-white">
               <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                 <path stroke="#333533" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
@@ -41,19 +35,6 @@ export default function Navbar() {
           </div>
         </div>
         <div className={`text-center flex  w-full h-full transition-2 duration-500 lg:hidden lg:flex ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
-              <div className='w-1/2 flex justify-start text-left'>
-                <ul className="lg:flex font-bold text-xl text-[#333533] mt-6 mb-4 space-y-4">
-                  <li className="lg:ml-4">
-                    <a href="/cursos">Cursos</a>
-                  </li>
-                  <li className="lg:ml-4">
-                    <a href="/precios">Precios</a>
-                  </li>
-                  <li className="lg:ml-4">
-                    <a href="#footer">Contacto</a>
-                  </li>
-                  </ul>
-                </div>
                 <div className='w-1/2 flex items-center grid grid-col-1'>
                   <div className='flex mt-6 justify-end'>
                     <Link aria-label="Suscribirse a Kualify" href="https://kualify.es/precios">
@@ -74,4 +55,3 @@ export default function Navbar() {
       </nav>
   )
 }
-

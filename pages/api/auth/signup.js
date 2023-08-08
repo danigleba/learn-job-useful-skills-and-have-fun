@@ -4,7 +4,7 @@ import {sign} from 'jsonwebtoken'
 import { serialize } from "cookie";
 import crypyo from "crypto";
 
-const secret = process.env.SECRET;
+const secret = process.env.FIREBASE_KEY;
 const crypto = require('crypto')
 
 export default async function (req, res) {

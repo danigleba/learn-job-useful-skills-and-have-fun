@@ -9,7 +9,6 @@ export default function Document() {
         <link rel="icon" href="/kualify-icon.png" />
       </Head>
       <body className=''>
-        <Navbar />
         <Main />
         <NextScript />
       </body>
