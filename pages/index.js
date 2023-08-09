@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Head from 'next/head'
 import {useState, useEffect} from 'react'
 import { Inter } from 'next/font/google'
@@ -14,68 +13,62 @@ export default function Home() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [user, setUser] = useState([])
-   
-  const handleVerify = async () => {
+  const [cookie, setCookie] = useState(null)
+
+  const checkAuth = async () => {  
+    const response = await fetch("/api/auth/checkAuth", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })  
+    const data = await response.json()
+    if (!data.cookieExists) {
+      Router.push("/login")
+    } else {
+      setCookie(true)
+    }
+  } 
+
+  const checkSubscription = async () => {
     try {
-      const response = await fetch('/api/auth/verify', {
+      const response = await fetch('/api/auth/checkSubscription', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email }),
-      });
-
+      })
       const data = await response.json();
-      console.log(data)
-      if (data.subscribed == true) {
+      if (data.subscribed) {
         return
       } else {
-        Router.push("/login")
+        Router.push("/registration")
       }
     } catch (error) {
       console.error('Error checking email:', error);
     }
   }
 
-  const checkAuth = async () => {  
-    const credentials = { email, password }
-    const response = await fetch("/api/auth/checkAuth", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(credentials),
-    })  
-    const data = await response.json()
-    if (data.message == "Cookie not found") {
-      Router.push("/login")
-    }
-  } 
-
   function handleGetUser() {
     fetch("api/user/getUser")
-    .then(response => response.json())
-    .then(data => setUser(data.data))
-    .catch(error => {
-      console.error("Error fetching user:", error)
-    })
+      .then(response => response.json())
+      .then(data => setUser(data.data))
+      .catch(error => {
+        console.error("Error fetching user:", error)
+      })
   }
-  
-
-  useEffect(() => {
-    handleGetUser()
-  }, [])
-  useEffect(() => {
-    setEmail(user?.email)
-    console.log(email)
-  }, [user])
 
   useEffect(() => {
     checkAuth()
-    if (email != "") {
-      handleVerify()
+  }, [])
+
+  useEffect(() => {
+    if (cookie) {
+      checkSubscription()
+      handleGetUser()
     }
-  }, [email])
+  }, [cookie])
 
   return (
     <>
@@ -89,13 +82,13 @@ export default function Home() {
           <meta property="og:image" content="https://example.com/og-image.jpg" />
       </Head>
       <main>
+        <Navbar />
         <Tags />
-        
         <div className='pt-12 text-[#1A1C1F]'>
           <h1 className='text-center text-3xl font-semibold pb-8'>👋 Hola, {user?.username}</h1>
           <Feed />    
         </div>
-       
+       <Footer />
       </main>
       
     </>

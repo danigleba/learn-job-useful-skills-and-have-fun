@@ -8,25 +8,15 @@ export default function Verify() {
   const router = useRouter()
 
   const handleVerify = async () => {
-    try {
-      const response = await fetch('/api/auth/verify', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
+    const url = "/api/auth/checkCostumer?email="+email
+    const response = await fetch(url)
+        const data = await response.json()
 
-      const data = await response.json();
-      console.log(data)
-      if (data.subscribed == true) {
+      if (data.isStripeCustomer) {
         router.push("/")
       } else {
         router.push("/login")
       }
-    } catch (error) {
-      console.error('Error checking email:', error);
-    }
   }
 
   return (
