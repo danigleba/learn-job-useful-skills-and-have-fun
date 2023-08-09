@@ -73,9 +73,10 @@ export default function Home() {
   return (
     <>
       <Head>
-          <title>Kualify | Aprende lo que la escuela no te enseñará.</title>
+          <title>Kualify | Menu principal</title>
           <meta name="description" content="Your meta description goes here" />
           <meta name="author" content="Kualify App" />
+          <link rel="icon" href="/icon.png" />
           <link rel="canonical" href="https://app.kualify.es/" />
           <meta property="og:title" content="Kualify App" />
           <meta property="og:description" content="Your meta description goes here" />
