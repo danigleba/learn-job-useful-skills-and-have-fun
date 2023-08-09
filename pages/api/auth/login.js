@@ -1,8 +1,7 @@
 import {sign} from 'jsonwebtoken'
 import { serialize } from "cookie";
-import { getFirestore, collection, doc, getDoc, getDocs, query, where} from "firebase/firestore";
-import crypyo from "crypto";
-import {db} from '../../../firebase/index'
+import { collection, getDocs, query, where} from "firebase/firestore";
+import {db} from '../../../utils/firebase/index'
 
 const secret = process.env.FIREBASE_KEY;
 const crypto = require('crypto')

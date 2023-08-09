@@ -1,4 +1,4 @@
-import {db} from '../../../firebase/index'
+import {db} from '@/utils/firebase'
 import { collection, query, where, getDocs, doc, getDoc } from 'firebase/firestore';
 import { verify } from 'jsonwebtoken';
 import { parse } from 'cookie';

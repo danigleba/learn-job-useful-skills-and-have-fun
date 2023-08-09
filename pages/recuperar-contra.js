@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link';
 import React from 'react';
 import { Inter } from 'next/font/google'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Footer from '@/components/Footer-Auth'
 import Navbar from '@/components/Navbar-Auth'
 
@@ -11,16 +11,18 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function getPassword() {
     const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [user, setUser] = useState({})
     const [wrongPassAlert, setWrongPassAlert] = useState("")
 
     function sendPassword() {
-        fetch("/api/email-test"), {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            }
+      if (email != "") { 
+        /*fetch("/api/email-test"), {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              }
+        } */ return
+      } else {
+        setWrongPassAlert("Escribe tu email vinculado a Kualify")
       } 
     }
 
@@ -50,13 +52,12 @@ export default function getPassword() {
                             <label htmlFor="email" className="block mb-2 text-sm font-medium">Correo de la cuenta</label>
                             <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="placeholder-[#c9c9c9] border border-[#333533] text-gray-900 sm:text-sm rounded-xl block w-full p-2.5" placeholder="nombre@ejemplo.com" required="" />
                         </div>
-                        <div className='h-0 text-center'>
-                            <a className='text-sm text-red-500'>{wrongPassAlert}</a>
-                        </div>
                         <div className='flex-1 flex flex-col items-center pt-2'>
                             <button onClick={sendPassword} type="submit" className='bg-[#333533] rounded-xl py-2.5 w-full text-white font-bold'>Enviar contraseña</button>
+                            <a className='text-sm text-center pt-2 text-red-600 font-light'>{wrongPassAlert}</a>
+
                         </div>
-                        <p className="pt-2 md:pt-0 pb-6  h-0 text-center text-sm font-light text-gray-500">
+                        <p className="pb-6  h-0 text-center text-sm font-light text-gray-500">
                             <a href="/login" className="font-medium text-primary-600 hover:underline">Volver</a>
                         </p>
                     </form>

@@ -1,4 +1,4 @@
-import {db} from '../../../firebase/index'
+import {db} from '../../../utils/firebase/index'
 import { collection, addDoc, query, where, getDocs, doc} from "firebase/firestore"; 
 import {sign} from 'jsonwebtoken'
 import { serialize } from "cookie";

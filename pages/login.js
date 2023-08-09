@@ -33,7 +33,7 @@ export default function Login() {
         } else {
           setWrongPassAlert("El email o la contraseña son incorrectos");
         }
-      };
+      }
   return (
     <>
         <Head>
@@ -62,21 +62,21 @@ export default function Login() {
                                 </div>
                                 <div className='pb-2'>
                                     <label htmlFor="password" className="block mb-2 text-sm font-medium ">Contraseña</label>
-                                    <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" placeholder="••••••••" className="placeholder-[#c9c9c9] border border-[#333533] text-gray-900 sm:text-sm rounded-xl block w-full p-2.5" required="" />
+                                    <input onChange={(e) => setPassword(e.target.value)} type='password' name="password" id="password" placeholder="••••••••" className="placeholder-[#c9c9c9] border border-[#333533] text-gray-900 sm:text-sm rounded-xl block w-full p-2.5" required="" />
                                 </div>
                                 <div className='flex-1 flex flex-col items-center pt-2'>
                                     <button onClick={getUser} type="submit" className='bg-[#333533] rounded-xl pt-2.5 pb-2.5 w-full text-white font-bold'>Inciar sesión</button>
-                                    <a className='pt-2 text-sm text-red-600 font-light'>{wrongPassAlert}</a>
+                                    <a className='pt-2 text-sm text-center text-red-600 font-light'>{wrongPassAlert}</a>
                                 </div>
                                 
                             </form>
                         </div>
                         <div className='bloc space-y-2 px-4'>
                                     <div className="h-full text-center text-sm font-light text-gray-500">
-                                        ¿Aún no tienes una cuenta? <a href="/registration" className="font-medium text-primary-600 hover:underline">Crea tu cuenta</a>
+                                        ¿Aún no tienes una cuenta? <a href="/registro" className="font-medium text-primary-600 hover:underline">Crea tu cuenta</a>
                                     </div>
                                     <div className="h-full text-center text-sm font-light text-gray-500">
-                                        ¿Has olvidado tu contraseña? <a href="/getpassword" className="font-medium text-primary-600 hover:underline">Recupera tu contraña</a>
+                                        ¿Has olvidado tu contraseña? <a href="/recuperar-contra" className="font-medium text-primary-600 hover:underline">Recupera tu contraña</a>
                                     </div>
                         </div>
                     </div>

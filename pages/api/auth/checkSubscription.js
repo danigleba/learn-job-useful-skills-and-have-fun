@@ -1,5 +1,4 @@
 import Stripe from 'stripe'
-import {db} from '@/firebase/index'
 import { verify } from 'jsonwebtoken';
 import { parse } from 'cookie';
 

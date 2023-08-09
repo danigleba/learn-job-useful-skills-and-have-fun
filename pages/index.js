@@ -2,18 +2,17 @@ import Head from 'next/head'
 import {useState, useEffect} from 'react'
 import { Inter } from 'next/font/google'
 import Router from 'next/router';
-import Feed from '../components/Feed.js'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import Tags from '@/components/Tags.js';
+import Link from 'next/link'
+import Image from 'next/image'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
   const [user, setUser] = useState([])
-  const [cookie, setCookie] = useState(null)
+  const [cookie, setCookie] = useState(false)
 
   const checkAuth = async () => {  
     const response = await fetch("/api/auth/checkAuth", {
@@ -43,7 +42,7 @@ export default function Home() {
       if (data.subscribed) {
         return
       } else {
-        Router.push("/registration")
+        Router.push("/renovar-suscripcion")
       }
     } catch (error) {
       console.error('Error checking email:', error);
@@ -84,10 +83,64 @@ export default function Home() {
       </Head>
       <main>
         <Navbar />
-        <Tags />
-        <div className='pt-12 text-[#1A1C1F]'>
-          <h1 className='text-center text-3xl font-semibold pb-8'>👋 Hola, {user?.username}</h1>
-          <Feed />    
+        <div className='pt-12 pb-24'>
+          <a className='font-extrabold text-4xl text-[#333533] text-center flex justify-center'>¿Cómo vas a mejorar hoy?</a>
+        <div className='flex justify-center pt-12'>
+        <div className="lg:space-y-0 grid lg:grid-cols-2 gap-12 justify-center mx-8 md:mx-24 w-2/3">
+                  <div>
+                    <Link href="/cursos/finanzas-personales">
+                      <div className="flex justify-center items-center">
+                        <div className="hover:bg-[#333533] duration-200 hover:text-white w-full text-[#333533] bg-white shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-xl pb-10">
+                          <div className="flex rounded-t-xl rounded-b-lg bg-cover bg-opacity-50 bg-center bg-[url('https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/course_covers%2Fpersonalfinance.webp?alt=media&token=ad205e2f-b958-4ece-afb0-15b71fd19857')] justify-center h-56"></div>
+                          <div className="px-6 py-6 text-center">
+                            <div className="font-bold text-2xl">Finanzas Personales</div>
+                          </div>
+                          <div className="w-full px-8 flex justify-center items-center space-x-6">
+                            <Image className="block rounded-full sm:mx-0 sm:shrink-0" height={48} width={48} src="/icon.png" alt="Profile picture"/>
+                            <div>
+                              <div className="text-left">
+                                <p className="cursor-pointer text-lg font-semibold">Nombre Empresa</p>
+                                <p className="cursor-pointer text-sm font-light">Puesto en Empresa</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                  <div>
+                    <Link href="/cursos/soft-skills">
+                      <div className="flex justify-center items-center">
+                        <div className="hover:bg-[#333533] duration-200 hover:text-white w-full text-[#333533] bg-white shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-xl pb-10">
+                          <div className="flex rounded-t-xl rounded-b-lg bg-cover bg-opacity-50 bg-center bg-[url('https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/course_covers%2Fsoftskills.webp?alt=media&token=f8f82f74-4785-4a38-ab89-642c1f23183d')] justify-center h-56"></div>
+                          <div className="px-6 py-6 text-center">
+                            <div className="font-bold text-2xl">Soft Skills</div>
+                          </div>
+                          <div className="w-full px-8 flex justify-center items-center space-x-6">
+                            <Image className="block rounded-full sm:mx-0 sm:shrink-0" height={48} width={48} src="/icon.png" alt="Profile picture" />
+                            <div>
+                              <div className="text-left">
+                                <p className="cursor-pointer text-lg font-semibold">Nombre Apellido</p>
+                                <p className="cursor-pointer text-sm font-light">Puesto en Empresa</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>       
+                </div>   
+
+                </div>
+                <div className='flex justify-center items-center'>
+                    <div className='cursor-pointer border-2 border-[#333533] w-max flex justify-center items-center rounded-full mt-16 px-12 py-2'>
+                      <a className='text-lg text-center flex justify-center text-[#333533] pr-4 font-normal'>Más cursos próximamente</a>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#333533" className="w-6 h-6">
+                        <path fillRule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clipRule="evenodd" />
+                      </svg>
+
+                    </div>
+                </div>
         </div>
        <Footer />
       </main>

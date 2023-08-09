@@ -1,8 +1,3 @@
-
-import {db} from '../../../firebase/index'
-import { collection, getDocs, doc, query, where} from "firebase/firestore";
-
-
 export default async function(req, res) {
     const { cookies } = req
     const jwt = cookies.kualifyApp

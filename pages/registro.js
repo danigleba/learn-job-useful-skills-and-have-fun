@@ -48,7 +48,7 @@ export default function Registration() {
                 }
             } else {
                 setWrongUserAlert("Usa el email con el que has pagado tu suscripción. Si no lo has hecho, hazlo ")
-                setPricingLink("aquí.")
+                setPricingLink("aquí")
             }
         } else {
             setWrongUserAlert("Responde a todos los campos")
@@ -94,7 +94,7 @@ export default function Registration() {
                                     <button onClick={addUser} type="submit" className='bg-[#333533] rounded-xl py-2.5 w-full text-white font-bold'>Crear mi cuenta</button>
                                     <p className='text-center pt-2 text-sm text-red-600 font-light'>{wrongUserAlert}<a className='underline text-center pt-2 text-sm text-red-600 font-light' href="https://kualify.es/precios">{princingLink}</a></p>
                                 </div>
-                                <p className="pt-1 md:pt-0 text-center text-sm font-light text-gray-500">
+                                <p className="md:pt-0 text-center text-sm font-light text-gray-500">
                                     ¿Ya tienes una cuenta? <a href="/login" className="font-medium text-primary-600 hover:underline">Inicia sesión</a>
                                 </p>
                             </form>
