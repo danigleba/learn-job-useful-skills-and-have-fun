@@ -27,12 +27,12 @@ export default function Navbar() {
             </Link>
         </div>
         <div className='space-x-4 flex'>
-          <Link legacyBehavior href="/3mubYgtjXanxnqIuDXGa">
+          <Link legacyBehavior href="/finanzas-personales">
             <div className='cursor-pointer px-4 py-2 rounded-md bg-[#333533] text-white font-semibold text-xs'>
               <a>Finanzas Personales</a>
             </div>
           </Link>
-          <Link legacyBehavior href="/hA0EKfNJpVcLeUxCbzam">
+          <Link legacyBehavior href="/soft-skills">
             <div className='cursor-pointer px-4 py-2 rounded-md bg-[#333533] text-white font-semibold text-xs'>
               <a>Soft Skills</a>
             </div>
@@ -47,7 +47,9 @@ export default function Navbar() {
                   </div>
                   <div>
                     <Link href="/perfil">
-                      <Image alt="Profile picture" src="/icon.png" width="45" height="45"/>
+                      <div className='w-11 h-11 rounded-full bg-[#333533] flex items-center justify-center text-white font-extrabold text-lg'>
+                        <p>{user?.username.charAt(0).toUpperCase()}</p>
+                      </div>
                     </Link>
                   </div>
                 </div>   

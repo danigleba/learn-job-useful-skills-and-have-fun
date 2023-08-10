@@ -94,8 +94,10 @@ export default function Home() {
       <main>
         <Navbar />
         <div className='flex justify-center grid grid-col-1 pt-12'>
-            <div className="flex justify-center">
-                <Image alt="Profile picture" src="/icon.png" height={150} width={150}/>
+          <div className='flex justify-center'>
+            <div className='w-40 h-40 rounded-full bg-[#333533] flex items-center justify-center text-white font-extrabold text-6xl'>
+              <p>{user?.username?.charAt(0).toUpperCase()}</p>
+            </div>
             </div>
             <a className='text-center pt-4 font-bold text-2xl'>{user?.username}</a>
             <div className='w-full'>

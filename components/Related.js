@@ -38,13 +38,7 @@ export default function Related(props) {
                                             </div>
                                             <div className="flex justify-center pb-3">
 
-                                                <div className="text-center border-rast:border-r-0 gap-4 cursor-pointer">
-                                                    {
-                                                        item?.tags?.map(tags => (
-                                                            <span key={tags} className="font-semibold py-2 px-6 badge mr-2 rounded-md bg-[#1A1C1F] cursor-pointer text-white">{tags}</span>
-                                                        ))
-                                                    }
-                                                </div>
+    
 
                                             </div>
                                         </div>

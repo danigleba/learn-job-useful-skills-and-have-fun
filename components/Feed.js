@@ -1,7 +1,6 @@
 import Image from "next/image"
 import { useState, useEffect } from "react"
 
-
 export default function Feed() {
     const [courses, setCourses] = useState([])    
    
@@ -13,42 +12,31 @@ export default function Feed() {
     }, [])
     
     return (
-        <div className="text-[#1A1C1F] mx-4 sm:mx-12">
-            <h1 className="flex justify-center text-center text-4xl font-bold">¿Qué quieres aprender hoy?</h1>
-            <div className="pt-12 pb-12 md:grid md:grid-cols-3  md:gap-4">
-                        {courses?.map(item => (
-                            <a href={"/"+item.id+"/intro"} key={item.id}>
-                                <div className="flex justify-center mb-8 active:scale-95 transition-transform cursor-pointer hover:scale-105">
-                                    <div className="w-full rounded-2xl inline-block overflow-hidden p-4 cursor-pointer">
-                                        <div className="shadow-md relative group w-full overflow-hidden bg-black h-32 rounded-md h-48">
-                                            <Image
-                                                alt={item.title}
-                                                src={item.cover_url}
-                                                height={1024}
-                                                width={1024}
-                                                className="object-cover transform duration-700"
-                                            />
-                                        </div>
-                                        <div className="p-2 rounded-b-2xl">
-                                            <div className="text-center px-3 pb-4 pt-2">
-                                                <h1 className="font-bold text-2xl mb-2 cursor-pointer">
-                                                    {item.title}
-                                                </h1>
+        <div className='flex justify-center pt-12'>
+            <div className="lg:space-y-0 grid lg:grid-cols-2 gap-12 justify-center mx-8 md:mx-24 w-2/3">
+                {courses?.map(item => (
+                            <a href={"/"+item.id} key={item.id}>
+                               <div>
+                                        <div className="flex justify-center items-center">
+                                            <div className="hover:bg-[#333533] duration-200 hover:text-white w-full text-[#333533] bg-white shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-xl pb-10">
+                                            <div
+                                                className="flex rounded-t-xl rounded-b-lg bg-cover bg-opacity-50 justify-center h-56"
+                                                style={{ backgroundImage: `url(${item.cover_url})`, backgroundPosition: 'center' }}
+                                            ></div>                                            <div className="px-6 py-6 text-center">
+                                                <div className="font-bold text-2xl">{item?.title}</div>
                                             </div>
-                                            <div className="flex justify-center pb-3">
-
-                                                <div className="text-center border-rast:border-r-0 gap-4 cursor-pointer">
-                                                    {
-                                                        item.tags.map(tags => (
-                                                            <span key={tags} className="font-semibold py-2 px-6 badge mr-2 rounded-md bg-[#1A1C1F] cursor-pointer text-white">{tags}</span>
-                                                        ))
-                                                    }
+                                            <div className="w-full px-8 flex justify-center items-center space-x-6">
+                                                <Image className="block rounded-full sm:mx-0 sm:shrink-0" height={48} width={48} src={item?.teacher?.profile_url} alt="Profile picture"/>
+                                                <div>
+                                                <div className="text-left">
+                                                    <p className="cursor-pointer text-lg font-semibold">{item?.teacher?.name}</p>
+                                                    <p className="cursor-pointer text-sm font-light">{item?.teacher?.job}</p>
                                                 </div>
-
+                                                </div>
+                                            </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                </div> 
                             </a>
                         ))}              
             </div>

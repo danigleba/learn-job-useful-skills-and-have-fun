@@ -2,12 +2,10 @@ import Head from "next/head"
 import Image from "next/image"
 import Router, { useRouter } from "next/router"
 import { useState, useEffect, useRef, Fragment} from "react"
-import YouTube from 'react-youtube'
 import { Dialog, Transition } from '@headlessui/react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Related from "@/components/Related"
-import Feed from "@/components/Feed"
 
 export default function Id() {
     const router = useRouter()
@@ -75,11 +73,11 @@ export default function Id() {
                  //Waits 300ms to change the step only once the "Closing Modal" animation is over in order to make the transition between steps cleaner
                 setTimeout(() => {
                 if ((activeStep + 2)  > (course && course.steps && course.steps.length)) {
-                    router.push(`/${id_course}/outro`)
+                    router.push(`/`)
                 } else {
                     window.scrollTo(0, 0)
                     setActiveStep(activeStep + 1)
-                    setVideoKey(videoKey + 1) 
+                    //setVideoKey(videoKey + 1) 
                 }
               }, 300)
             }, 250)        
@@ -163,7 +161,8 @@ export default function Id() {
                 <meta property="og:description" content="Your meta description goes here" />
                 <meta property="og:image" content="https://example.com/og-image.jpg" />
             </Head>    
-            <main className="text-center">
+            <main className="text-center bg-white">
+                <Navbar />
                 <div className="pt-12">
                     <div className="pl-10 pr-10 pb-6">
                         {course?.tags?.map(item => (
@@ -172,13 +171,13 @@ export default function Id() {
                                     <p className="tag">{item}</p>
                                 </div>
                             </a>))} 
-                        <h2 className="text-3xl sm:text-4xl font-bold content-center text-gray-800">{course?.title}</h2>
-                        <h2 className="text-xl text-[#1A1C1F] font-semibold pt-4">{activeStep + 1}. {course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep].title}</h2>
+                        <h2 className="text-3xl sm:text-5xl font-extrabold content-center text-gray-800">{course?.title}</h2>
+                        <h2 className="text-xl text-[#1A1C1F] font-medium pt-4">{course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep].title}</h2>
                     </div>
 
                     <div className="flex justify-center p-6">
-                            <div className="rounded-lg overflow-hidden shadow-md">
-                                <video src={course?.intro_video} type="video/mp4" width="1024" height="960" controls oncontextmenu="return false;" controlsList="nodownload"></video>
+                            <div className="shadow-xl rounded-lg overflow-hidden ">
+                                <video src={course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.video_url} type="video/mp4" width="1024" height="960" controls oncontextmenu="return false;" controlsList="nodownload"></video>
                             </div>
                     </div>
 
@@ -207,19 +206,14 @@ export default function Id() {
                                     leave="ease-in duration-200"
                                     leaveFrom="opacity-100 scale-100"
                                     leaveTo="opacity-0 scale-95">
-                                    <Dialog.Panel className="sm:w-full md:w-1/2 wtransform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle transition-all">
-                                        <Dialog.Title
-                                            as="h5"
-                                            className="text-xl font-semibold leading-6 text-[#1A1C1F] text-center pt-2">
-                                            Antes de continuar...
-                                    </Dialog.Title>  
-                                        <div className="pt-2">
-                                            <h2 className="text-center text-2xl font-bold  pt-4">{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].title}</h2>
+                                    <Dialog.Panel className="sm:w-full md:w-1/2 wtransform overflow-hidden rounded-3xl bg-white p-8 text-left align-middle transition-all">
+                                        <div className="">
+                                            <h2 className="text-center text-2xl font-bold">{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].title}</h2>
                                         </div>
                                         {/*In order to delete the top-left's button's autoFocus, this invisible input is created and set to autoFocus instead*/}
                                         <input type="text" autoFocus className="opacity-0 absolute"/>
                                         <div className="justify-center text-[#1A1C1F]">
-                                            <div className="grid content-center grid-cols-2 mx-2 pt-12">
+                                            <div className="grid content-center grid-cols-2 mx-2 pt-8">
                                                 <div className="p-2 pl-0 text-right">
                                                     <button 
                                                         onClick={handleNextStep}
@@ -258,10 +252,8 @@ export default function Id() {
                     </Transition>
                 </div>
                 <Related id_course={router.query.id_course}/>
-                <Feed />
-               
+               <Footer />
             </main>
         </>
     )
 }
-

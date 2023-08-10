@@ -67,6 +67,16 @@ export default function Home() {
     }
   }, [cookie])
 
+  const logOff = async () => {
+    try {
+      const response = await fetch('/api/auth/logoff', {
+        method: 'POST', 
+      })
+    } catch (error) {
+      console.error('An error occurred:', error)
+    }
+    Router.reload()
+  }
   return (
     <>
       <Head>
@@ -81,12 +91,17 @@ export default function Home() {
       </Head>
       <main>
       <nav className="my-3 mx-12">
-      <div className='flex items-center justify-between h-11'>
-            <Link href="/">
-              <Image alt="Kualify logo" src="https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/logo.png?alt=media&token=f332a294-dbd8-4b36-9e95-5f6c402f329c" width="95" height="25"/>
-            </Link>
-      </div>
-    </nav>
+        <div className='flex items-center justify-between h-11'>
+              <Link href="/">
+                <Image alt="Kualify logo" src="https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/logo.png?alt=media&token=f332a294-dbd8-4b36-9e95-5f6c402f329c" width="95" height="25"/>
+              </Link>
+              <Link aria-label="Iniciar sesión en Kualify" href="/login">
+                    <div className='py-1.5 px-6 text-white rounded-3xl font-semibold text-lg bg-[#333533]'>
+                        <button onClick={logOff}>Salir</button>
+                    </div>
+              </Link>
+        </div>
+      </nav>
         <div className='mx-4'>
             <a className='text-center flex justify-center pt-12 font-extrabold text-[#333533] text-3xl'>{user?.username}, tu suscripción ha caducado.<br/>Suscríbete para seguir disfrutando de Kualify Premium.</a>
             <a className='text-center pt-2 flex justify-center font-light text-lg text-[#333533]'>Para seguir usando la misma cuenta, suscríbete con tu email: {user.email}</a>
