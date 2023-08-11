@@ -3,7 +3,7 @@ import { verify } from 'jsonwebtoken';
 import { parse } from 'cookie';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
-const secret = process.env.FIREBASE_KEY;
+const secret = process.env.COOKIE_KEY;
 
 export default async function handler(req, res) {
   const token = parse(req.headers.cookie).kualifyApp

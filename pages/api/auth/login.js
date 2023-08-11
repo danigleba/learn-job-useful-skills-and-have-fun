@@ -3,7 +3,7 @@ import { serialize } from "cookie";
 import { collection, getDocs, query, where} from "firebase/firestore";
 import {db} from '../../../utils/firebase/index'
 
-const secret = process.env.FIREBASE_KEY;
+const secret = process.env.COOKIE_KEY;
 const crypto = require('crypto')
 
 export default async function (req, res) {

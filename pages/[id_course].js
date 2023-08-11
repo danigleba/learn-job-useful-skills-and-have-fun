@@ -251,7 +251,7 @@ export default function Id() {
                         </Dialog>
                     </Transition>
                 </div>
-                <Related id_course={router.query.id_course}/>
+                <Related activeStep={activeStep} id_course={router.query.id_course}/>
                <Footer />
             </main>
         </>

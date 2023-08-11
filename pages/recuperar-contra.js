@@ -12,17 +12,24 @@ const inter = Inter({ subsets: ['latin'] })
 export default function getPassword() {
     const [email, setEmail] = useState("")
     const [wrongPassAlert, setWrongPassAlert] = useState("")
+    const [buttonClicked, setButtonClicked] = useState(false)
 
-    function sendPassword() {
+    const askForPassword = async (e) => {
+      e.preventDefault()
       if (email != "") { 
-        /*fetch("/api/email-test"), {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              }
-        } */ return
+        const url = "/api/auth/checkCostumer?email=" + email
+        const response = await fetch(url)
+        const data = await response.json()
+        if (data.isStripeCustomer) {
+          setWrongPassAlert("")
+          const mailtoLink = `mailto:kualify.help@gmail.com?subject=He%20olvidado%20mi%20contraseña&body=Hola,%20he%20olvidado%20mi%20contraseña.%20Mi%20cuenta%20es:%20${email}.%20Gracias.&cc=${email}`
+          window.location.href = mailtoLink
+          setButtonClicked(true)
+        } else {
+          setWrongPassAlert("Este email no está registrado en Kualify")
+        }
       } else {
-        setWrongPassAlert("Escribe tu email vinculado a Kualify")
+        setWrongPassAlert("Escribe el email de tu cuenta de Kualify")
       } 
     }
 
@@ -43,7 +50,10 @@ export default function getPassword() {
       <section>
         <div className="text-[#333533] flex justify-center mt-12 px-6 mx-auto mb-24">
             <div className="w-full md:mt-0 sm:max-w-md xl:p-0">
-                <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <div className={`${buttonClicked ? 'block' : 'hidden'}`}>
+                  <a>felicidades</a>
+                </div>
+                <div className={`p-6 space-y-4 md:space-y-6 sm:p-8 ${buttonClicked ? 'hidden' : 'block'}`}>
                     <h1 className="text-3xl font-bold text-center">
                         Recupera tu contraseña
                     </h1>
@@ -53,7 +63,7 @@ export default function getPassword() {
                             <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="placeholder-[#c9c9c9] border border-[#333533] text-gray-900 sm:text-sm rounded-xl block w-full p-2.5" placeholder="nombre@ejemplo.com" required="" />
                         </div>
                         <div className='flex-1 flex flex-col items-center pt-2'>
-                            <button onClick={sendPassword} type="submit" className='bg-[#333533] rounded-xl py-2.5 w-full text-white font-bold'>Enviar contraseña</button>
+                            <button onClick={askForPassword} type="submit" className='bg-[#333533] rounded-xl py-2.5 w-full text-white font-bold'>Enviar contraseña</button>
                             <a className='text-sm text-center pt-2 text-red-600 font-light'>{wrongPassAlert}</a>
 
                         </div>
