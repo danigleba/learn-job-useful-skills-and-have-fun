@@ -81,7 +81,7 @@ export default function Home() {
       </Head>
       <main className='bg-white'>
         <Navbar />
-        <div className='pt-12 pb-24'>
+        <div className='pt-12 pb-24 px-8'>
           <a className='font-extrabold text-4xl text-[#333533] text-center flex justify-center'>¿Cómo vas a mejorar hoy?</a>
           <Feed />
           <div className='flex justify-center items-center'>

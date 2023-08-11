@@ -103,8 +103,8 @@ export default function Home() {
         </div>
       </nav>
         <div className='mx-4'>
-            <a className='text-center flex justify-center pt-12 font-extrabold text-[#333533] text-3xl'>{user?.username}, tu suscripción ha caducado.<br/>Suscríbete para seguir disfrutando de Kualify Premium.</a>
-            <a className='text-center pt-2 flex justify-center font-light text-lg text-[#333533]'>Para seguir usando la misma cuenta, suscríbete con tu email: {user.email}</a>
+            <a className='text-center flex justify-center pt-12 font-extrabold text-[#333533] text-3xl'>{user?.username}, tu suscripción ha caducado.</a><a className='text-center flex justify-center pt-2 font-extrabold text-[#333533] text-3xl'>Suscríbete para seguir disfrutando de Kualify Premium.</a>
+            <a className='text-center pt-4 flex justify-center font-light text-lg text-[#333533]'>Para seguir usando la misma cuenta, suscríbete con tu email: {user.email}</a>
           </div>
             <div className="flex justify-center h-full">
                 <div className="w-full 2xl:w-1/2 pt-12 mx-8 md:mx-24 rounded-3xl">

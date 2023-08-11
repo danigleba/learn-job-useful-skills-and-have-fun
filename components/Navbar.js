@@ -26,7 +26,7 @@ export default function Navbar() {
               <Image alt="Kualify logo" src="https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/logo.png?alt=media&token=f332a294-dbd8-4b36-9e95-5f6c402f329c" width="95" height="25"/>
             </Link>
         </div>
-        <div className='space-x-4 flex'>
+        <div className='space-x-4 flex hidden md:flex'>
           <Link legacyBehavior href="/finanzas-personales">
             <div className='cursor-pointer px-4 py-2 rounded-md bg-[#333533] text-white font-semibold text-xs'>
               <a>Finanzas Personales</a>

@@ -50,14 +50,17 @@ export default function getPassword() {
       <section>
         <div className="text-[#333533] flex justify-center mt-12 px-6 mx-auto mb-24">
             <div className="w-full md:mt-0 sm:max-w-md xl:p-0">
-                <div className={`${buttonClicked ? 'block' : 'hidden'}`}>
-                  <a>felicidades</a>
-                </div>
-                <div className={`p-6 space-y-4 md:space-y-6 sm:p-8 ${buttonClicked ? 'hidden' : 'block'}`}>
+                <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1 className="text-3xl font-bold text-center">
                         Recupera tu contraseña
                     </h1>
-                    <form className="space-y-4 md:space-y-6" action="#">
+                    <div className={`${buttonClicked ? 'block' : 'hidden'} text-center`}>
+                      <a className='text-center font-normal text-lg'>Envíanos un mensaje y te responderemos con tu contraseña lo antes posible.</a>
+                      <p className="pb-6 pt-6 h-0 text-center text-sm font-light text-gray-500">
+                          <a href="/login" className="font-medium text-primary-600 hover:underline">Volver</a>
+                      </p>
+                    </div>
+                    <form className={`space-y-4 md:space-y-6" action="#" ${buttonClicked ? 'hidden' : 'block'}`}>
                         <div className=''>
                             <label htmlFor="email" className="block mb-2 text-sm font-medium">Correo de la cuenta</label>
                             <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="placeholder-[#c9c9c9] border border-[#333533] text-gray-900 sm:text-sm rounded-xl block w-full p-2.5" placeholder="nombre@ejemplo.com" required="" />
