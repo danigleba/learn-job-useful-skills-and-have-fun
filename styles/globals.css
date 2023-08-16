@@ -16,10 +16,10 @@ html {
    @apply text-white font-semibold py-1.5 px-6 rounded-md bg-[#1A1C1F];
  }
  .btn-primary {
-   @apply bg-[#1A1C1F] ring-transparent	text-white w-full px-6 sm:w-96 py-3 rounded-md hover:bg-[#2C3036] font-bold shadow-md;
+   @apply bg-[#333533] ring-transparent	text-white px-16 sm:px-24 py-3 rounded-lg font-bold text-base;
  }
  
  .btn-quiz {
-   @apply w-full h-full bg-[#EDEFF2] hover:bg-[#1A1C1F] hover:text-white  font-bold py-4 px-4 text-center text-sm md:text-base	 rounded focus:shadow-md focus:text-white;
+   @apply w-full h-full bg-[#f4f4f4] hover:bg-[#333533] hover:text-white font-bold py-4 px-4 text-center text-sm md:text-base rounded focus:text-white;
  }
 }

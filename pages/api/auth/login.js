@@ -39,8 +39,8 @@ export default async function (req, res) {
         path: "/",
       })
       res.setHeader("Set-Cookie", serializedCookie)
-      res.status(200).json({message: "User found in database!"})
+      res.status(200).json({userExists: true})
   } else {
-    res.json({message: "User not found in database"})
+    res.json({message: false})
   }
 }

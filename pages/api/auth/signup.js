@@ -50,7 +50,7 @@ export default async function (req, res) {
                 path: "/",
                 })
             res.setHeader("Set-Cookie", serializedCookie)
-            res.status(200).json({message: "User added to database"})
+            res.status(200).json({userAdded: true})
         }
 }
  

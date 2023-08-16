@@ -20,7 +20,7 @@ export default function Navbar() {
   }, [])
   return (
     <nav className="my-3 mx-12">
-      <div className='flex items-center justify-between h-11'>
+      <div className='flex items-center justify-between h-11 space-x-4'>
         <div>
             <Link href="/">
               <Image alt="Kualify logo" src="https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/logo.png?alt=media&token=f332a294-dbd8-4b36-9e95-5f6c402f329c" width="95" height="25"/>

@@ -13,9 +13,10 @@ export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [wrongPassAlert, setWrongPassAlert] = useState("")
+    const [buttonText, setButtonText] = useState("Iniciar sesión")
 
     const getUser = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         const credentials = { email, password }
         const response = await fetch("/api/auth/login", {
           method: "POST",
@@ -24,12 +25,11 @@ export default function Login() {
           },
           body: JSON.stringify(credentials),
         });
-      
         const data = await response.json();
-      
-        if (data.message === "User found in database!") {
-            setWrongPassAlert("");
-            Router.push("/");
+        if (data.userExists) {
+            setWrongPassAlert("")
+            setButtonText("Cargando...")
+            Router.push("/")
         } else {
           setWrongPassAlert("El email o la contraseña son incorrectos");
         }
@@ -65,7 +65,7 @@ export default function Login() {
                                     <input onChange={(e) => setPassword(e.target.value)} type='password' name="password" id="password" placeholder="••••••••" className="placeholder-[#c9c9c9] border border-[#333533] text-gray-900 sm:text-sm rounded-xl block w-full p-2.5" required="" />
                                 </div>
                                 <div className='flex-1 flex flex-col items-center pt-2'>
-                                    <button onClick={getUser} type="submit" className='bg-[#333533] rounded-xl pt-2.5 pb-2.5 w-full text-white font-bold'>Inciar sesión</button>
+                                    <button onClick={getUser} type="submit" className='bg-[#333533] rounded-xl pt-2.5 pb-2.5 w-full text-white font-bold'>{buttonText}</button>
                                     <a className='pt-2 text-sm text-center text-red-600 font-light'>{wrongPassAlert}</a>
                                 </div>
                                 

@@ -15,6 +15,7 @@ export default function Registration() {
     const [language, setLanguage] = useState("")
     const [wrongUserAlert, setWrongUserAlert] = useState("")
     const [princingLink, setPricingLink] = useState("")
+    const [buttonText, setButtonText] = useState("Crear mi cuenta")
 
     useEffect(() => {
         const lang = navigator.language
@@ -38,9 +39,10 @@ export default function Registration() {
                 });
             
                 const data = await response.json();
-                if (data.message == 'User added to database') {
+                if (data.userAddes) {
                     setWrongUserAlert("")
                     setPricingLink("")
+                    setButtonText("Cargando...")
                     Router.push('/')
                 } else {
                     setWrongUserAlert("Este usuario ya existe, inicia sesión")
@@ -91,7 +93,7 @@ export default function Registration() {
                                     <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" placeholder="••••••••" className="placeholder-[#c9c9c9] border border-[#333533] text-gray-900 sm:text-sm rounded-xl block w-full p-2.5" required="" />
                                 </div>                             
                                 <div className='flex-1 flex flex-col items-center pt-2'>
-                                    <button onClick={addUser} type="submit" className='bg-[#333533] rounded-xl py-2.5 w-full text-white font-bold'>Crear mi cuenta</button>
+                                    <button onClick={addUser} type="submit" className='bg-[#333533] rounded-xl py-2.5 w-full text-white font-bold'>{buttonText}</button>
                                     <p className='text-center pt-2 text-sm text-red-600 font-light'>{wrongUserAlert}<a className='underline text-center pt-2 text-sm text-red-600 font-light' href="https://kualify.es/precios">{princingLink}</a></p>
                                 </div>
                                 <p className="md:pt-0 text-center text-sm font-light text-gray-500">
