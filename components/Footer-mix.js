@@ -10,7 +10,7 @@ export default function Footer() {
                                 <a href="mailto:kualify.help@gmail.com" className="text-center">kualify.info@gmail.com</a>
                             </li>
                             <li>
-                                <a className="text-center">+34 692 17 72 97</a>
+                                <p className="text-center">+34 692 17 72 97</p>
                             </li>
                         </ul>
                     </div>

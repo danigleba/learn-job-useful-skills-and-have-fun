@@ -22,7 +22,7 @@ export default function Navbar() {
                 <button>Iniciar sesión</button>
             </div>
             </Link>
-            <Link aria-label="Ir a la App de Kualify" href="/registro">
+            <Link aria-label="Crea tu cuenta" href="/registro">
             <div className='hidden lg:block py-2 px-6 text-white rounded-3xl font-semibold text-lg bg-[#333533]'>
                 <button>Crea tu cuenta</button>
             </div>
