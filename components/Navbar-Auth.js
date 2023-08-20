@@ -42,7 +42,7 @@ export default function Navbar() {
         <div className={`text-center flex h-max transition-2 duration-500 lg:hidden lg:flex ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
             <div className='w-1/2 flex items-center justify-start grid grid-col-1 space-y-2'>
                 <div className='flex mt-6'>
-                    <Link aria-label="Suscribirse a Kualify" href="/registro">
+                    <Link aria-label="Crea tu cuenta" href="/registro">
                     <div className='w-max py-2 px-6 text-white rounded-3xl font-semibold  text-center text-lg bg-[#333533]'>
                         <button>Crea tu cuenta</button>
                     </div>
