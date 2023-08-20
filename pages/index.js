@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   const [email, setEmail] = useState("")
   const [user, setUser] = useState([])
-  const [cookie, setCookie] = useState(false)
+  const [cookie, setCookie] = useState()
 
   const checkAuth = async () => {  
     const response = await fetch("/api/auth/checkAuth", {
@@ -82,11 +82,11 @@ export default function Home() {
       <main className='bg-white'>
         <Navbar />
         <div className='pt-12 pb-24 px-8'>
-          <a className='font-extrabold text-4xl text-[#333533] text-center flex justify-center'>¿Cómo vas a mejorar hoy?</a>
+          <p className='font-extrabold text-4xl text-[#333533] text-center flex justify-center'>¿Cómo vas a mejorar hoy?</p>
           <Feed />
           <div className='flex justify-center items-center'>
               <div className='cursor-pointer  w-max flex justify-center items-center '>
-                <a target="_blank" href="https://kualify.es/cursos" className='hover:text-white hover:bg-[#333533] duration-200 flex items-center rounded-full mt-16 px-12 py-2 border-2 border-[#333533] text-lg text-center flex justify-center text-[#333533] font-medium'>Más cursos próximamente</a>
+                <p target="_blank" href="https://kualify.es/cursos" className='hover:text-white hover:bg-[#333533] duration-200 flex items-center rounded-full mt-16 px-12 py-2 border-2 border-[#333533] text-lg text-center flex justify-center text-[#333533] font-medium'>Más cursos próximamente</p>
               </div>
           </div>
         </div>

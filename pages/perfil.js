@@ -99,7 +99,7 @@ export default function Home() {
               <p>{user?.username?.charAt(0).toUpperCase()}</p>
             </div>
             </div>
-            <a className='text-center pt-4 font-bold text-2xl'>{user?.username}</a>
+            <p className='text-center pt-4 font-bold text-2xl'>{user?.username}</p>
             <div className='w-full'>
               <button
                   onClick={logOff}

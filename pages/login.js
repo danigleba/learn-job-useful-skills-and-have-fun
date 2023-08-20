@@ -66,7 +66,7 @@ export default function Login() {
                                 </div>
                                 <div className='flex-1 flex flex-col items-center pt-2'>
                                     <button onClick={getUser} type="submit" className='bg-[#333533] rounded-xl pt-2.5 pb-2.5 w-full text-white font-bold'>{buttonText}</button>
-                                    <a className='pt-2 text-sm text-center text-red-600 font-light'>{wrongPassAlert}</a>
+                                    <p className='pt-2 text-sm text-center text-red-600 font-light'>{wrongPassAlert}</p>
                                 </div>
                                 
                             </form>

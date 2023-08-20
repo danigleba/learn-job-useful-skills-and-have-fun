@@ -55,7 +55,7 @@ export default function getPassword() {
                         Recupera tu contraseña
                     </h1>
                     <div className={`${buttonClicked ? 'block' : 'hidden'} text-center`}>
-                      <a className='text-center font-normal text-lg'>Envíanos un mensaje y te responderemos con tu contraseña lo antes posible.</a>
+                      <p className='text-center font-normal text-lg'>Envíanos un mensaje y te responderemos con tu contraseña lo antes posible.</p>
                       <p className="pb-6 pt-6 h-0 text-center text-sm font-light text-gray-500">
                           <a href="/login" className="font-medium text-primary-600 hover:underline">Volver</a>
                       </p>
@@ -67,7 +67,7 @@ export default function getPassword() {
                         </div>
                         <div className='flex-1 flex flex-col items-center pt-2'>
                             <button onClick={askForPassword} type="submit" className='bg-[#333533] rounded-xl py-2.5 w-full text-white font-bold'>Enviar petición</button>
-                            <a className='text-sm text-center pt-2 text-red-600 font-light'>{wrongPassAlert}</a>
+                            <p className='text-sm text-center pt-2 text-red-600 font-light'>{wrongPassAlert}</p>
 
                         </div>
                         <p className="pb-6  h-0 text-center text-sm font-light text-gray-500">

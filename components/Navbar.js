@@ -29,12 +29,12 @@ export default function Navbar() {
         <div className='space-x-4 flex hidden md:flex'>
           <Link legacyBehavior href="/finanzas-personales">
             <div className='cursor-pointer px-4 py-2 rounded-md bg-[#333533] text-white font-semibold text-xs'>
-              <a>Finanzas Personales</a>
+              <p>Finanzas Personales</p>
             </div>
           </Link>
           <Link legacyBehavior href="/soft-skills">
             <div className='cursor-pointer px-4 py-2 rounded-md bg-[#333533] text-white font-semibold text-xs'>
-              <a>Soft Skills</a>
+              <p>Soft Skills</p>
             </div>
           </Link>
         </div>
