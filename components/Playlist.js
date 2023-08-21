@@ -35,7 +35,7 @@ export default function Playlist(props) {
                                     <div className="flex justify-center items-center">
                                         <button onClick={() => changeStep(index)} className="w-full">
                                                 <div className={`border-2 border-[#333533] text-[#333533] rounded-md p-1 ${(index == props.activeStep) ? "bg-[#333533] text-white" : ""} ${(index > props.limitStep) ? "cursor-default" : "cursor-pointer"}`}>
-                                                    <div className="text-center flex justify-center items-center space-x-2">
+                                                    <div className="text-center flex justify-center px-2 items-center space-x-2">
                                                         <h1 className="truncate font-medium  text-sm sm:text-md">
                                                             {item.title}
                                                         </h1>

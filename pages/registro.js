@@ -65,7 +65,7 @@ export default function Registration() {
             <meta name="description" content="Your meta description goes here" />
             <meta name="author" content="Kualify App" />
             <link rel="icon" href="/icon.png" />
-            <link rel="canonical" href="https://app.kualify.es/" />
+            <link rel="canonical" href="/" />
             <meta property="og:title" content="Kualify App" />
             <meta property="og:description" content="Your meta description goes here" />
             <meta property="og:image" content="https://example.com/og-image.jpg" />
@@ -94,7 +94,7 @@ export default function Registration() {
                                 </div>                             
                                 <div className='flex-1 flex flex-col items-center pt-2'>
                                     <button onClick={addUser} type="submit" className='bg-[#333533] rounded-xl py-2.5 w-full text-white font-bold'>{buttonText}</button>
-                                    <p className='text-center pt-2 text-sm text-red-600 font-light'>{wrongUserAlert}<a className='underline text-center pt-2 text-sm text-red-600 font-light' href="https://kualify.es/precios">{princingLink}</a></p>
+                                    <p className='text-center pt-2 text-sm text-red-600 font-light'>{wrongUserAlert}<a aria-label="Precios" className='underline text-center pt-2 text-sm text-red-600 font-light' href="https://kualify.es/precios">{princingLink}</a></p>
                                 </div>
                                 <p className="md:pt-0 text-center text-sm font-light text-gray-500">
                                     ¿Ya tienes una cuenta? <a href="/login" className="font-medium text-primary-600 hover:underline">Inicia sesión</a>
