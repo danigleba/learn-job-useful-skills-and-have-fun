@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   const [email, setEmail] = useState("")
   const [user, setUser] = useState([])
-  const [cookie, setCookie] = useState(null)
+  const [cookie, setCookie] = useState()
 
   const checkAuth = async () => {  
     const response = await fetch("/api/auth/checkAuth", {
@@ -84,7 +84,7 @@ export default function Home() {
           <meta name="description" content="Your meta description goes here" />
           <meta name="author" content="Kualify App" />
           <link rel="icon" href="/icon.png" />
-          <link rel="canonical" href="/" />
+          <link rel="canonical" href="/https://app.kualify.es/"/>
           <meta property="og:title" content="Kualify App" />
           <meta property="og:description" content="Your meta description goes here" />
           <meta property="og:image" content="https://example.com/og-image.jpg" />
