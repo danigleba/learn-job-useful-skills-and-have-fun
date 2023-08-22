@@ -62,7 +62,7 @@ export default function Id() {
     }
 
     function handleGetUser() {
-      fetch("api/user/getUser")
+      fetch("/api/user/getUser")
         .then(response => response.json())
         .then(data => setUser(data.data))
         .catch(error => {
@@ -189,7 +189,7 @@ export default function Id() {
                 <meta name="description" content="Your meta description goes here" />
                 <meta name="author" content="Kualify App" />
                 <link rel="icon" href="/icon.png" />
-                <link rel="canonical" href="/https://app.kualify.es/"/>
+                <link rel="canonical" href={`https://app.kualify.es/${id_course}`}/>
                 <meta property="og:title" content="Kualify App" />
                 <meta property="og:description" content="Your meta description goes here" />
                 <meta property="og:image" content="https://example.com/og-image.jpg" />

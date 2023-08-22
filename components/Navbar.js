@@ -11,7 +11,7 @@ export default function Navbar() {
   
   }
   useEffect(() => {
-    fetch("api/user/getUser")
+    fetch("/api/user/getUser")
     .then(response => response.json())
     .then(data => setUser(data.data))
     .catch(error => {
@@ -27,12 +27,12 @@ export default function Navbar() {
             </Link>
         </div>
         <div className='space-x-4 flex hidden md:flex'>
-          <Link legacyBehavior href="/finanzas-personales">
+          <Link legacyBehavior href="/cursos/finanzas-personales">
             <div className='cursor-pointer px-4 py-2 rounded-md bg-[#333533] text-white font-semibold text-xs'>
               <p>Finanzas Personales</p>
             </div>
           </Link>
-          <Link legacyBehavior href="/soft-skills">
+          <Link legacyBehavior href="/cursos/soft-skills">
             <div className='cursor-pointer px-4 py-2 rounded-md bg-[#333533] text-white font-semibold text-xs'>
               <p>Soft Skills</p>
             </div>
