@@ -68,7 +68,7 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    if (cookie) {
+    if (cookie == true) {
       checkSubscription()
       handleGetUser()
     }
