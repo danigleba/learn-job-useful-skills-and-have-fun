@@ -48,13 +48,19 @@ export default function Home() {
     }
   }
 
-  function handleGetUser() {
-    fetch("api/user/getUser")
-      .then(response => response.json())
-      .then(data => setUser(data.data))
-      .catch(error => {
-        console.error("Error fetching user:", error)
+  const handleGetUser = async () => {
+    try {
+      const response = await fetch("/api/user/getUser",  {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+      },
       })
+      const data = await response.json()
+      setUser(data)
+    } catch (error) {
+        console.error('Error getting user:', error);
+    }
   }
 
   useEffect(() => {
