@@ -54,10 +54,9 @@ export default function Home() {
         headers: {
         'Content-Type': 'application/json',
       },
-      //body: JSON.stringify({ email }),
       })
       const data = await response.json()
-      setUser(data)
+      setUser(data.data)
     } catch (error) {
         console.error('Error getting user:', error);
     }

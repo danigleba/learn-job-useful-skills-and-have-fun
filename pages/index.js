@@ -57,7 +57,7 @@ export default function Home() {
       },
       })
       const data = await response.json()
-      setUser(data)
+      setUser(data.data)
     } catch (error) {
         console.error('Error getting user:', error);
     }
@@ -68,10 +68,8 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    if (cookie == true) {
-      checkSubscription()
-      handleGetUser()
-    }
+    checkSubscription()
+    handleGetUser()
   }, [cookie])
   return (
     <>

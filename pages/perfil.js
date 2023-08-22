@@ -58,7 +58,7 @@ export default function Home() {
       },
       })
       const data = await response.json()
-      setUser(data)
+      setUser(data.data)
     } catch (error) {
         console.error('Error getting user:', error);
     }

@@ -70,7 +70,7 @@ export default function Id() {
         },
         })
         const data = await response.json()
-        setUser(data)
+        setUser(data.data)
       } catch (error) {
           console.error('Error getting user:', error);
       }
@@ -164,7 +164,7 @@ export default function Id() {
     }, [cookie])
 
    useEffect(() => {  
-      if (user?.email.length > 0) {
+      if (user?.email?.length > 0) {
         getProgress()
       }
     }, [user, id_course])
