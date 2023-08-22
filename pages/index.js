@@ -49,7 +49,7 @@ export default function Home() {
   }
 
   const handleGetUser = async () => {
-    try {
+    //try {
       const response = await fetch("/api/user/getUser",  {
         method: 'POST',
         headers: {
@@ -58,9 +58,9 @@ export default function Home() {
       })
       const data = await response.json()
       setUser(data.data)
-    } catch (error) {
-        console.error('Error getting user:', error);
-    }
+    //} catch (error) {
+    //    console.error('Error getting user:', error);
+   //}
   }
 
   useEffect(() => {
