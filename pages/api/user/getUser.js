@@ -19,9 +19,9 @@ export default async function (req, res) {
             res.status(200).json({data: doc.data()})
         })
     } catch (error) {
-            console.log(error)
-            res.status(500).json({message: "Server error"})
-        }
+          console.log(error)
+          res.status(500).json({message: "Server error"})
+      }
   } //else {
     //res.status(200).json({message: "Token not found"})
   //}

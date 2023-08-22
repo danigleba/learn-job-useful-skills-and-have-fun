@@ -13,7 +13,7 @@ export default function Feed() {
     
     return (
         <div className='flex justify-center'>
-            <div className="space-y-12 md:space-y-0  md:grid md:grid-cols-2 gap-12 justify-center w-full lg:w-2/3">
+            <div className="space-y-12 md:space-y-0 md:grid md:grid-cols-2 gap-12 justify-center w-full lg:w-2/3">
                 {courses?.map(item => (
                             <a href={"/cursos/"+item.id} key={item.id}>
                                 <div className="mt-12 w-full hover:bg-[#333533] duration-200 hover:text-white text-[#333533] bg-white shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-xl pb-10">

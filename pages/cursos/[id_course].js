@@ -62,7 +62,7 @@ export default function Id() {
     }
 
     const handleGetUser = async () => {
-      try {
+     // try {
         const response = await fetch("/api/user/getUser",  {
           method: 'POST',
           headers: {
@@ -71,9 +71,9 @@ export default function Id() {
         })
         const data = await response.json()
         setUser(data.data)
-      } catch (error) {
-          console.error('Error getting user:', error);
-      }
+     // } //catch (error) {
+       //   console.error('Error getting user:', error);
+     // }
     }
 
     function handleGetQuiz() {
