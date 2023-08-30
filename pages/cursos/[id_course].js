@@ -5,8 +5,8 @@ import { Dialog, Transition } from '@headlessui/react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Playlist from "@/components/Playlist"
-import { limit } from "firebase/firestore"
-//import { limit } from "firebase/firestore"
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from '@/utils/firebase'
 
 export default function Id() {
     const router = useRouter()
@@ -25,56 +25,44 @@ export default function Id() {
     const [answColor3, setAnswColor3] = useState("")
     const [answColor4, setAnswColor4] = useState("")
     const answColors = [setAnswColor1, setAnswColor2, setAnswColor3, setAnswColor4]
-
-    const checkAuth = async () => {  
-      const response = await fetch("/api/auth/checkAuth", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        }
-      })  
-      const data = await response.json()
-      if (!data.cookieExists) {
-        Router.push("/login")
+   
+  function checkEmailFormat(str) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(str)
+  }
+  
+  function checkAuth() {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user)
       } else {
-        setCookie(true)
+          router.push("/login")
       }
-    } 
-
-    const checkSubscription = async () => {
-      try {
-        const response = await fetch('/api/auth/checkSubscription', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          //body: JSON.stringify({ email }),
-        })
-        const data = await response.json();
-        if (data.subscribed) {
-          return
-        } else {
-          Router.push("/renovar-suscripcion")
-        }
-      } catch (error) {
-        console.error('Error checking email:', error);
-      }
-    }
-
-    const handleGetUser = async () => {
-     // try {
-        const response = await fetch("/api/user/getUser",  {
-          method: 'POST',
-          headers: {
+    })
+  }
+  const checkSubscription = async () => {
+    try {
+      const response = await fetch('/api/auth/checkSubscription?email='+user.email, {
+        method: 'POST',
+        headers: {
           'Content-Type': 'application/json',
         },
-        })
-        const data = await response.json()
-        setUser(data.data)
-     // } //catch (error) {
-       //   console.error('Error getting user:', error);
-     // }
+      })
+      const data = await response.json();
+      if (data.subscribed) {
+        console.log("is suscribed")
+      } else {
+        Router.push("/planes")
+      } 
+    } catch (error) {
+      console.error('Error checking email:', error);
     }
+  }
+
+  useEffect(() => {
+    if (checkEmailFormat(user?.email))
+      checkSubscription()    
+  }, [user])
 
     function handleGetQuiz() {
       if (!id_course) {
@@ -156,15 +144,8 @@ export default function Id() {
         handleGetCourse()
     }, [id_course])
     
-    useEffect(() => {
-      if (cookie) {
-        checkSubscription()
-        handleGetUser()
-      }
-    }, [cookie])
-
    useEffect(() => {  
-      if (user?.email?.length > 0) {
+    if (checkEmailFormat(user?.email)) {
         getProgress()
       }
     }, [user, id_course])
@@ -201,7 +182,7 @@ export default function Id() {
                 <meta property="og:image" content="https://example.com/og-image.jpg" />
             </Head>    
             <main className="text-center bg-white">
-                <Navbar />
+                <Navbar user={user} />
                 <div className="pt-12">
                     <div className="pl-6 pr-6 pb-6">
                         {course?.tags?.map(item => (

@@ -1,110 +1,96 @@
 import Head from 'next/head'
-import Router, { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import Router, { useRouter } from 'next/router';
 import { Inter } from 'next/font/google'
-import Footer from '@/components/Footer-Auth'
+import { useState } from 'react';
+import { auth } from '@/utils/firebase'
+import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from 'firebase/auth'
+import Footer from '@/components/Footer-mix'
 import Navbar from '@/components/Navbar-Auth'
+import Image from 'next/image'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Registration() {
-    const router = useRouter()
-    const [email, setEmail] = useState("")
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
-    const [language, setLanguage] = useState("")
-    const [wrongUserAlert, setWrongUserAlert] = useState("")
-    const [princingLink, setPricingLink] = useState("")
-    const [buttonText, setButtonText] = useState("Crear mi cuenta")
+export default function Login() {
+    const googleProvider = new GoogleAuthProvider()
 
-    useEffect(() => {
-        const lang = navigator.language
-        setLanguage(lang)
-    }, [])
+    const [user, setUser] = useState(null)
+    const [username, setUsername] = useState()
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
 
-    const addUser = async (e) => {  
-        e.preventDefault()
-        const credentials = {email, password, username, language} 
-        const url = "/api/auth/checkCostumer?email=" + email
-        const response = await fetch(url)
-        const data = await response.json()
-        if (email !== "" && password !== "" && username !== "") {
-            if (data.isStripeCustomer) {
-                const response = await fetch("/api/auth/signup", {
+    const handleGoogleSignIn = async () => {
+        try {
+          const result = await signInWithPopup(auth, googleProvider)
+          const url = `/api/auth/signup2?lang=${navigator.language}&profile_url=${auth.currentUser.photoURL}&email=${auth.currentUser.email}&username=${auth.currentUser.displayName}`
+                const response = await fetch(url, {
                     method: "POST",
                     headers: {
                     "Content-Type": "application/json",
                     },
-                    body: JSON.stringify(credentials),
-                });
-            
-                const data = await response.json();
-                if (data.userAddes) {
-                    setWrongUserAlert("")
-                    setPricingLink("")
-                    setButtonText("Cargando...")
-                    Router.push('/')
-                } else {
-                    setWrongUserAlert("Este usuario ya existe, inicia sesión")
-                    setPricingLink("")
+                })
+                const data = await response.json()
+                if (data.userCreated) {
+                    Router.push("/planes")
                 }
-            } else {
-                setWrongUserAlert("Usa el email con el que has pagado tu suscripción. Si no lo has hecho, hazlo ")
-                setPricingLink("aquí")
-            }
-        } else {
-            setWrongUserAlert("Responde a todos los campos")
-            setPricingLink("")
-
+          // User signed in successfully using Google
+        } catch (error) {
+          console.error('Google login error:', error);
         }
     }
-  return (
+
+    const handleEmailSignIn = async () => {
+        Router.push("/registro_email")
+    }
+    return (
     <>
         <Head>
             <title>Kualify | Crea tu cuenta</title>
             <meta name="description" content="Your meta description goes here" />
             <meta name="author" content="Kualify App" />
             <link rel="icon" href="/icon.png" />
-            <link rel="canonical" href="https://app.kualify.es/registro"/>
+            <link rel="canonical" href="https://app.kualify.es/login"/>
             <meta property="og:title" content="Kualify App" />
             <meta property="og:description" content="Your meta description goes here" />
             <meta property="og:image" content="https://example.com/og-image.jpg" />
         </Head>
         <main>
-            <Navbar />
-            <section>
+        <Navbar />
+        <section>
                 <div className="text-[#333533] flex justify-center mt-12 px-6 mx-auto mb-24">
                     <div className="w-full md:mt-0 sm:max-w-md xl:p-0">
-                        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                        <div className="p-6 space-y-3 sm:p-8">
                             <h1 className="text-3xl font-extrabold text-center">
                                 Crea tu cuenta
                             </h1>
-                            <form className="space-y-4 md:space-y-6" action="#">
-                                <div>
-                                    <label htmlFor="username" className="block mb-2 text-sm font-medium">Nombre de usuario</label>
-                                    <input onChange={(e) => setUsername(e.target.value)} type="name" name="username" id="username" className="placeholder-[#c9c9c9] border border-[#333533] text-gray-900 sm:text-sm rounded-xl block w-full p-2.5" placeholder="Nombre" required="" />
+                            <div className="text-center pt-2 pb-4">
+                                <div className="p-2 bg-[#f4f4f4] items-center px-4 text-white leading-5 rounded-xl flex lg:inline-flex" role="alert">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="#ffd60a" className="w-9 h-9">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                                    </svg>
+                                    <span className="text-center font-medium mx-2 sm:mx-4 my-1 flex-auto text-[#333533]">Al pagar tu suscripción habrás de poner el email que uses ahora.</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="#ffd60a" className="w-9 h-9">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                                    </svg>
                                 </div>
-                                <div>
-                                    <label htmlFor="email" className="block mb-2 text-sm font-medium">Correo</label>
-                                    <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="placeholder-[#c9c9c9] border border-[#333533] text-gray-900 sm:text-sm rounded-xl block w-full p-2.5" placeholder="nombre@ejemplo.com" required="" />
+                            </div>
+                                <div className="flex-1 flex flex-col items-center">
+                                    <button onClick={handleGoogleSignIn} className='flex items-center justify-center border-2 border-[#333533] rounded-xl py-2 w-full text-[#333533] font-bold'>
+                                        <Image alt="Google logo" className='mr-2' height={20} width={20} src="/logos/googlepay.png"></Image>
+                                        Usar mi cuenta de Google</button>
                                 </div>
-                                <div className='pb-2'>
-                                    <label htmlFor="password" className="block mb-2 text-sm font-medium">Contraseña</label>
-                                    <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" placeholder="••••••••" className="placeholder-[#c9c9c9] border border-[#333533] text-gray-900 sm:text-sm rounded-xl block w-full p-2.5" required="" />
-                                </div>                             
-                                <div className='flex-1 flex flex-col items-center pt-2'>
-                                    <button onClick={addUser} type="submit" className='bg-[#333533] rounded-xl py-2.5 w-full text-white font-bold'>{buttonText}</button>
-                                    <p className='text-center pt-2 text-sm text-red-600 font-light'>{wrongUserAlert}<a aria-label="Precios" className='underline text-center pt-2 text-sm text-red-600 font-light' href="https://kualify.es/precios">{princingLink}</a></p>
+                                <hr className="my-12 h-0.5 border-t-0 bg-[#f4f4f4]" />                                
+                                <div className="flex-1 flex flex-col items-center">
+                                    <button onClick={handleEmailSignIn} className='flex items-center justify-center border-2 border-[#333533] rounded-xl py-2 w-full text-white bg-[#333533] font-bold'>
+                                        Usar mi correo electrónico</button>
                                 </div>
-                                <p className="md:pt-0 text-center text-sm font-light text-gray-500">
+                                <p className="pt-2 text-center text-sm font-light text-gray-500">
                                     ¿Ya tienes una cuenta? <a href="/login" className="font-medium text-primary-600 hover:underline">Inicia sesión</a>
                                 </p>
-                            </form>
                         </div>
                     </div>
                 </div>
-            </section>
-            <Footer />
+            </section>             
+            <Footer />   
         </main>
     </>
   )

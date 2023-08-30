@@ -2,22 +2,8 @@ import {useEffect, useState} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function Navbar() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [user, setUser] = useState()
-  
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-  
-  }
-  useEffect(() => {
-    fetch("/api/user/getUser")
-    .then(response => response.json())
-    .then(data => setUser(data.data))
-    .catch(error => {
-      console.error("Error fetching user:", error)
-    })
-  }, [])
+export default function Navbar(props) {
+  console.log(props.user)
   return (
     <nav className="my-3 mx-12">
       <div className='flex items-center justify-between h-11 space-x-4'>
@@ -32,9 +18,9 @@ export default function Navbar() {
               <p>Finanzas Personales</p>
             </div>
           </Link>
-          <Link legacyBehavior href="/cursos/soft-skills">
+          <Link legacyBehavior href="/cursos/ventas">
             <div className='cursor-pointer px-4 py-2 rounded-md bg-[#333533] text-white font-semibold text-xs'>
-              <p>Soft Skills</p>
+              <p>Ventas</p>
             </div>
           </Link>
         </div>
@@ -42,13 +28,13 @@ export default function Navbar() {
                 <div className='space-x-4 flex items-center justify-center'> 
                   <div>
                     <Link href="/perfil">
-                      <p className='font-semibold text-xl w-max'>{user?.username}</p>
+                      <p className='font-semibold text-xl w-max'>{props.user?.displayName}</p>
                     </Link>
                   </div>
                   <div>
                     <Link href="/perfil">
-                      <div className='w-11 h-11 rounded-full bg-[#333533] flex items-center justify-center text-white font-extrabold text-lg'>
-                        <p>{user?.username.charAt(0).toUpperCase()}</p>
+                      <div style={{ backgroundImage: `url(${props.user?.photoURL})`}} className="bg-cover w-11 h-11 rounded-full bg-[#333533] flex items-center justify-center text-white font-extrabold text-lg">
+                        <p className={`${(props.user?.photoURL != null) ? "hidden" : ""}`} >{props.user?.displayName?.charAt(0).toUpperCase()}</p>
                       </div>
                     </Link>
                   </div>

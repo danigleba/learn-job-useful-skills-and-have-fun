@@ -6,84 +6,53 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer-Auth'
 import Image from 'next/image'
 import Link from 'next/link'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from '@/utils/firebase'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const [email, setEmail] = useState("")
   const [user, setUser] = useState([])
-  const [cookie, setCookie] = useState()
 
-  const checkAuth = async () => {  
-    const response = await fetch("/api/auth/checkAuth", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      }
-    })  
-    const data = await response.json()
-    if (!data.cookieExists) {
-      Router.push("/login")
+  function checkEmailFormat(str) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(str)
+  }
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setUser(user)
     } else {
-      setCookie(true)
+        Router.push("/login")
     }
-  } 
+  })
 
   const checkSubscription = async () => {
     try {
-      const response = await fetch('/api/auth/checkSubscription', {
+      const response = await fetch('/api/auth/checkSubscription?email='+user.email, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
       })
       const data = await response.json();
       if (data.subscribed) {
-        return
+        console.log("is suscribed")
       } else {
-        Router.push("/renovar-suscripcion")
-      }
+        Router.push("/planes")
+      } 
     } catch (error) {
       console.error('Error checking email:', error);
     }
   }
 
-  const handleGetUser = async () => {
-    try {
-      const response = await fetch("/api/user/getUser",  {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-      },
-      })
-      const data = await response.json()
-      setUser(data.data)
-    } catch (error) {
-        console.error('Error getting user:', error);
-    }
-  }
-
   useEffect(() => {
-    checkAuth()
-  }, [])
+    if (checkEmailFormat(user.email))
+      checkSubscription()    
+  }, [user])
 
-  useEffect(() => {
-    if (cookie) {
-      checkSubscription()
-      handleGetUser()
-    }
-  }, [cookie])
-
-  const logOff = async () => {
-    try {
-      const response = await fetch('/api/auth/logoff', {
-        method: 'POST', 
-      })
-    } catch (error) {
-      console.error('An error occurred:', error)
-    }
-    Router.reload()
+  function logOff() {
+    Router.push("/login")
   }
   return (
     <>
@@ -98,14 +67,14 @@ export default function Home() {
           <meta property="og:image" content="https://example.com/og-image.jpg" />
       </Head>
       <main>
-        <Navbar />
+        <Navbar user={user} />
         <div className='flex justify-center grid grid-col-1 pt-12'>
           <div className='flex justify-center'>
-            <div className='w-40 h-40 rounded-full bg-[#333533] flex items-center justify-center text-white font-extrabold text-6xl'>
-              <p>{user?.username?.charAt(0).toUpperCase()}</p>
+            <div style={{ backgroundImage: `url(${user.photoURL})`}} className='bg-cover w-40 h-40 rounded-full bg-[#333533] flex items-center justify-center text-white font-extrabold text-6xl'>
+              <p className={`${(user.photoURL != null) ? "hidden" : ""}`}>{user?.displayName?.charAt(0).toUpperCase()}</p>
             </div>
-            </div>
-            <p className='text-center pt-4 font-bold text-2xl'>{user?.username}</p>
+          </div>
+            <p className='text-center pt-4 font-bold text-2xl'>{user?.displayName}</p>
             <div className='w-full'>
               <button
                   onClick={logOff}

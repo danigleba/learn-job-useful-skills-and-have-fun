@@ -1,15 +1,9 @@
 import Stripe from 'stripe'
-import { verify } from 'jsonwebtoken';
-import { parse } from 'cookie';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
-const secret = process.env.COOKIE_KEY;
 
 export default async function handler(req, res) {
-  const token = parse(req.headers.cookie).kualifyApp
-  if (token) {
-    const decoded = verify(token, secret)
-    const email = decoded.email
+    const email = req.query.email
 
     try {
       const customer = await stripe.customers.list({
@@ -32,10 +26,5 @@ export default async function handler(req, res) {
       console.error(error)
       return res.status(500).json({ error: 'An error occurred' })
     }
-  } else {
-      return res.status(401).json({ message: "Cookie not found." })
-
-  }
-  
 }
   

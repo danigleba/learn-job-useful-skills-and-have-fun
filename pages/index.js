@@ -5,74 +5,51 @@ import Router from 'next/router';
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Feed from '@/components/Feed'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from '@/utils/firebase'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const [email, setEmail] = useState("")
   const [user, setUser] = useState([])
-  const [cookie, setCookie] = useState()
 
-  const checkAuth = async () => {  
-    const response = await fetch("/api/auth/checkAuth", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      }
-    })  
-    const data = await response.json()
-    if (!data.cookieExists) {
-      Router.push("/login")
+  function checkEmailFormat(str) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(str)
+  }
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setUser(user)
     } else {
-      setCookie(true)
+        Router.push("/login")
     }
-  } 
+  })
 
   const checkSubscription = async () => {
     try {
-      const response = await fetch('/api/auth/checkSubscription', {
+      const response = await fetch('/api/auth/checkSubscription?email='+user.email, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
       })
       const data = await response.json();
       if (data.subscribed) {
-        return
+        console.log("is suscribed")
       } else {
-        Router.push("/renovar-suscripcion")
-      }
+        Router.push("/planes")
+      } 
     } catch (error) {
       console.error('Error checking email:', error);
     }
   }
 
-  const handleGetUser = async () => {
-    //try {
-      const response = await fetch("/api/user/getUser",  {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-      },
-      })
-      const data = await response.json()
-      setUser(data.data)
-    //} catch (error) {
-    //    console.error('Error getting user:', error);
-   //}
-  }
-
   useEffect(() => {
-    checkAuth()
-  }, [])
+    if (checkEmailFormat(user.email))
+      checkSubscription()    
+  }, [user])
 
-  useEffect(() => {
-    if (cookie) {
-      checkSubscription()
-      handleGetUser()
-    }
-  }, [cookie])
   return (
     <>
       <Head>
@@ -86,13 +63,13 @@ export default function Home() {
           <meta property="og:image" content="https://example.com/og-image.jpg" />
       </Head>
       <main className='bg-white'>
-        <Navbar />
+        <Navbar user={user}/>
         <div className='pt-12 pb-24 px-8'>
           <p className='font-extrabold text-4xl text-[#333533] text-center flex justify-center'>¿Cómo vas a mejorar hoy?</p>
           <Feed />
           <div className='flex justify-center items-center'>
               <div className='cursor-pointer  w-max flex justify-center items-center '>
-                <p target="_blank" href="https://kualify.es/cursos" className='hover:text-white hover:bg-[#333533] duration-200 flex items-center rounded-full mt-16 px-12 py-2 border-2 border-[#333533] text-lg text-center flex justify-center text-[#333533] font-medium'>Más cursos próximamente</p>
+                <a target="_blank" href="https://kualify.es/cursos" className='hover:text-white hover:bg-[#333533] duration-200 flex items-center rounded-full mt-16 px-12 py-2 border-2 border-[#333533] text-lg text-center flex justify-center text-[#333533] font-medium'>Más cursos próximamente</a>
               </div>
           </div>
         </div>

@@ -10,7 +10,6 @@ const crypto = require('crypto')
 export default async function (req, res) {
     const seed = Math.floor(Math.random() * 4) + 1
     const profile_url = `https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/profile%2F${seed}.png?alt=media&token=80dbbe0b-8f43-42b4-93d0-8ab4340db1e`
-    //const profile_url =  "/profile/" + seed + ".png"
     const { email, password, username, language } = req.body
     const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
     //check weather email is alrady registred in database
