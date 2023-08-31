@@ -15,7 +15,7 @@ export default function Playlist(props) {
                 'Content-Type': 'application/json',
                 },
             })
-            Router.reload()
+            router.reload()
         }
     }
 

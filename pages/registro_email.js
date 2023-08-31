@@ -52,7 +52,7 @@ export default function Login() {
             })
             const data = await response.json();
             if (data.userCreated) {
-                Router.push("/planes")
+                router.push("/planes")
             }
         } catch (error) {
             if (error.code === "auth/email-already-in-use") {

@@ -25,7 +25,7 @@ export default function Home() {
       if (user) {
         setUser(user)
       } else {
-          Router.push("/login")
+          router.push("/login")
       }
     })    
   }, [])
@@ -42,7 +42,7 @@ export default function Home() {
       if (data.subscribed) {
         console.log("is suscribed")
       } else {
-        Router.push("/planes")
+        router.push("/planes")
       } 
     } catch (error) {
       console.error('Error checking email:', error);
@@ -55,7 +55,7 @@ export default function Home() {
   }, [user])
 
   function logOff() {
-    Router.push("/login")
+    router.push("/login")
   }
   return (
     <>

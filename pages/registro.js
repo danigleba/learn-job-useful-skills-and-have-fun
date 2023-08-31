@@ -31,7 +31,7 @@ export default function Login() {
                 })
                 const data = await response.json()
                 if (data.userCreated) {
-                    Router.push("/planes")
+                    router.push("/planes")
                 }
           // User signed in successfully using Google
         } catch (error) {
@@ -40,7 +40,7 @@ export default function Login() {
     }
 
     const handleEmailSignIn = async () => {
-        Router.push("/registro_email")
+        router.push("/registro_email")
     }
     return (
     <>

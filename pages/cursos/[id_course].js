@@ -35,7 +35,7 @@ export default function Id() {
       if (user) {
         setUser(user)
       } else {
-          Router.push("/login")
+          router.push("/login")
       }
     })    
   }, [])
@@ -52,7 +52,7 @@ export default function Id() {
       if (data.subscribed) {
         console.log("is suscribed")
       } else {
-        Router.push("/planes")
+        router.push("/planes")
       } 
     } catch (error) {
       console.error('Error checking email:', error);
@@ -117,7 +117,7 @@ export default function Id() {
               }
             })
           }
-          Router.reload()
+          router.reload()
       } else {
           answColors[e.target.id]("focus:bg-red-600")
       }
@@ -131,7 +131,7 @@ export default function Id() {
         'Content-Type': 'application/json',
       },
     })
-    Router.reload()
+    router.reload()
   }
 
     useEffect(() => {

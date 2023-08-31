@@ -18,7 +18,7 @@ export default function Home() {
         if (user) {
             setUser(user)
         } else {
-            Router.push("/login2")
+            router.push("/login2")
         }
     })
 
@@ -33,7 +33,7 @@ export default function Home() {
           })
           const data = await response.json();
           if (data.subscribed) {
-            Router.push("/")
+            router.push("/")
             } 
         } catch (error) {
           console.error('Error checking email:', error);

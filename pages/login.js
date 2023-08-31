@@ -23,7 +23,7 @@ export default function Login() {
     const handleGoogleSignIn = async () => {
         try {
             const result = await signInWithPopup(auth, googleProvider)
-            Router.push("/")
+            router.push("/")
           // User signed in successfully using Google
         } catch (error) {
           console.error('Google login error:', error);
@@ -38,7 +38,7 @@ export default function Login() {
         setProblem("");
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                Router.push("/")
+                router.push("/")
             })
             .catch((error) => {
             setProblem("Contraseña o email incorrectos.")
