@@ -25,11 +25,45 @@ export default function Id() {
     const [answColor4, setAnswColor4] = useState("")
     const answColors = [setAnswColor1, setAnswColor2, setAnswColor3, setAnswColor4]
    
-    function checkEmailFormat(str) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      return emailRegex.test(str)
-    }
+  function checkEmailFormat(str) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(str)
+  }
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user)
+      } else {
+          Router.push("/login")
+      }
+    })    
+  }, [])
+  
+  const checkSubscription = async () => {
+    try {
+      const response = await fetch('/api/auth/checkSubscription?email='+user.email, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      const data = await response.json();
+      if (data.subscribed) {
+        console.log("is suscribed")
+      } else {
+        Router.push("/planes")
+      } 
+    } catch (error) {
+      console.error('Error checking email:', error);
+    }
+  }
+
+  useEffect(() => {
+    if (checkEmailFormat(user?.email))
+      checkSubscription()    
+  }, [user])
+   
     function handleGetQuiz() {
       if (!id_course) {
           return
@@ -102,11 +136,6 @@ export default function Id() {
 
     useEffect(() => {
       window.scrollTo(0, 0)
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          setUser(user)
-        } 
-      })  
     }, [])
 
     useEffect(() => {       
@@ -152,7 +181,7 @@ export default function Id() {
                 <meta property="og:image" content="https://example.com/og-image.jpg" />
             </Head>    
             <main className="text-center bg-white">
-                <Navbar user={user} />
+                <Navbar user={user}/>
                 <div className="pt-12">
                     <div className="pl-6 pr-6 pb-6">
                         {course?.tags?.map(item => (
