@@ -13,15 +13,17 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
     const router = useRouter()
     const [user, setUser] = useState({})
-
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            setUser(user)
-        } else {
-            router.push("/login2")
-        }
-    })
-
+    
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(user)
+            } else {
+                router.push("/login")
+            }
+        })
+    }) 
+    
     const checkSubscription = async () => {
         try {
             const url = '/api/auth/checkSubscription?email='+ user.email
