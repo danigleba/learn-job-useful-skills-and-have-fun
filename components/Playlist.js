@@ -1,9 +1,9 @@
 import Image from "next/image"
 import { useState, useEffect } from "react"
-//import Router, {useRouter} from "next/router"
+import Router, {useRouter} from "next/router"
 
 export default function Playlist(props) {
-    //const router = useRouter()
+    const router = useRouter()
     const [course, setCourse] = useState([])    
 
     function changeStep(index) {
@@ -15,7 +15,7 @@ export default function Playlist(props) {
                 'Content-Type': 'application/json',
                 },
             })
-            //router.reload()
+            router.reload()
         }
     }
 

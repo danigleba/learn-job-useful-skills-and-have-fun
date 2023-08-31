@@ -31,39 +31,14 @@ export default function Id() {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user)
-      } else {
-          router.push("/login")
-      }
+      } 
     })    
   }, [])
-  
-  const checkSubscription = async () => {
-    try {
-      const response = await fetch('/api/auth/checkSubscription?email='+user.email, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      const data = await response.json();
-      if (data.subscribed) {
-        console.log("is suscribed")
-      } else {
-        router.push("/planes")
-      } 
-    } catch (error) {
-      console.error('Error checking email:', error);
-    }
-  }
 
-  useEffect(() => {
-    if (checkEmailFormat(user?.email))
-      checkSubscription()    
-  }, [user])
-   
     function handleGetQuiz() {
       if (!id_course) {
           return
@@ -134,10 +109,6 @@ export default function Id() {
     router.reload()
   }
 
-    useEffect(() => {
-      window.scrollTo(0, 0)
-    }, [])
-
     useEffect(() => {       
         handleGetQuiz()
         handleGetCourse()
@@ -181,7 +152,7 @@ export default function Id() {
                 <meta property="og:image" content="https://example.com/og-image.jpg" />
             </Head>    
             <main className="text-center bg-white">
-                <Navbar user={user}/>
+                <Navbar />
                 <div className="pt-12">
                     <div className="pl-6 pr-6 pb-6">
                         {course?.tags?.map(item => (

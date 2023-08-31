@@ -12,46 +12,6 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const router = useRouter()
-  const [user, setUser] = useState([])
-
-  function checkEmailFormat(str) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(str)
-  }
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user)
-      } else {
-          router.push("/login")
-      }
-    })    
-  }, [])
-  
-  const checkSubscription = async () => {
-    try {
-      const response = await fetch('/api/auth/checkSubscription?email='+user.email, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      const data = await response.json();
-      if (data.subscribed) {
-        console.log("is suscribed")
-      } else {
-        router.push("/planes")
-      } 
-    } catch (error) {
-      console.error('Error checking email:', error);
-    }
-  }
-
-  useEffect(() => {
-    if (checkEmailFormat(user.email))
-      checkSubscription()    
-  }, [user])
   return (
     <>
       <Head>
@@ -65,7 +25,7 @@ export default function Home() {
           <meta property="og:image" content="https://example.com/og-image.jpg" />
       </Head>
       <main className='bg-white'>
-        <Navbar user={user}/>
+        <Navbar />
         <div className='pt-12 pb-24 px-8'>
           <p className='font-extrabold text-4xl text-[#333533] text-center flex justify-center'>¿Cómo vas a mejorar hoy?</p>
           <Feed />
