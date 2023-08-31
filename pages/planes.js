@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import {useState, useEffect} from 'react'
 import { Inter } from 'next/font/google'
-import Router, {useRouter} from 'next/router'
+import {useRouter} from 'next/router'
 import Navbar from '@/components/Navbar-Auth'
 import Footer from '@/components/Footer-mix'
 import Link from 'next/link'

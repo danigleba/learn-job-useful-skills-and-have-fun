@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Router, {useRouter} from 'next/router';
+import {useRouter} from 'next/router';
 import { Inter } from 'next/font/google'
 import { useState } from 'react';
 import { auth } from '@/utils/firebase'

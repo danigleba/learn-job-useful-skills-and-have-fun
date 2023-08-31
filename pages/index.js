@@ -3,10 +3,7 @@ import { Inter } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Feed from '@/components/Feed'
-import {useEffect, useState} from 'react'
-import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from '@/utils/firebase'
-import Router, {useRouter} from 'next/router';
+import {useRouter} from 'next/router';
 
 const inter = Inter({ subsets: ['latin'] })
 

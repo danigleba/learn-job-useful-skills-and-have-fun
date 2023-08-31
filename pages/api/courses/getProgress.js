@@ -1,17 +1,19 @@
-import { db } from '../../../utils/firebase/index';
-import { collection, query, where, getDocs, addDoc, doc} from "firebase/firestore";
+import { db } from '@/utils/firebase/index'
+import { collection, query, where, getDocs, addDoc, getDoc, doc} from "firebase/firestore";
 
 export default async function (req, res) {
     const id_course = req.query.id_course
     const email = req.query.email
+
     const courseRef = doc(db, "courses", id_course) 
-    console.log(courseRef)
+    const courseSnap = await getDoc(courseRef)
+
     const collectionRef = collection(db, "user_progress")
     const docSnap = query(collectionRef, where("id_course", "==", id_course), where("user_email", "==", email));
+    const querySnap = await getDocs(docSnap);
     try {
-        const querySnap = await getDocs(docSnap);
         if (querySnap.empty) {
-            if (courseRef?.title?.lenght > 0) {
+            if (courseSnap.exists()) {
                 const docRef = await addDoc(collectionRef, {
                     user_email: email,
                     id_course: id_course,

@@ -33,7 +33,6 @@ export default function Navbar() {
       })
       const data = await response.json();
       if (data.subscribed) {
-        console.log("is suscribed")
       } else {
         Router.push("/planes")
       } 

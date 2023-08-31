@@ -1,5 +1,5 @@
 import Head from "next/head"
-import Router, { useRouter } from "next/router"
+import { useRouter } from "next/router"
 import { useState, useEffect, useRef, Fragment} from "react"
 import { Dialog, Transition } from '@headlessui/react'
 import Navbar from '@/components/Navbar'
@@ -68,6 +68,9 @@ export default function Id() {
         },
       })
       const data = await response.json()
+      if (data.fakeCourse) {
+        router.push("/404")
+      }
       setActiveStep(data?.progress?.active_step)
       setLimitStep(data?.progress?.limit_step)
     } 

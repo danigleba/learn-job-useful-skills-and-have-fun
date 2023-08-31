@@ -1,10 +1,9 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
-import Router, {useRouter} from 'next/router'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer-Auth'
 import Link from 'next/link'
-import { onAuthStateChanged } from 'firebase/auth'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from '@/utils/firebase'
 import {useEffect, useState} from 'react'
 
@@ -12,7 +11,6 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const [user, setUser] = useState({})
-  const router = useRouter()
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -23,8 +21,10 @@ export default function Home() {
   }, [])
 
   function logOff() {
-    router.push("/login")
-  }
+    signOut(auth).then(() => {
+    }).catch((error) => {
+      console.log(error)
+    }) }
   return (
     <>
       <Head>

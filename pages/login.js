@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { Inter } from 'next/font/google'
 import { useState } from 'react';
 import { auth } from '@/utils/firebase'
@@ -69,7 +69,7 @@ export default function Login() {
                             </h1>
                                 <div className="flex-1 flex flex-col items-center">
                                     <button onClick={handleGoogleSignIn} className='flex items-center justify-center border-2 border-[#333533] rounded-xl py-2 w-full text-[#333533] font-bold'>
-                                        <Image alt="Google logo" className='mr-2' height={20} width={20} src="/logos/googlepay.png"></Image>
+                                        <Image alt="Google logo" className='mr-2' height={20} width={20} src="/logos/googlepay.webp"></Image>
                                         Entrar con Google</button>
                                 </div>
                                 <hr className="my-12 h-0.5 border-t-0 bg-[#f4f4f4]" />  
