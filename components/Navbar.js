@@ -1,9 +1,51 @@
 import {useEffect, useState} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from '@/utils/firebase'
+import Router from 'next/router';
 
 export default function Navbar(props) {
-  console.log(props.user)
+  const [user, setUser] = useState([])
+
+  function checkEmailFormat(str) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(str)
+  }
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user)
+      } else {
+          Router.push("/login")
+      }
+    })    
+  }, [])
+  
+  const checkSubscription = async () => {
+    try {
+      const response = await fetch('/api/auth/checkSubscription?email='+user.email, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      const data = await response.json();
+      if (data.subscribed) {
+        console.log("is suscribed")
+      } else {
+        Router.push("/planes")
+      } 
+    } catch (error) {
+      console.error('Error checking email:', error);
+    }
+  }
+
+  useEffect(() => {
+    if (checkEmailFormat(user.email))
+      checkSubscription()    
+  }, [user])
   return (
     <nav className="my-3 mx-12">
       <div className='flex items-center justify-between h-11 space-x-4'>
@@ -28,13 +70,13 @@ export default function Navbar(props) {
                 <div className='space-x-4 flex items-center justify-center'> 
                   <div>
                     <Link href="/perfil">
-                      <p className='font-semibold text-xl w-max'>{props.user?.displayName}</p>
+                      <p className='font-semibold text-xl w-max'>{user?.displayName}</p>
                     </Link>
                   </div>
                   <div>
                     <Link href="/perfil">
-                      <div style={{ backgroundImage: `url(${props.user?.photoURL})`}} className="bg-cover w-11 h-11 rounded-full bg-[#333533] flex items-center justify-center text-white font-extrabold text-lg">
-                        <p className={`${(props.user?.photoURL != null) ? "hidden" : ""}`} >{props.user?.displayName?.charAt(0).toUpperCase()}</p>
+                      <div style={{ backgroundImage: `url(${user?.photoURL})`}} className="bg-cover w-11 h-11 rounded-full bg-[#333533] flex items-center justify-center text-white font-extrabold text-lg">
+                        <p className={`${(user?.photoURL != null) ? "hidden" : ""}`} >{user?.displayName?.charAt(0).toUpperCase()}</p>
                       </div>
                     </Link>
                   </div>

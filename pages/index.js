@@ -1,55 +1,12 @@
 import Head from 'next/head'
-import {useState, useEffect} from 'react'
 import { Inter } from 'next/font/google'
-import Router from 'next/router';
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Feed from '@/components/Feed'
-import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from '@/utils/firebase'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const [user, setUser] = useState([])
-
-  function checkEmailFormat(str) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(str)
-  }
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setUser(user)
-    } else {
-        Router.push("/login")
-    }
-  })
-
-  const checkSubscription = async () => {
-    try {
-      const response = await fetch('/api/auth/checkSubscription?email='+user.email, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      const data = await response.json();
-      if (data.subscribed) {
-        console.log("is suscribed")
-      } else {
-        Router.push("/planes")
-      } 
-    } catch (error) {
-      console.error('Error checking email:', error);
-    }
-  }
-
-  useEffect(() => {
-    if (checkEmailFormat(user.email))
-      checkSubscription()    
-  }, [user])
-
   return (
     <>
       <Head>
@@ -63,7 +20,7 @@ export default function Home() {
           <meta property="og:image" content="https://example.com/og-image.jpg" />
       </Head>
       <main className='bg-white'>
-        <Navbar user={user}/>
+        <Navbar />
         <div className='pt-12 pb-24 px-8'>
           <p className='font-extrabold text-4xl text-[#333533] text-center flex justify-center'>¿Cómo vas a mejorar hoy?</p>
           <Feed />

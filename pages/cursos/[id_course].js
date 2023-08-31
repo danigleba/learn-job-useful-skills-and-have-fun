@@ -14,7 +14,6 @@ export default function Id() {
     const [course, setCourse] = useState({})
     const [user, setUser] = useState()
     const [quiz, setQuiz] = useState({})
-    const [cookie, setCookie] = useState()
 
     const [limitStep, setLimitStep] = useState()
     const [activeStep, setActiveStep] = useState()
@@ -26,43 +25,10 @@ export default function Id() {
     const [answColor4, setAnswColor4] = useState("")
     const answColors = [setAnswColor1, setAnswColor2, setAnswColor3, setAnswColor4]
    
-  function checkEmailFormat(str) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(str)
-  }
-  
-  function checkAuth() {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user)
-      } else {
-          router.push("/login")
-      }
-    })
-  }
-  const checkSubscription = async () => {
-    try {
-      const response = await fetch('/api/auth/checkSubscription?email='+user.email, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      const data = await response.json();
-      if (data.subscribed) {
-        console.log("is suscribed")
-      } else {
-        Router.push("/planes")
-      } 
-    } catch (error) {
-      console.error('Error checking email:', error);
+    function checkEmailFormat(str) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      return emailRegex.test(str)
     }
-  }
-
-  useEffect(() => {
-    if (checkEmailFormat(user?.email))
-      checkSubscription()    
-  }, [user])
 
     function handleGetQuiz() {
       if (!id_course) {
@@ -136,7 +102,11 @@ export default function Id() {
 
     useEffect(() => {
       window.scrollTo(0, 0)
-      checkAuth()
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          setUser(user)
+        } 
+      })  
     }, [])
 
     useEffect(() => {       

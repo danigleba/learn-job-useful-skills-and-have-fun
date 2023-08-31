@@ -21,7 +21,7 @@ export default function Login() {
     const handleGoogleSignIn = async () => {
         try {
           const result = await signInWithPopup(auth, googleProvider)
-          const url = `/api/auth/signup2?lang=${navigator.language}&profile_url=${auth.currentUser.photoURL}&email=${auth.currentUser.email}&username=${auth.currentUser.displayName}`
+          const url = `/api/auth/signup?lang=${navigator.language}&profile_url=${auth.currentUser.photoURL}&email=${auth.currentUser.email}&username=${auth.currentUser.displayName}`
                 const response = await fetch(url, {
                     method: "POST",
                     headers: {
