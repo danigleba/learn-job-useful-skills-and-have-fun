@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Router from 'next/router';
+import Router, {useRouter} from 'next/router';
 import { Inter } from 'next/font/google'
 import { useState } from 'react';
 import { auth } from '@/utils/firebase'
@@ -10,6 +10,8 @@ import Navbar from '@/components/Navbar-Auth'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Login() {
+    const router = useRouter()
+
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")

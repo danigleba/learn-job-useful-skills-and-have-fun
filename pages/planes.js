@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import {useState, useEffect} from 'react'
 import { Inter } from 'next/font/google'
-import Router from 'next/router'
+import Router, {useRouter} from 'next/router'
 import Navbar from '@/components/Navbar-Auth'
 import Footer from '@/components/Footer-mix'
 import Link from 'next/link'
@@ -11,6 +11,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+    const router = useRouter()
     const [user, setUser] = useState({})
 
     onAuthStateChanged(auth, (user) => {

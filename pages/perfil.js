@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
-import Router from 'next/router'
+import Router, {useRouter} from 'next/router'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer-Auth'
 import Link from 'next/link'
@@ -11,6 +11,8 @@ import {useEffect, useState} from 'react'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const router = useRouter()
+
   const [user, setUser] = useState({})
 
   function checkEmailFormat(str) {

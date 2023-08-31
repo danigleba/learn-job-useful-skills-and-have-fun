@@ -11,6 +11,7 @@ import Image from 'next/image'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Login() {
+    const router = useRouter()
     const googleProvider = new GoogleAuthProvider()
 
     const [user, setUser] = useState(null)
