@@ -35,7 +35,7 @@ export default function Playlist(props) {
                                 <a key={`${item.id}-${index}`}>
                                     <div className="flex justify-center items-center">
                                         <button onClick={() => changeStep(index)} className="w-full">
-                                                <div className={`border-2 border-[#333533] text-[#333533] rounded-md p-1 ${(index == props.activeStep) ? "bg-[#333533] text-white" : ""} ${(index > props.limitStep) ? "cursor-default" : "cursor-pointer"}`}>
+                                                <div className={`${((index)<= props.limitStep) ? "hover:bg-[#333533] hover:border-[#333533] hover:text-white duration-200" : ""}  text-[#333533] rounded-md px-1 py-2 ${(index == props.activeStep) ? "bg-[#333533] text-white" : "bg-[#f4f4f4] border-[#f4f4f4]"} ${(index > props.limitStep) ? "cursor-default" : "cursor-pointer"}`}>
                                                     <div className="text-center flex justify-center px-2 items-center space-x-2">
                                                         <h1 className="truncate font-medium  text-sm sm:text-md">
                                                             {item.title}

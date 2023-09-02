@@ -40,12 +40,17 @@ export default function Home() {
       <main>
         <Navbar />
         <div className='flex justify-center grid grid-col-1 pt-12'>
-          <div className='flex justify-center'>
-            <div style={{ backgroundImage: `url(${user?.photoURL})`}} className='bg-cover w-40 h-40 rounded-full bg-[#333533] flex items-center justify-center text-white font-extrabold text-6xl'>
-              <p className={`${(user?.photoURL != null) ? "hidden" : ""}`}>{user?.displayName?.charAt(0).toUpperCase()}</p>
-            </div>
-          </div>
-            <p className='text-center pt-4 font-bold text-2xl'>{user?.displayName}</p>
+        <div className='space-x-4 flex items-center justify-center'> 
+        
+                  <div>
+                      <div style={{ backgroundImage: `url(${user?.photoURL})`}} className="bg-cover w-14 h-14 rounded-full bg-[#333533] flex items-center justify-center text-white font-extrabold text-lg">
+                        <p className={`${(user?.photoURL != null) ? "hidden" : ""}`} >{user?.displayName?.charAt(0).toUpperCase()}</p>
+                      </div>
+                  </div>
+                  <div>
+                      <p className='font-semibold text-xl w-max'>{user?.displayName}</p>
+                  </div>
+                </div> 
             <div className='w-full'>
               <button
                   onClick={logOff}

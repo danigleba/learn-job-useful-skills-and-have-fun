@@ -174,8 +174,8 @@ export default function Id() {
                             </div>
                     </div>
                     <div className="pb-16 pt-10 mx-6 space-y-4 space-x-2 sm:space-x-4">
-                        <button className={`border-2 border-[#333533] rounded-lg ring-transparent text-[#333533] px-6 sm:px-12 py-2.5 rounded-lg font-bold text-center text-base; ${activeStep > 0 ? "inline-block" : "hidden"}`} onClick={goBack} >Atrás</button>
-                        <button className={`btn-primary ${((parseInt(activeStep)+1) >= course?.steps?.length) ? "hidden" : "inline-block"}`} onClick={openModal}>Continuar</button>
+                        <button className={`py-3 hover:scale-105 duration-200 rounded-lg bg-[#f4f4f4] ring-transparent text-[#333533] px-6 sm:px-12 rounded-lg font-bold text-center text-base; ${activeStep > 0 ? "inline-block" : "hidden"}`} onClick={goBack} >Atrás</button>
+                        <button className={`btn-primary hover:scale-105 shadow-[0_8px_30px_rgb(0,0,0,0.08)] duration-200 ${((parseInt(activeStep)+1) >= course?.steps?.length) ? "hidden" : "inline-block"}`} onClick={openModal}>Continuar</button>
                     </div>
                     <Transition appear show={isOpen} as={Fragment}>
                         <Dialog as="div" className="relative z-10" onClose={closeModal}>
