@@ -59,7 +59,7 @@ export default function getPassword() {
                             <input onChange={(e) => setEmail(e.target.value)} className="placeholder-[#c9c9c9] border border-[#333533] text-gray-900 sm:text-sm rounded-xl block w-full p-2.5" placeholder="email@ejemplo.com" />
                         </div>
                         <div className='flex-1 flex flex-col items-center pt-2'>
-                            <button onClick={askForPassword} className='bg-[#333533] rounded-xl py-2.5 w-full text-white font-bold'>Enviar petición</button>
+                            <button onClick={askForPassword} className='bg-[#333533] rounded-xl py-2.5 w-full text-white font-bold'>Pedir mi contraseña</button>
                             <p className='text-sm text-center pt-2 text-red-600 font-light'>{problem}</p>
 
                         </div>

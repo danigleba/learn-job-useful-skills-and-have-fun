@@ -92,7 +92,7 @@ export default function Home() {
                                             </h3>
                                             <Link href="https://buy.stripe.com/4gw9BV5kB8ykgsE3cg">
                                                 <button type="button"
-                                                    className="hover:bg-transparent hover:border-2 border-[#333533] hover:text-[#333533] text-white inline-block w-full rounded-md bg-[#333533] py-2 border-2 text-md font-bold transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200">
+                                                    className="hover:bg-[#f4f4f4f4] hover:text-[#333533] text-white inline-block w-full rounded-md bg-[#333533] py-2.5 text-md font-bold transition duration-200  focus:outline-none focus:ring-0">
                                                     Suscribirme
                                                 </button>
                                             </Link>
@@ -118,7 +118,7 @@ export default function Home() {
                                             </h3>
                                             <Link href="https://buy.stripe.com/bIY4hBeVbcOA7W828b">
                                                 <button type="button"
-                                                    className="hover:bg-transparent hover:border-2 border-[#333533] hover:text-[#333533] text-white inline-block w-full rounded-md bg-[#333533] py-2 border-2 text-md font-bold transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200">
+                                                    className="hover:bg-[#f4f4f4f4] hover:text-[#333533] text-white inline-block w-full rounded-md bg-[#333533] py-2.5 text-md font-bold transition duration-200  focus:outline-none focus:ring-0">
                                                     Suscribirme
                                                 </button>
                                             </Link>

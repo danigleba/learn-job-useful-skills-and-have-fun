@@ -25,11 +25,11 @@ export default function Login() {
 
     const handleEmailSignIn = async () => {
         if (username === "" || email === "" || password === "") {
-            setProblem("Llena todos los campos.");
+            setProblem("Llena todos los campos");
             return
         }
         if (password.length < 6) {
-            setProblem("Escribe una contraseña más larga.");
+            setProblem("Escribe una contraseña más larga");
             return;
         }
         if (!checkEmailFormat(email)) {

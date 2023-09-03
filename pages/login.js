@@ -32,7 +32,7 @@ export default function Login() {
 
     const handleEmailSignIn = async () => {
         if ( email === "" || password === "") {
-            setProblem("Llena todos los campos.");
+            setProblem("Llena todos los campos");
             return
         }                
         setProblem("");
@@ -41,7 +41,7 @@ export default function Login() {
                 router.push("/")
             })
             .catch((error) => {
-            setProblem("Contraseña o email incorrectos.")
+            setProblem("Contraseña o email incorrectos")
               const errorCode = error.code;
               const errorMessage = error.message;
             })
@@ -91,7 +91,7 @@ export default function Login() {
                                     ¿Aún no tienes una cuenta? <a href="/registro" className="font-medium text-primary-600 hover:underline">Crea tu cuenta</a>
                                 </p>
                                 <p className="text-center text-sm font-light text-gray-500">
-                                    ¿Has olvidado tu contraseña? <a href="/recuperar-contra" className="font-medium text-primary-600 hover:underline">Recuparar mi contraseña</a>
+                                    ¿Has olvidado tu contraseña? <a href="/recuperar-contra" className="font-medium text-primary-600 hover:underline">Recupera tu contraseña</a>
                                 </p>
                         </div>
                     </div>
