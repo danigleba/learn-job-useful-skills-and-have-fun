@@ -4,11 +4,14 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Feed from '@/components/Feed'
 import {useRouter} from 'next/router';
+import { useState } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const router = useRouter()
+  const [feedLoading, setFeedLoading] = useState(true)
+
   return (
     <>
       <Head>
@@ -25,7 +28,7 @@ export default function Home() {
         <Navbar />
         <div className='pt-12 pb-24 px-8'>
           <p className='font-extrabold text-4xl text-[#333533] text-center flex justify-center'>¿Cómo vas a mejorar hoy?</p>
-          <Feed />
+          <Feed />        
           <div className='flex justify-center items-center'>
               <div className='cursor-pointer  w-max flex justify-center items-center '>
                 <a target="_blank" href="https://kualify.es/cursos" className='hover:text-white hover:bg-[#333533] duration-200 flex items-center rounded-full mt-16 px-12 py-2 border-2 border-[#333533] text-lg text-center flex justify-center text-[#333533] font-medium'>Más cursos próximamente</a>

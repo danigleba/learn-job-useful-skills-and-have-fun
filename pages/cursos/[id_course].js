@@ -31,13 +31,13 @@ export default function Id() {
   }
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user)
       } 
     })    
-  }, [])
+  }, [] )
 
     function handleGetQuiz() {
       if (!id_course) {
@@ -145,7 +145,7 @@ export default function Id() {
     return (
         <>
             <Head>
-                <title>Kualify | {course?.title}</title>
+                <title>Kualify | Cursos</title>
                 <meta name="description" content="Your meta description goes here" />
                 <meta name="author" content="Kualify App" />
                 <link rel="icon" href="/icon.png" />
