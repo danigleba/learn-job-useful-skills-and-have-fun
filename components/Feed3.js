@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-
+import Image from 'next/image'
 export default function Feed() {
     const [content, setContent] = useState([])
     const [selectedTag, setSelectedTag] = useState("")
@@ -36,17 +36,21 @@ export default function Feed() {
                                     <a className={`${(i.tag != "" && i.tag != item) ? "hidden" : ""}`} href={`/cursos/${i.id}`} key={`${i.id}-${index}`}>
                                         <div style={{
                                             backgroundImage: `url(${i?.cover_url})`,
-                                            }} className="w-full h-40 bg-cover bg-center rounded-lg"></div>
-                                            <div className='pt-4 flex items-center gap-4'>
-                                                <div 
-                                                    style={{ backgroundImage: `url(${i?.teacher?.profile_url})`}} 
-                                                    className='h-12 w-12 rounded-full bg-cover bg-gray-500'>
+                                            }} className="w-full h-40 bg-cover bg-center rounded-lg">
+                                        </div>
+                                        <div className='pt-4 flex items-center gap-4'>
+                                            <Image 
+                                                src={i?.teacher?.profile_url} 
+                                                className='rounded-full bg-cover'
+                                                height={48}
+                                                width={48}
+                                                alt="Profile picture"
+                                            />
+                                                <div className="grid grid-rows-2">
+                                                    <p className='text-left font-semibold text-base truncate'>{i.title}</p>
+                                                    <p className='text-base text-left font-light truncate'>{i?.teacher?.name}</p>
                                                 </div>
-                                                <div>
-                                                    <p className='text-left font-semibold text-base'>{i.title}</p>
-                                                    <p className='text-base text-left font-light'>{i?.teacher?.name}</p>
-                                                </div>
-                                            </div>
+                                        </div>
                                     </a>
                                 ))}
                             </div>

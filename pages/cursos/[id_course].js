@@ -112,7 +112,7 @@ export default function Id() {
   }
 
     useEffect(() => {       
-        handleGetQuiz()
+        //handleGetQuiz()
         handleGetCourse()
     }, [id_course])
     
@@ -121,6 +121,12 @@ export default function Id() {
         getProgress()
       }
     }, [user, id_course])
+
+    useEffect(() => {  
+      if (activeStep < limitStep) {
+        handleGetQuiz() 
+     }}, [limitStep])
+  
 
     function closeModal() {
         setIsOpen(false)
@@ -167,22 +173,28 @@ export default function Id() {
                         <h2 className="truncate text-xl text-[#1A1C1F] font-medium pt-2">{parseInt(activeStep) +1}. {course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep].title}</h2>
                     </div>
 
+                    
+
+
                     <div className="flex justify-center pt-2 md:pt-6 px-4">
-                            <div className={`bg-white shadow-[0_8px_30px_rgb(0,0,0,0.08)]  rounded-lg overflow-hidden ${(course?.tag != "Course") ? "hidden" : ""}`}>
-                                <video className={`${(course?.tag != "Course") ? "hidden" : ""} bg-[#f4f4f4]`} src={course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.video_url} type="video/mp4" width="1024" height="960" controls controlsList="nodownload" onContextMenu={handleContextMenu}></video>
-                            </div>
-                            <div className={`w-full md:w-3/4	bg-[#f4f4f4] ${(course?.tag != "Course") ? "" : "hidden"}`}>
-                              <div className="aspect-w-16 aspect-h-9 w-full bg-[#f4f4f4]" >
-                                <iframe
-                                  className="shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-lg"
-                                  src={`${course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.video_url}?modestbranding=1&showinfo=0&rel=0&start=30&end=120`}
-                                  title="YouTube video player"
-                                  frameborder="0"
-                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                  allowfullscreen
-                                ></iframe>                              
-                              </div>
-                            </div>
+                      {course?.tag != "Course" ? (
+                        <div className="w-full md:w-3/4	bg-[#f4f4f4]">
+                        <div className="aspect-w-16 aspect-h-9 w-full bg-[#f4f4f4]" >
+                          <iframe
+                            className="shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-lg"
+                            src={course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.video_url}
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                          ></iframe>                              
+                        </div>
+                      </div>
+                      ) : (
+                        <div className="bg-[#f4f4f4] shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-lg overflow-hidden">
+                          <video src={course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.video_url} type="video/mp4" width="1024" height="960" controls controlsList="nodownload" onContextMenu={handleContextMenu}></video>
+                        </div>
+                      )}
                     </div>
                     <div className="pb-16 pt-10 mx-6 space-y-4 space-x-2 sm:space-x-4">
                         <button className={`py-3 hover:scale-105 duration-200 rounded-lg bg-[#f4f4f4] ring-transparent text-[#333533] px-6 sm:px-12 rounded-lg font-bold text-center text-base; ${activeStep > 0 ? "inline-block" : "hidden"}`} onClick={goBack} >Atrás</button>
