@@ -13,7 +13,7 @@ html {
 
 /* ______________________ */
  .tag {
-   @apply text-white font-semibold py-1.5 px-6 rounded-md bg-[#1A1C1F];
+   @apply text-[#333533] font-semibold py-1.5 px-6 rounded-md bg-[#f4f4f4];
  }
  .btn-primary {
    @apply bg-[#333533] ring-transparent	text-white px-16 sm:px-24 py-3 rounded-lg font-bold text-base;

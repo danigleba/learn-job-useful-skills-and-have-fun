@@ -31,7 +31,6 @@ export default function Id() {
   }
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user)
@@ -155,7 +154,7 @@ export default function Id() {
                 <meta property="og:image" content="https://example.com/og-image.jpg" />
             </Head>    
             <main className="text-center bg-white">
-                <Navbar />
+                <Navbar />             
                 <div className="pt-12">
                     <div className="pl-6 pr-6 pb-6">
                         {course?.tags?.map(item => (
@@ -169,8 +168,20 @@ export default function Id() {
                     </div>
 
                     <div className="flex justify-center pt-2 md:pt-6 px-4">
-                            <div className="shadow-xl rounded-lg overflow-hidden ">
-                                <video src={course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.video_url} type="video/mp4" width="1024" height="960" controls controlsList="nodownload" onContextMenu={handleContextMenu}></video>
+                            <div className={`bg-white shadow-[0_8px_30px_rgb(0,0,0,0.08)]  rounded-lg overflow-hidden ${(course?.tag != "Course") ? "hidden" : ""}`}>
+                                <video className={`${(course?.tag != "Course") ? "hidden" : ""} bg-[#f4f4f4]`} src={course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.video_url} type="video/mp4" width="1024" height="960" controls controlsList="nodownload" onContextMenu={handleContextMenu}></video>
+                            </div>
+                            <div className={`w-full md:w-3/4	bg-[#f4f4f4] ${(course?.tag != "Course") ? "" : "hidden"}`}>
+                              <div className="aspect-w-16 aspect-h-9 w-full bg-[#f4f4f4]" >
+                                <iframe
+                                  className="shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-lg"
+                                  src={`${course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.video_url}?modestbranding=1&showinfo=0&rel=0&start=30&end=120`}
+                                  title="YouTube video player"
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                  allowfullscreen
+                                ></iframe>                              
+                              </div>
                             </div>
                     </div>
                     <div className="pb-16 pt-10 mx-6 space-y-4 space-x-2 sm:space-x-4">
