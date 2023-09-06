@@ -31,6 +31,7 @@ export default function Id() {
   }
 
   useEffect(() => {
+    window.scroll(0,0)
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user)
@@ -158,6 +159,7 @@ export default function Id() {
                 <meta property="og:title" content="Kualify App" />
                 <meta property="og:description" content="Your meta description goes here" />
                 <meta property="og:image" content="https://example.com/og-image.jpg" />
+                <script src="https://www.youtube.com/iframe_api"></script>
             </Head>    
             <main className="text-center bg-white">
                 <Navbar />             
@@ -172,26 +174,22 @@ export default function Id() {
                         <h2 className="text-3xl sm:text-4xl font-extrabold content-center text-gray-800">{course?.title}</h2>
                         <h2 className="truncate text-xl text-[#1A1C1F] font-medium pt-2">{parseInt(activeStep) +1}. {course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep].title}</h2>
                     </div>
-
-                    
-
-
-                    <div className="flex justify-center pt-2 md:pt-6 px-4">
+                    <div className="flex justify-center pt-2 md:pt-6">
                       {course?.tag != "Course" ? (
-                        <div className="w-full md:w-3/4	bg-[#f4f4f4]">
-                        <div className="aspect-w-16 aspect-h-9 w-full bg-[#f4f4f4]" >
+                        <div className="w-full md:w-3/4	">
+                        <div className="aspect-w-16 aspect-h-9 w-full" >
                           <iframe
-                            className="shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-lg"
+                            className="shadow-[0_8px_30px_rgb(0,0,0,0.08) rounded-xl"
                             src={course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.video_url}
-                            title="YouTube video player"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen
+                            title={course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.title}
+                            //frameborder="0"
+                            disablekb={1}
+                            //allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                           ></iframe>                              
                         </div>
                       </div>
                       ) : (
-                        <div className="bg-[#f4f4f4] shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-lg overflow-hidden">
+                        <div className="bg-[#f4f4f4] shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-xl overflow-hidden">
                           <video src={course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.video_url} type="video/mp4" width="1024" height="960" controls controlsList="nodownload" onContextMenu={handleContextMenu}></video>
                         </div>
                       )}
@@ -227,7 +225,7 @@ export default function Id() {
                                             <h2 className="text-center text-2xl font-bold">{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].title}</h2>
                                         </div>
                                         {/*In order to delete the top-left's button's autoFocus, this invisible input is created and set to autoFocus instead*/}
-                                        <input type="text" autoFocus className="opacity-0 absolute"/>
+                                        <input type="text" autoFocus="false" className="opacity-0 absolute"/>
                                         <div className="justify-center text-[#1A1C1F]">
                                             <div className="grid content-center grid-cols-1 md:grid-cols-2 pt-8">
                                                 <div className="p-2">

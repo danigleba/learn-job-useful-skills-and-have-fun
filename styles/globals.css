@@ -22,4 +22,8 @@ html {
  .btn-quiz {
    @apply w-full h-full bg-[#f4f4f4] hover:bg-[#333533] hover:text-white font-bold py-4 px-4 text-center text-sm md:text-base rounded focus:text-white;
  }
+
+ .scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
 }
