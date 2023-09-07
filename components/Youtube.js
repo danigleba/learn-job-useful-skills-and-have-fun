@@ -1,6 +1,7 @@
 import React from 'react'
 import YouTube from 'react-youtube'
 import {useRouter} from 'next/router'
+import { useRef } from "react"
 
 const YouTubeVideo = ({ onVideoEnd, videoId, start_time, end_time, videoEnded }) => {
   const router = useRouter()
@@ -27,12 +28,31 @@ const YouTubeVideo = ({ onVideoEnd, videoId, start_time, end_time, videoEnded })
     onVideoEnd()
   }
 
+  const playerRef = useRef(null);
+
+  let lastTapTimestamp = 0
+
+  const handleDoubleTap = () => {
+    const currentTime = playerRef.current.getCurrentTime();
+    const currentTimestamp = Date.now();
+
+    if (currentTimestamp - lastTapTimestamp < 3000) {
+      // Prevent default behavior for double-tap
+      return;
+    }
+
+    lastTapTimestamp = currentTimestamp;
+
+    // Handle your custom behavior here (e.g., show controls, etc.)
+  };
+
   return (
     <div className="w-full md:w-3/4">
-        <div className="aspect-w-16 aspect-h-9 w-full shadow-[0_8px_30px_rgb(0,0,0,0.08) rounded-xl overflow-hidden" >
+        <div onTouchEnd={handleDoubleTap} className="aspect-w-16 aspect-h-9 w-full shadow-[0_8px_30px_rgb(0,0,0,0.08) rounded-xl overflow-hidden" >
           {!videoEnded ?  
             (
               <YouTube
+              ref={playerRef}
                 videoId={videoId}
                 opts={opts}
                 //onReady={onPlayerReady}

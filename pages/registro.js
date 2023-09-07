@@ -31,7 +31,7 @@ export default function Login() {
                 })
                 const data = await response.json()
                 if (data.userCreated) {
-                    router.push("/planes")
+                    router.push("/")
                 }
           // User signed in successfully using Google
         } catch (error) {
