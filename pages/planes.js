@@ -15,6 +15,7 @@ export default function Home() {
     const [user, setUser] = useState({})
     
     useEffect(() => {
+        router.push("/")
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user)

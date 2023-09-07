@@ -26,17 +26,17 @@ export default function Feed() {
                                     </a>
                 ))} 
             </div>
-            <div className='pb-24 mx-8 lg:mx-48 text-[#333533] text-center pt-6 items-center  text-2xl md:text-xl justify-center h-full'>
+            <div className='pb-24 mx-8 lg:mx-24 text-[#333533] text-center pt-6 items-center  text-2xl md:text-xl justify-center h-full'>
                 {tags?.map((item, index) => (                                
                     <a key={`${item}-${index}`}>
                         <div className={` ${(selectedTag != "" && selectedTag != item) ? "hidden" : ""} pb-4`}>
                             <p className='font-bold text-3xl'>{item}</p>
                             <div className='pb-10 flex gap-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full pt-6 justify-start'> 
                                 {content?.map((i, index) => (                                
-                                    <a className={`${(i.tag != "" && i.tag != item) ? "hidden" : ""}`} href={`/cursos/${i.id}`} key={`${i.id}-${index}`}>
+                                    <a className={`${(i.tag != "" && i.tag != item) ? "hidden" : ""} hover:scale-105 duration-200`} href={`/cursos/${i.id}`} key={`${i.id}-${index}`}>
                                         <div style={{
                                             backgroundImage: `url(${i?.cover_url})`,
-                                            }} className="w-full h-40 bg-cover bg-center rounded-lg">
+                                            }} className="shadow-[0_8px_30px_rgb(0,0,0,0.08)]  w-full h-44 md:h-52 bg-cover bg-center rounded-lg">
                                         </div>
                                         <div className='pt-4 flex items-center gap-4'>
                                             <Image 

@@ -22,9 +22,9 @@ export default async function (req, res) {
                 })
                 const updatedQuerySnap = await getDocs(docSnap)
                 res.status(200).json({ progress : updatedQuerySnap.docs[0].data() })
-            } else {
-                res.status(200).json({ fakeCourse : true })
-            }
+            } //else {
+                //res.status(200).json({ fakeCourse : true })
+           // }
         } else {
             res.status(200).json({ progress: querySnap.docs[0].data() })
         }

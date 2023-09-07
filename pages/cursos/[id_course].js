@@ -31,7 +31,6 @@ export default function Id() {
   }
 
   useEffect(() => {
-    window.scroll(0,0)
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user)
@@ -113,7 +112,6 @@ export default function Id() {
   }
 
     useEffect(() => {       
-        //handleGetQuiz()
         handleGetCourse()
     }, [id_course])
     
@@ -124,7 +122,7 @@ export default function Id() {
     }, [user, id_course])
 
     useEffect(() => {  
-      if (activeStep < limitStep) {
+      if (activeStep < limitStep || activeStep == 0) {
         handleGetQuiz() 
      }}, [limitStep])
   
@@ -137,6 +135,7 @@ export default function Id() {
     }
 
     useEffect(() => {
+        window.scrollTo({top: 0, behavior: 'smooth'})
         //Resets the bg colors when clicked of the buttons
         setAnswColor1("")
         setAnswColor2("")
@@ -162,7 +161,7 @@ export default function Id() {
                 <script src="https://www.youtube.com/iframe_api"></script>
             </Head>    
             <main className="text-center bg-white">
-                <Navbar />             
+                <Navbar />  
                 <div className="pt-12">
                     <div className="pl-6 pr-6 pb-6">
                         {course?.tags?.map(item => (
@@ -171,21 +170,20 @@ export default function Id() {
                                     <p className="tag">{item}</p>
                                 </div>
                             </a>))} 
-                        <h2 className="text-3xl sm:text-4xl font-extrabold content-center text-gray-800">{course?.title}</h2>
+                        <h2 className="text-2xl sm:text-4xl font-extrabold content-center text-gray-800">{course?.title}</h2>
                         <h2 className="truncate text-xl text-[#1A1C1F] font-medium pt-2">{parseInt(activeStep) +1}. {course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep].title}</h2>
                     </div>
                     <div className="flex justify-center pt-2 md:pt-6">
                       {course?.tag != "Course" ? (
                         <div className="w-full md:w-3/4	">
                         <div className="aspect-w-16 aspect-h-9 w-full" >
-                          <iframe
-                            className="shadow-[0_8px_30px_rgb(0,0,0,0.08) rounded-xl"
-                            src={course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.video_url}
-                            title={course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.title}
-                            //frameborder="0"
-                            disablekb={1}
-                            //allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          ></iframe>                              
+                            <iframe 
+                              className="shadow-[0_8px_30px_rgb(0,0,0,0.08) rounded-xl"
+                              src={`${course?.video_url};controls=0&modestbranding=1&showinfo=0&rel=0&start=${course?.steps && course?.steps[activeStep] && course?.steps[activeStep].start_time}&end=${course?.steps && course?.steps[activeStep] && course?.steps[activeStep].end_time}&disablekb=1`}
+                              title={course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.title}
+                              //frameborder="0"
+                              //allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            ></iframe>                            
                         </div>
                       </div>
                       ) : (
