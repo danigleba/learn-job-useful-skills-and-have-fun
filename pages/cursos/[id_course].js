@@ -8,12 +8,16 @@ import Playlist from "@/components/Playlist"
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '@/utils/firebase'
 
+import YouTubeVideo from '@/components/Youtube';
+
+
 export default function Id() {
     const router = useRouter()
     const { id_course } = router.query
     const [course, setCourse] = useState({})
     const [user, setUser] = useState()
     const [quiz, setQuiz] = useState({})
+    const [videoEnded, setVideoEnded] = useState(false)
 
     const [limitStep, setLimitStep] = useState()
     const [activeStep, setActiveStep] = useState()
@@ -147,6 +151,16 @@ export default function Id() {
       const handleContextMenu = (e) => {
         e.preventDefault()
       }
+
+
+  function handleVideoEnd() {
+    setVideoEnded(true)
+    console.log("video has ended")
+  }
+
+  useEffect(() => {  
+    console.log(videoEnded)
+    }, [videoEnded])
     return (
         <>
             <Head>
@@ -174,20 +188,10 @@ export default function Id() {
                         <h2 className="truncate text-xl text-[#1A1C1F] font-medium pt-2">{parseInt(activeStep) +1}. {course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep].title}</h2>
                     </div>
                     <div className="flex justify-center pt-2 md:pt-6">
-                      {course?.tag != "Course" ? (
-                        <div className="w-full md:w-3/4	">
-                        <div className="aspect-w-16 aspect-h-9 w-full" >
-                            <iframe 
-                              className="shadow-[0_8px_30px_rgb(0,0,0,0.08) rounded-xl"
-                              src={`${course?.video_url};controls=0&modestbranding=1&showinfo=0&rel=0&start=${course?.steps && course?.steps[activeStep] && course?.steps[activeStep].start_time}&end=${course?.steps && course?.steps[activeStep] && course?.steps[activeStep].end_time}&disablekb=1`}
-                              title={course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.title}
-                              //frameborder="0"
-                              //allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            ></iframe>                            
-                        </div>
-                      </div>
+                      {(course?.tag != "Course" && (course?.steps && course?.steps[activeStep] && course?.steps[activeStep].start_time )!= null) ? (
+                                <YouTubeVideo videoEnded={videoEnded} start_time={course?.steps && course?.steps[activeStep] && course?.steps[activeStep].start_time} end_time={course?.steps && course?.steps[activeStep] && course?.steps[activeStep].end_time} videoId={course?.video_url} onVideoEnd={handleVideoEnd} />            
                       ) : (
-                        <div className="bg-[#f4f4f4] shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-xl overflow-hidden">
+                        <div className={`bg-[#f4f4f4] shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-xl overflow-hidden ${videoEnded ? "hidden" : ""}`}>
                           <video src={course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.video_url} type="video/mp4" width="1024" height="960" controls controlsList="nodownload" onContextMenu={handleContextMenu}></video>
                         </div>
                       )}

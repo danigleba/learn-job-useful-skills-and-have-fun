@@ -5,6 +5,7 @@ export default async function(req, res) {
   const articlesRef = collection(db, "courses")
   const articlesSnap = query(articlesRef)
   const queryArticlesSnap = await getDocs(articlesSnap)
+
   try {
     const docs = []
     queryArticlesSnap.forEach((doc) => {

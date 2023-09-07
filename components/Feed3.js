@@ -33,7 +33,7 @@ export default function Feed() {
                             <p className='font-bold text-3xl'>{item}</p>
                             <div className='pb-10 flex gap-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full pt-6 justify-start'> 
                                 {content?.map((i, index) => (                                
-                                    <a className={`${(i.tag != "" && i.tag != item) ? "hidden" : ""} hover:scale-105 duration-200`} href={`/cursos/${i.id}`} key={`${i.id}-${index}`}>
+                                    <a className={`${(i.tag != "" && i.tag != item || i.private) ? "hidden" : ""} hover:scale-105 duration-200`} href={`/cursos/${i.id}`} key={`${i.id}-${index}`}>
                                         <div style={{
                                             backgroundImage: `url(${i?.cover_url})`,
                                             }} className="shadow-[0_8px_30px_rgb(0,0,0,0.08)]  w-full h-44 md:h-52 bg-cover bg-center rounded-lg">
