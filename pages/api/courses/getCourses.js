@@ -13,6 +13,7 @@ export default async function(req, res) {
           id: doc.id,
           ...doc.data(),
         })
+      
     })
     res.status(200).json({ data: docs })
   } catch (error) {

@@ -20,7 +20,7 @@ export default function Id() {
     const [videoEnded, setVideoEnded] = useState(false)
 
     const [limitStep, setLimitStep] = useState()
-    const [activeStep, setActiveStep] = useState()
+    const [activeStep, setActiveStep] = useState(null)
 
     const [isOpen, setIsOpen] = useState(false)    
     const [answColor1, setAnswColor1] = useState("")
@@ -139,7 +139,9 @@ export default function Id() {
     }
 
     useEffect(() => {
+      if (activeStep !=null) {
         window.scrollTo({top: 0, behavior: 'smooth'})
+      }
         //Resets the bg colors when clicked of the buttons
         setAnswColor1("")
         setAnswColor2("")
@@ -161,6 +163,25 @@ export default function Id() {
   useEffect(() => {  
     console.log(videoEnded)
     }, [videoEnded])
+
+    const playerRef = useRef(null);
+
+    // Handle touch events to prevent skipping forward/backward
+    useEffect(() => {
+      const player = playerRef?.current?.getInternalPlayer();
+
+      const handleTouchStart = (e) => {
+        // Prevent the default behavior for touch events
+        e.preventDefault();
+      };
+
+      player?.addEventListener('touchstart', handleTouchStart);
+
+      return () => {
+        // Clean up event listener when component unmounts
+        player?.removeEventListener('touchstart', handleTouchStart);
+      };
+    }, []);
     return (
         <>
             <Head>
@@ -189,7 +210,8 @@ export default function Id() {
                     </div>
                     <div className="flex justify-center pt-2 md:pt-6">
                       {(course?.tag != "Course" && (course?.steps && course?.steps[activeStep] && course?.steps[activeStep].start_time )!= null) ? (
-                                <YouTubeVideo videoEnded={videoEnded} start_time={course?.steps && course?.steps[activeStep] && course?.steps[activeStep].start_time} end_time={course?.steps && course?.steps[activeStep] && course?.steps[activeStep].end_time} videoId={course?.video_url} onVideoEnd={handleVideoEnd} />            
+                                <YouTubeVideo ref={playerRef}
+                                videoEnded={videoEnded} start_time={course?.steps && course?.steps[activeStep] && course?.steps[activeStep].start_time} end_time={course?.steps && course?.steps[activeStep] && course?.steps[activeStep].end_time} videoId={course?.video_url} onVideoEnd={handleVideoEnd} />            
                       ) : (
                         <div className={`bg-[#f4f4f4] shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-xl overflow-hidden ${videoEnded ? "hidden" : ""}`}>
                           <video src={course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.video_url} type="video/mp4" width="1024" height="960" controls controlsList="nodownload" onContextMenu={handleContextMenu}></video>

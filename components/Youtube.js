@@ -14,7 +14,7 @@ const YouTubeVideo = ({ onVideoEnd, videoId, start_time, end_time, videoEnded })
       controls: 0,
       modestbranding: 1,
       disablekb: 1,
-      showinfo: 1,
+      //showinfo: 1,
       rel: 0,
     },
   };
