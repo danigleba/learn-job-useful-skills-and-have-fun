@@ -142,6 +142,7 @@ export default function Id() {
       if (activeStep !=null) {
         window.scrollTo({top: 0, behavior: 'smooth'})
       }
+      setVideoEnded(false)
         //Resets the bg colors when clicked of the buttons
         setAnswColor1("")
         setAnswColor2("")
@@ -154,15 +155,9 @@ export default function Id() {
         e.preventDefault()
       }
 
-
   function handleVideoEnd() {
-    setVideoEnded(true)
-    console.log("video has ended")
+    setVideoEnded(true)    
   }
-
-  useEffect(() => {  
-    console.log(videoEnded)
-    }, [videoEnded])
     return (
         <>
             <Head>
@@ -190,8 +185,8 @@ export default function Id() {
                         <h2 className="truncate text-xl text-[#1A1C1F] font-medium pt-2">{parseInt(activeStep) +1}. {course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep].title}</h2>
                     </div>
                     <div className="flex justify-center pt-2 md:pt-6">
-                      {(course?.tag != "Course" && (course?.steps && course?.steps[activeStep] && course?.steps[activeStep].start_time )!= null) ? (
-                                <YouTubeVideo videoEnded={videoEnded} start_time={course?.steps && course?.steps[activeStep] && course?.steps[activeStep].start_time} end_time={course?.steps && course?.steps[activeStep] && course?.steps[activeStep].end_time} videoId={course?.video_url} onVideoEnd={handleVideoEnd} />            
+                      {(course?.tag != "Course" && (course?.steps && course?.steps[activeStep] && course?.steps[activeStep].start_time ) != null) ? (
+                          <YouTubeVideo videoEnded={videoEnded} start_time={course?.steps && course?.steps[activeStep] && course?.steps[activeStep].start_time} end_time={course?.steps && course?.steps[activeStep] && course?.steps[activeStep].end_time} videoId={course?.video_url} onVideoEnd={handleVideoEnd} />            
                       ) : (
                         <div className={`bg-[#f4f4f4] shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-xl overflow-hidden ${videoEnded ? "hidden" : ""}`}>
                           <video src={course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.video_url} type="video/mp4" width="1024" height="960" controls controlsList="nodownload" onContextMenu={handleContextMenu}></video>

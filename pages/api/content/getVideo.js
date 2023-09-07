@@ -1,7 +1,6 @@
 import {db} from '../../../utils/firebase/index'
 import { getDoc, doc} from "firebase/firestore";
 
-
 export default async function(req, res) {
     const id_video = req.query.id_video
     const videoRef = doc(db, "content", id_video) 

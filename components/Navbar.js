@@ -56,12 +56,12 @@ export default function Navbar(props) {
             </Link>
         </div>
         <div className='space-x-4 flex hidden md:flex'>
-          <Link legacyBehavior href="/">
+          <Link legacyBehavior href="/cursos">
           <div className={`${(props.page == "cursos" ? "bg-[#333533] text-white" : "bg-[#f4f4f4] text-[#333533]")} hover:bg-[#333533] hover:text-white duration-200 cursor-pointer px-8 py-2 rounded-md font-semibold md:text-sm`}>
               <p>Cursos</p>
             </div>
           </Link>
-          <Link legacyBehavior href="/index2">
+          <Link legacyBehavior href="/">
             <div className={`${(props.page == "videos" ? "bg-[#333533] text-white" : "bg-[#f4f4f4] text-[#333533]")} hover:bg-[#333533] hover:text-white duration-200 cursor-pointer px-8 py-2 rounded-md font-semibold md:text-sm`}>
               <p>Vídeos</p>
             </div>
@@ -85,12 +85,12 @@ export default function Navbar(props) {
           </div>
         </div>
         <div className='space-x-4 flex flex md:hidden justify-center pt-6'>
-          <Link legacyBehavior href="/">
+          <Link legacyBehavior href="/cursos">
           <div className={`${(props.page == "cursos" ? "bg-[#333533] text-white" : "bg-[#f4f4f4] text-[#333533]")} hover:bg-[#333533] hover:text-white duration-200 cursor-pointer px-8 py-2 rounded-md font-semibold md:text-sm`}>
               <p>Cursos</p>
             </div>
           </Link>
-          <Link legacyBehavior href="/index2">
+          <Link legacyBehavior href="/">
             <div className={`${(props.page == "videos" ? "bg-[#333533] text-white" : "bg-[#f4f4f4] text-[#333533]")} hover:bg-[#333533] hover:text-white duration-200 cursor-pointer px-8 py-2 rounded-md font-semibold md:text-sm`}>
               <p>Vídeos</p>
             </div>

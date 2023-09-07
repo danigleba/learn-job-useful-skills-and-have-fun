@@ -1,7 +1,6 @@
 import React from 'react'
 import YouTube from 'react-youtube'
 import {useRouter} from 'next/router'
-import { useRef } from "react"
 
 const YouTubeVideo = ({ onVideoEnd, videoId, start_time, end_time, videoEnded }) => {
   const router = useRouter()
@@ -27,42 +26,26 @@ const YouTubeVideo = ({ onVideoEnd, videoId, start_time, end_time, videoEnded })
   const onPlayerEnd = (event) => {
     onVideoEnd()
   }
-
-  const playerRef = useRef(null);
-
-  let lastTapTimestamp = 0
-
-  const handleDoubleTap = () => {
-    const currentTime = playerRef.current.getCurrentTime();
-    const currentTimestamp = Date.now();
-
-    if (currentTimestamp - lastTapTimestamp < 3000) {
-      // Prevent default behavior for double-tap
-      return;
-    }
-
-    lastTapTimestamp = currentTimestamp;
-
-    // Handle your custom behavior here (e.g., show controls, etc.)
-  };
-
   return (
     <div className="w-full md:w-3/4">
-        <div onTouchEnd={handleDoubleTap} className="aspect-w-16 aspect-h-9 w-full shadow-[0_8px_30px_rgb(0,0,0,0.08) rounded-xl overflow-hidden" >
+        <div className="aspect-w-16 aspect-h-9 w-full shadow-[0_8px_30px_rgb(0,0,0,0.08) rounded-xl overflow-hidden" >
           {!videoEnded ?  
             (
               <YouTube
-              ref={playerRef}
                 videoId={videoId}
                 opts={opts}
                 //onReady={onPlayerReady}
                 onEnd={onPlayerEnd}
               />  
             ) : (
-              <div className='w-full h-full bg-[#333533] flex justify-center items-center shadow-[0_8px_30px_rgb(0,0,0,0.08)'>   
-                <button onClick={reloadPage} className='font-bold text-lg hover:scale-105 duration-200 rounded-lg bg-white py-2 px-12'>
-                  Volver a ver
-                </button>
+              <div className='w-full h-full bg-[#333533] text-white flex  justify-center items-center shadow-[0_8px_30px_rgb(0,0,0,0.08)'>   
+                <div className='p-8 space-y-4 md:space-y-8'>
+                  <p className='font-bold md:font-extrabold text-md md:text-2xl lg:text-3xl'>¿Lo has entendido todo?</p>
+                  <p className='md:font-medium text-sm md:text-md lg:text-xl'>Si la cabeza te da vueltas 😵‍💫, no te preocupes, puedes volver a ver el vídeo</p>
+                  <button onClick={reloadPage} className='text-[#333533] font-bold text-sm md:text-lg hover:scale-105 duration-200 rounded-lg bg-white py-1 md:py-2 px-6 md:px-12'>
+                    Volver a ver
+                  </button>
+                </div>
               </div>
             )
           }
