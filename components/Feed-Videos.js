@@ -30,7 +30,7 @@ export default function Feed() {
                 {tags?.map((item, index) => (                                
                     <a key={`${item}-${index}`}>
                         <div className={` ${(selectedTag != "" && selectedTag != item) ? "hidden" : ""} pb-4`}>
-                            <p className='font-bold text-3xl'>{item}</p>
+                            <p className='font-extrabold text-3xl'>{item}</p>
                             <div className='pb-10 flex gap-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full pt-6 justify-start'> 
                                 {content?.map((i, index) => (                                
                                     <a className={`${(i.tag != "" && i.tag != item || i.private) ? "hidden" : ""} hover:scale-105 duration-200`} href={`/cursos/${i.id}`} key={`${i.id}-${index}`}>
