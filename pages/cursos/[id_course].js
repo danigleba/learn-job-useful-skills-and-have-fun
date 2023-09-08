@@ -122,13 +122,14 @@ export default function Id() {
    useEffect(() => {  
     if (checkEmailFormat(user?.email)) {
         getProgress()
+        handleGetQuiz() 
       }
     }, [user, id_course])
 
-    useEffect(() => {  
-      if (activeStep < limitStep || activeStep == 0) {
+    /*seEffect(() => {  
+      if ((parseInt(activeStep)+1) >= (course?.steps?.length)) {
         handleGetQuiz() 
-     }}, [limitStep])
+     }}, [activeStep])*/
   
 
     function closeModal() {
