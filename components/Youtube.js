@@ -28,7 +28,7 @@ const YouTubeVideo = ({ onVideoEnd, videoId, start_time, end_time, videoEnded })
   }
   return (
     <div className="w-full md:w-3/4">
-        <div className="aspect-w-16 aspect-h-9 w-full shadow-[0_8px_30px_rgb(0,0,0,0.08) rounded-xl overflow-hidden" >
+        <div className="aspect-w-16 aspect-h-9 w-full shadow-[0_8px_30px_rgb(0,0,0,0.08) md:rounded-xl overflow-hidden" >
           {!videoEnded ?  
             (
               <YouTube

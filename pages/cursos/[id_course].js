@@ -79,7 +79,7 @@ export default function Id() {
     } 
 
     const handleNextStep = async (e) => { 
-      if (e.target.value) {
+      if (e.target.value == "true") {
           answColors[e.target.id]("focus:bg-green-400")
           const url = "/api/courses/progress+1?id_course=" + id_course + "&email=" + user.email + "&activeStep=" + activeStep
           const response = fetch(url, {
@@ -100,7 +100,7 @@ export default function Id() {
           }
           router.reload()
       } else {
-          answColors[e.target.id]("focus:bg-red-600")
+          answColors[e.target.id]("focus:bg-red-500")
       }
   }
 
@@ -122,14 +122,14 @@ export default function Id() {
    useEffect(() => {  
     if (checkEmailFormat(user?.email)) {
         getProgress()
-        handleGetQuiz() 
+       // handleGetQuiz() 
       }
     }, [user, id_course])
 
-    /*seEffect(() => {  
-      if ((parseInt(activeStep)+1) >= (course?.steps?.length)) {
+    useEffect(() => {  
+      if ((parseInt(activeStep)+1) <= (course?.steps?.length)) {
         handleGetQuiz() 
-     }}, [activeStep])*/
+     }}, [activeStep])
   
 
     function closeModal() {
@@ -189,7 +189,7 @@ export default function Id() {
                       {(course?.tag != "Course" && (course?.steps && course?.steps[activeStep] && course?.steps[activeStep].start_time ) != null) ? (
                           <YouTubeVideo videoEnded={videoEnded} start_time={course?.steps && course?.steps[activeStep] && course?.steps[activeStep].start_time} end_time={course?.steps && course?.steps[activeStep] && course?.steps[activeStep].end_time} videoId={course?.video_url} onVideoEnd={handleVideoEnd} />            
                       ) : (
-                        <div className={`bg-[#f4f4f4] shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-xl overflow-hidden ${videoEnded ? "hidden" : ""}`}>
+                        <div className={`bg-[#f4f4f4] shadow-[0_8px_30px_rgb(0,0,0,0.08)] md:rounded-xl overflow-hidden ${videoEnded ? "hidden" : ""}`}>
                           <video src={course && course?.steps && course?.steps[activeStep] && course?.steps[activeStep]?.video_url} type="video/mp4" width="1024" height="960" controls controlsList="nodownload" onContextMenu={handleContextMenu}></video>
                         </div>
                       )}
