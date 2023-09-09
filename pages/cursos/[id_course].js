@@ -99,6 +99,7 @@ export default function Id() {
             })
           }
           router.reload()
+          
       } else {
           answColors[e.target.id]("focus:bg-red-500")
       }

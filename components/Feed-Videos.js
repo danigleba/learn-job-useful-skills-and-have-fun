@@ -31,12 +31,12 @@ export default function Feed() {
                     <a key={`${item}-${index}`}>
                         <div className={` ${(selectedTag != "" && selectedTag != item) ? "hidden" : ""} pb-4`}>
                             <p className='font-extrabold text-3xl'>{item}</p>
-                            <div className='pb-10 flex gap-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full pt-6 justify-start'> 
+                            <div className=' mb-10 flex gap-12 md:gap-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full mt-6 justify-start'> 
                                 {content?.map((i, index) => (                                
                                     <a className={`${(i.tag != "" && i.tag != item || i.private) ? "hidden" : ""} hover:scale-105 duration-200`} href={`/cursos/${i.id}`} key={`${i.id}-${index}`}>
                                         <div style={{
                                             backgroundImage: `url(${i?.cover_url})`,
-                                            }} className="shadow-[0_8px_30px_rgb(0,0,0,0.08)]  w-full h-44 md:h-52 bg-cover bg-center rounded-lg">
+                                            }} className="aspect-w-16 aspect-h-9 shadow-[0_8px_30px_rgb(0,0,0,0.08)]  w-full  bg-cover bg-center rounded-lg">
                                         </div>
                                         <div className='pt-4 flex items-start gap-4'>
                                             <Image 
@@ -46,9 +46,9 @@ export default function Feed() {
                                                 width={48}
                                                 alt="Profile picture"
                                             />
-                                                <div className="grid grid-rows-2">
-                                                    <p className='text-left font-semibold text-base line-clamp-2 flex-wrap'>{i.title}</p>
-                                                    <p className='text-base text-left font-light truncate '>{i?.teacher?.name}</p>
+                                                <div className="space-y-0.5 items-center">
+                                                    <p className='text-left font-semibold text-base line-clamp-2 flex-wrap leading-5'>{i.title}</p>
+                                                    <p className='text-base text-left font-light truncate'>{i?.teacher?.name}</p>
                                                 </div>
                                         </div>
                                     </a>
