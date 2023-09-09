@@ -38,7 +38,7 @@ export default function Feed() {
                                             backgroundImage: `url(${i?.cover_url})`,
                                             }} className="shadow-[0_8px_30px_rgb(0,0,0,0.08)]  w-full h-44 md:h-52 bg-cover bg-center rounded-lg">
                                         </div>
-                                        <div className='pt-4 flex items-center gap-4'>
+                                        <div className='pt-4 flex items-start gap-4'>
                                             <Image 
                                                 src={i?.teacher?.profile_url} 
                                                 className='rounded-full bg-cover'
@@ -47,8 +47,8 @@ export default function Feed() {
                                                 alt="Profile picture"
                                             />
                                                 <div className="grid grid-rows-2">
-                                                    <p className='text-left font-semibold text-base truncate'>{i.title}</p>
-                                                    <p className='text-base text-left font-light truncate'>{i?.teacher?.name}</p>
+                                                    <p className='text-left font-semibold text-base line-clamp-2 flex-wrap'>{i.title}</p>
+                                                    <p className='text-base text-left font-light truncate '>{i?.teacher?.name}</p>
                                                 </div>
                                         </div>
                                     </a>
