@@ -3,7 +3,7 @@ import Image from 'next/image'
 export default function Feed() {
     const [content, setContent] = useState([])
     const [selectedTag, setSelectedTag] = useState("")
-    const tags = ["Finanzas Personales", "Emprendimiento", "Habilidades Sociales", "Inteligenia Artifical", "Productividad"]
+    const tags = ["Finanzas Personales", "Emprendimiento", "Habilidades Sociales", "Productividad"]
 
     function selectTag(tag) {
         setSelectedTag(tag)
