@@ -79,8 +79,9 @@ export default function Id() {
     } 
 
     const handleNextStep = async (e) => { 
+      console.log(e.target.id)
       if (e.target.value == "true") {
-          answColors[e.target.id]("focus:bg-green-400")
+          answColors[e.target.id]("focus:bg-[#4ade80]")
           const url = "/api/courses/progress+1?id_course=" + id_course + "&email=" + user.email + "&activeStep=" + activeStep
           const response = fetch(url, {
             method: 'POST',
@@ -101,7 +102,7 @@ export default function Id() {
           router.reload()
           
       } else {
-          answColors[e.target.id]("focus:bg-red-500")
+          answColors[e.target.id]("focus:bg-[#ef4444]")
       }
   }
 
