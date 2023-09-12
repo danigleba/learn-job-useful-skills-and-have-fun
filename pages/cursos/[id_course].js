@@ -12,23 +12,18 @@ import YouTubeVideo from '@/components/Youtube';
 
 
 export default function Id() {
-    const router = useRouter()
-    const { id_course } = router.query
-    const [course, setCourse] = useState({})
-    const [user, setUser] = useState()
-    const [quiz, setQuiz] = useState({})
-    const [videoEnded, setVideoEnded] = useState(false)
+  const router = useRouter()
+  const { id_course } = router.query
+  const [course, setCourse] = useState({})
+  const [user, setUser] = useState()
+  const [quiz, setQuiz] = useState({})
+  const [videoEnded, setVideoEnded] = useState(false)
 
-    const [limitStep, setLimitStep] = useState()
-    const [activeStep, setActiveStep] = useState(null)
+  const [limitStep, setLimitStep] = useState()
+  const [activeStep, setActiveStep] = useState(null)
 
-    const [isOpen, setIsOpen] = useState(false)    
-    const [answColor1, setAnswColor1] = useState("")
-    const [answColor2, setAnswColor2] = useState("")
-    const [answColor3, setAnswColor3] = useState("")
-    const [answColor4, setAnswColor4] = useState("")
-    const answColors = [setAnswColor1, setAnswColor2, setAnswColor3, setAnswColor4]
-   
+  const [isOpen, setIsOpen] = useState(false)    
+  
   function checkEmailFormat(str) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return emailRegex.test(str)
@@ -79,9 +74,8 @@ export default function Id() {
     } 
 
     const handleNextStep = async (e) => { 
-      console.log(e.target.id)
       if (e.target.value == "true") {
-          answColors[e.target.id]("focus:bg-[#4ade80]")
+          e.target.className="btn-quiz text-white bg-green-400"
           const url = "/api/courses/progress+1?id_course=" + id_course + "&email=" + user.email + "&activeStep=" + activeStep
           const response = fetch(url, {
             method: 'POST',
@@ -99,10 +93,13 @@ export default function Id() {
               }
             })
           }
-          router.reload()
-          
+          //Timeout for green background to load in safari
+          const timer = setTimeout(() => {
+            router.reload() 
+          }, 200);
       } else {
-          answColors[e.target.id]("focus:bg-[#ef4444]")
+        e.target.className="btn-quiz text-white bg-red-500"
+
       }
   }
 
@@ -145,12 +142,7 @@ export default function Id() {
       if (activeStep !=null) {
         window.scrollTo({top: 0, behavior: 'smooth'})
       }
-      setVideoEnded(false)
-        //Resets the bg colors when clicked of the buttons
-        setAnswColor1("")
-        setAnswColor2("")
-        setAnswColor3("")
-        setAnswColor4("")        
+      setVideoEnded(false)      
         }, [activeStep])
 
       //Prevents user from rigth clicking and downloading a video
@@ -227,7 +219,7 @@ export default function Id() {
                                             <h2 className="text-center text-2xl font-bold">{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].title}</h2>
                                         </div>
                                         {/*In order to delete the top-left's button's autoFocus, this invisible input is created and set to autoFocus instead*/}
-                                        <input type="text" autoFocus="false" className="opacity-0 absolute"/>
+                                        <input type="text" className="opacity-0 absolute"/>
                                         <div className="justify-center text-[#1A1C1F]">
                                             <div className="grid content-center grid-cols-1 md:grid-cols-2 pt-8">
                                                 <div className="p-2">
@@ -235,28 +227,28 @@ export default function Id() {
                                                         onClick={handleNextStep}
                                                         id={0}
                                                         value={quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[0] && quiz.questions[activeStep].answers[0].value}
-                                                        className={`btn-quiz ${answColor1}`}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[0].title}</button>
+                                                        className={`btn-quiz hover:bg-[#333533] hover:text-white`}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[0].title}</button>
                                                 </div>
                                                 <div className="p-2">
-                                                    <button 
+                                                    <button                                       
                                                         onClick={handleNextStep}
                                                         id={1}
                                                         value={quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[1] && quiz.questions[activeStep].answers[1].value}
-                                                        className={`btn-quiz ${answColor2}`}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[1].title}</button>
+                                                        className={`btn-quiz hover:bg-[#333533] hover:text-white`}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[1].title}</button>
                                                 </div>
                                                 <div className="p-2">
                                                     <button 
                                                         onClick={handleNextStep}
                                                         id={2}
                                                         value={quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[2] && quiz.questions[activeStep].answers[2].value}                                                        
-                                                        className={`btn-quiz ${answColor3}`}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[2].title}</button>
+                                                        className={`btn-quiz hover:bg-[#333533] hover:text-white`}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[2].title}</button>
                                                 </div>
                                                 <div className="p-2">
                                                     <button 
                                                         onClick={handleNextStep}
                                                         id={3}
                                                         value={quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[3] && quiz.questions[activeStep].answers[3].value}                                                           
-                                                        className={`btn-quiz ${answColor4}`}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[3].title}</button>
+                                                        className={`btn-quiz hover:bg-[#333533] hover:text-white`}>{quiz && quiz.questions && quiz.questions[activeStep] && quiz.questions[activeStep].answers && quiz.questions[activeStep].answers[3].title}</button>
                                                 </div>
                                             </div>
                                         </div>       

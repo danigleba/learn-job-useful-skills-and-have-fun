@@ -38,11 +38,11 @@ const YouTubeVideo = ({ onVideoEnd, videoId, start_time, end_time, videoEnded })
                 onEnd={onPlayerEnd}
               />  
             ) : (
-              <div className='w-full h-full bg-[#333533] text-white flex  justify-center items-center shadow-[0_8px_30px_rgb(0,0,0,0.08)'>   
-                <div className='p-8 space-y-4 md:space-y-8'>
-                  <p className='font-bold md:font-extrabold text-md md:text-2xl lg:text-3xl'>¿Lo has entendido todo?</p>
-                  <p className='md:font-medium text-sm md:text-md lg:text-xl'>Si la cabeza te da vueltas 😵‍💫, no te preocupes, puedes volver a ver el vídeo</p>
-                  <button onClick={reloadPage} className='text-[#333533] font-bold text-sm md:text-lg hover:scale-105 duration-200 rounded-lg bg-white py-1 md:py-2 px-6 md:px-12'>
+              <div className='w-full h-full bg-[#333533] text-white flex justify-center items-center shadow-[0_8px_30px_rgb(0,0,0,0.08)'>   
+                <div className='p-4 space-y-4 md:space-y-8'>
+                  <p className='font-bold md:font-extrabold text-xl md:text-3xl lg:text-4xl'>¿Lo has entendido todo?</p>
+                  <p className='md:font-light text-sm md:text-lg lg:text-xl'>Si la cabeza te da vueltas 😵‍💫, no te preocupes, puedes volver a ver el vídeo</p>
+                  <button onClick={reloadPage} className='text-[#333533] font-bold text-sm md:text-lg hover:scale-105 duration-200 rounded md:rounded-md bg-white py-1 md:py-2 px-6 md:px-12'>
                     Volver a ver
                   </button>
                 </div>
