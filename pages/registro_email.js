@@ -43,7 +43,7 @@ export default function Login() {
             await updateProfile(auth.currentUser, {
                 displayName: username
             })
-            const url = `/api/auth/signup2?lang=${navigator.language}&profile_url=${auth.currentUser.photoURL}&email=${email}&username=${username}`;
+            const url = `/api/auth/signup?lang=${navigator.language}&profile_url=${auth.currentUser.photoURL}&email=${email}&username=${username}`;
             const response = await fetch(url, {
                 method: "POST",
                 headers: {

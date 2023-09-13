@@ -166,7 +166,7 @@ export default function Id() {
                 <meta property="og:image" content="https://example.com/og-image.jpg" />
                 <script src="https://www.youtube.com/iframe_api"></script>
             </Head>    
-            <main className="text-center bg-white">
+            <main className="text-center">
                 <Navbar />  
                 <div className="pt-12">
                     <div className="pl-6 pr-6 pb-6">
