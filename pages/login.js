@@ -22,13 +22,21 @@ export default function Login() {
 
     const handleGoogleSignIn = async () => {
         try {
-            const result = await signInWithPopup(auth, googleProvider)
-            router.push("/")
+          const result = await signInWithPopup(auth, googleProvider)
+          const url = `/api/auth/signup?lang=${navigator.language}&profile_url=${auth.currentUser.photoURL}&email=${auth.currentUser.email}&username=${auth.currentUser.displayName}`
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                    "Content-Type": "application/json",
+                    },
+                })
+                router.push("/")                
           // User signed in successfully using Google
         } catch (error) {
           console.error('Google login error:', error);
         }
     }
+
 
     const handleEmailSignIn = async () => {
         if ( email === "" || password === "") {
