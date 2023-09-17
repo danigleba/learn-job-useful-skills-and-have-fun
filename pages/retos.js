@@ -76,10 +76,10 @@ export default function Home() {
             <Image className={`${(item.category == "Productivity") ? "": "hidden"}`} alt="Man working emoji" height={22} width={22} src={`${(item.category == "Productivity") ? "https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fman_technologist.webp?alt=media&token=f0dc43d7-e713-4971-923a-cc2820bece1d" : ""}`} />
             <Image className={`${(item.category == "Personal Finance") ? "": "hidden"}`} alt="Flying money emoji" height={22} width={22} src={`${(item.category == "Personal Finance") ? "https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fmoney_with_wings.webp?alt=media&token=37061431-6ed8-4109-8a76-b650601edf67" : ""}`} />          </div>
           <div className='w-max justify-center flex bg-[#f4f4f4] rounded-md px-8 w-full px-3 py-1.5 text-[#333533] text-md font-semibold text-center'>
-            <p>{`${(item?.category == "Social Skills") ? "Habilidades Sociales" : ""}`}</p>
-            <p>{`${(item?.category == "Entrepreneurship") ? "Emprendimiento" : ""}`}</p>
-            <p>{`${(item?.category == "Productivity") ? "Productividad" : ""}`}</p>
-            <p>{`${(item?.category == "Personal Finance") ? "Finanzas Personales" : ""}`}</p>
+            <p className='truncate'>{`${(item?.category == "Social Skills") ? "Habilidades Sociales" : ""}`}</p>
+            <p className='truncate'>{`${(item?.category == "Entrepreneurship") ? "Emprendimiento" : ""}`}</p>
+            <p className='truncate'>{`${(item?.category == "Productivity") ? "Productividad" : ""}`}</p>
+            <p className='truncate'>{`${(item?.category == "Personal Finance") ? "Finanzas Personales" : ""}`}</p>
           </div>
           
         </div>
