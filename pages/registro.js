@@ -63,18 +63,8 @@ export default function Login() {
                             <h1 className="text-3xl font-extrabold text-center">
                                 Crea tu cuenta
                             </h1>
-                            <div className="text-center pt-2 pb-4">
-                                <div className="p-2 bg-[#f4f4f4] items-center px-4 text-white leading-5 rounded-xl flex lg:inline-flex" role="alert">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="#ffd60a" className="w-9 h-9">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-                                    </svg>
-                                    <span className="text-center font-medium mx-2 sm:mx-4 my-1 flex-auto text-[#333533]">Al pagar tu suscripción habrás de poner el email que uses ahora.</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="#ffd60a" className="w-9 h-9">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-                                    </svg>
-                                </div>
-                            </div>
-                                <div className="flex-1 flex flex-col items-center">
+                            
+                                <div className="flex-1 flex flex-col items-center pt-2">
                                     <button onClick={handleGoogleSignIn} className='flex items-center justify-center border-2 border-[#333533] rounded-xl py-2 w-full text-[#333533] font-bold'>
                                         <Image alt="Google logo" className='mr-2' height={20} width={20} src="/logos/googlepay.webp"></Image>
                                         Usar mi cuenta de Google</button>
