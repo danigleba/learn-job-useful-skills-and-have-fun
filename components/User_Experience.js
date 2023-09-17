@@ -1,5 +1,5 @@
 import { useEffect, useState} from "react"
-import {BiSolidBriefcase} from 'react-icons/bi'
+import Image from 'next/image'
 export default function User_Experience(props) {
     const [videos, setVideos] = useState([])
     const [entreprenerushipPoints, setEntreprenerushipPoints] = useState(0)
@@ -62,10 +62,10 @@ export default function User_Experience(props) {
     <main className="w-full md:w-max pt-6 px-6">
         <p className="text-center font-extrabold text-2xl text-[#333533] pb-4">Tus puntos</p>
        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 flex justify-center ">
-            <div className={`space-y-4 py-3 flex-col px-8 text-center justify-center h-full w-full rounded-md text-[#333533] font-bold text-lg flex space-x-2 items-center ${getBackgroundColor(entreprenerushipPoints)}`}>
+            <div className={` py-3 flex-col px-8 text-center justify-center h-full w-full rounded-md text-[#333533] font-bold text-lg flex space-x-2 items-center ${getBackgroundColor(entreprenerushipPoints)}`}>
                 <div className="space-y-1">
-                    <div className="text-3xl">
-                        💼
+                    <div className="text-3xl flex justify-center items-center">
+                        <Image alt="Briefcase emoji" height={30} width={30} src="https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fbriefcase.webp?alt=media&token=7091e5ba-9a24-43af-a956-4b82f1fc281b"/>
                     </div> 
                     <div className="text-center flex justify-center">
                         <p>{entreprenerushipPoints} <a className="text-sm">pts</a></p>
@@ -74,8 +74,8 @@ export default function User_Experience(props) {
             </div>
             <div className={`space-y-4 py-3 flex-col px-8  text-center justify-center h-full w-full rounded-md text-[#333533] font-bold text-lg flex space-x-2 items-center ${getBackgroundColor(socialSkillsPoints)}`}>
                 <div className="space-y-1">
-                    <div className="text-3xl ">
-                        👋
+                <div className="text-3xl flex justify-center items-center">
+                        <Image alt="Hi hand emoji" height={30} width={30} src="https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fwaving_hand.webp?alt=media&token=108db640-ffc8-4adb-88c4-2a86694bccd4"/>
                     </div> 
                     <div className="text-center flex justify-center">
                         <p>{socialSkillsPoints} <a className="text-sm">pts</a></p>
@@ -84,8 +84,8 @@ export default function User_Experience(props) {
             </div>
             <div className={`space-y-4 py-3 flex-col px-8 text-center justify-center h-full w-full rounded-md text-[#333533] font-bold text-lg flex space-x-2 items-center ${getBackgroundColor(personalFinancePoints)}`}>
                 <div className="space-y-1">
-                    <div className="text-3xl ">
-                        💶
+                <div className="text-3xl flex justify-center items-center">
+                        <Image alt="Fliying money emoji" height={30} width={30} src="https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fmoney_with_wings.webp?alt=media&token=37061431-6ed8-4109-8a76-b650601edf67"/>
                     </div> 
                     <div className="text-center flex justify-center">
                         <p>{personalFinancePoints} <a className="text-sm">pts</a></p>
@@ -94,8 +94,8 @@ export default function User_Experience(props) {
             </div>
             <div className={`space-y-4 py-3 flex-col px-8 text-center justify-center h-full w-full rounded-md text-[#333533] font-bold text-lg flex space-x-2 items-center ${getBackgroundColor(productivityPoints)}`}>
                 <div className="space-y-1">
-                    <div className="text-3xl ">
-                        👩‍💻
+                <div className="text-3xl flex justify-center items-center">
+                        <Image alt="Working man emoji" height={30} width={30} src="https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fman_technologist.webp?alt=media&token=f0dc43d7-e713-4971-923a-cc2820bece1d"/>
                     </div> 
                     <div className="text-center flex justify-center ">
                         <p>{productivityPoints} <a className="text-sm">pts</a></p>

@@ -85,11 +85,11 @@ export default function Feed_Videos_Active() {
                                                                       <div className="flex justify-center text-[#333533] font-extrabold text-sm px-4 py-2 w-max h-max bg-white rounded-md mx-2 my-2">
                                                                           <p>+{item.points} pts</p>
                                                                       </div>
-                                                                      <div className="flex justify-center items-center text-[#] font-extrabold text-base px-3 py-1.5 w-max h-max bg-white rounded-md mx-2 my-2">
-                                                                          <p>{`${(item.category == "Social Skills") ? "👋" : ""}`}</p>
-                                                                          <p>{`${(item.category == "Entrepreneurship") ? "💼" : ""}`}</p>
-                                                                          <p>{`${(item.category == "Productivity") ? "👩‍💻" : ""}`}</p>
-                                                                          <p>{`${(item.category == "Personal Finance") ? "💶" : ""}`}</p>
+                                                                      <div className="flex justify-center items-center text-[#] font-extrabold text-base px-3 py-2 w-fit h-max bg-white rounded-md mx-2 my-2">
+                                                                          <Image className={`${(item.category == "Social Skills") ? "": "hidden"}`} alt="Hi hand emoji" height={20} width={20} src={`${(item.category == "Social Skills") ? "https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fwaving_hand.webp?alt=media&token=108db640-ffc8-4adb-88c4-2a86694bccd4" : ""}`} />
+                                                                          <Image className={`${(item.category == "Entrepreneurship") ? "": "hidden"}`} alt="Briefcase emoji" height={20} width={20} src={`${(item.category == "Entrepreneurship") ? "https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fbriefcase.webp?alt=media&token=7091e5ba-9a24-43af-a956-4b82f1fc281b" : ""}`} />
+                                                                          <Image className={`${(item.category == "Productivity") ? "": "hidden"}`} alt="Man working emoji" height={20} width={20} src={`${(item.category == "Productivity") ? "https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fman_technologist.webp?alt=media&token=f0dc43d7-e713-4971-923a-cc2820bece1d" : ""}`} />
+                                                                          <Image className={`${(item.category == "Personal Finance") ? "": "hidden"}`} alt="Flying money emoji" height={20} width={20} src={`${(item.category == "Personal Finance") ? "https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fmoney_with_wings.webp?alt=media&token=37061431-6ed8-4109-8a76-b650601edf67" : ""}`} />
                                                                       </div>
                                                                 </div>
                                                         </div>

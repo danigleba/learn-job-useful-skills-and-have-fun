@@ -34,7 +34,7 @@ export default function Feed_Videos() {
                             <p className='font-extrabold text-3xl'>{item}</p>
                             <div className=' mb-10 flex gap-12 md:gap-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full mt-6 justify-start'> 
                                 {content?.map((i, index) => (                                
-                                    <a className={`${(i.tag != "" && i.tag != item /*|| i.private*/) ? "hidden" : ""} hover:scale-105 duration-200`} href={`/cursos/${i.id}`} key={`${i.id}-${index}`}>
+                                    <a className={`${(i.tag != "" && i.tag != item || i.private) ? "hidden" : ""} hover:scale-105 duration-200`} href={`/cursos/${i.id}`} key={`${i.id}-${index}`}>
                                         <div style={{
                                             backgroundImage: `url(${i?.cover_url})`,
                                             }} className="aspect-w-16 aspect-h-9 shadow-[0_8px_30px_rgb(0,0,0,0.08)]  w-full  bg-cover bg-center rounded-lg">
@@ -42,12 +42,12 @@ export default function Feed_Videos() {
                                                         <div className="flex justify-center text-[#333533] font-extrabold text-sm px-4 py-2 w-max h-max bg-white rounded-md mx-2 my-2">
                                                                       <p>+{i.points} pts</p>
                                                                   </div>
-                                                                  <div className="flex justify-center items-center text-[#] font-extrabold text-base px-3 py-1.5 w-max h-max bg-white rounded-md mx-2 my-2">
-                                                                      <p>{`${(i.category == "Social Skills") ? "👋" : ""}`}</p>
-                                                                      <p>{`${(i.category == "Entrepreneurship") ? "💼" : ""}`}</p>
-                                                                      <p>{`${(i.category == "Productivity") ? "👩‍💻" : ""}`}</p>
-                                                                      <p>{`${(i.category == "Personal Finance") ? "💶" : ""}`}</p>
-                                                                  </div>
+                                                                  <div className="flex justify-center items-center text-[#] font-extrabold text-base px-3 py-2 w-fit h-max bg-white rounded-md mx-2 my-2">
+                                                                          <Image className={`${(i.category == "Social Skills") ? "": "hidden"}`} alt="Hi hand emoji" height={20} width={20} src={`${(i.category == "Social Skills") ? "https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fwaving_hand.webp?alt=media&token=108db640-ffc8-4adb-88c4-2a86694bccd4" : ""}`} />
+                                                                          <Image className={`${(i.category == "Entrepreneurship") ? "": "hidden"}`} alt="Briefcase emoji" height={20} width={20} src={`${(i.category == "Entrepreneurship") ? "https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fbriefcase.webp?alt=media&token=7091e5ba-9a24-43af-a956-4b82f1fc281b" : ""}`} />
+                                                                          <Image className={`${(i.category == "Productivity") ? "": "hidden"}`} alt="Man working emoji" height={20} width={20} src={`${(i.category == "Productivity") ? "https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fman_technologist.webp?alt=media&token=f0dc43d7-e713-4971-923a-cc2820bece1d" : ""}`} />
+                                                                          <Image className={`${(i.category == "Personal Finance") ? "": "hidden"}`} alt="Flying money emoji" height={20} width={20} src={`${(i.category == "Personal Finance") ? "https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fmoney_with_wings.webp?alt=media&token=37061431-6ed8-4109-8a76-b650601edf67" : ""}`} />
+                                                                      </div>
                                                             </div>
                                         </div>
                                         <div className='pt-4 flex items-start gap-4'>

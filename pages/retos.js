@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react'
 import Bottombar from '@/components/Bottombar'
 import Confetti from 'react-confetti'
 import useWindowSize from 'react-use/lib/useWindowSize'
+import Image from 'next/image'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -68,19 +69,19 @@ export default function Home() {
   {challenges?.map(item => (
     <a key={item.id}>
       <div className=' h-full bg-white shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-xl p-4 flex flex-col'>
-        <div className='flex gap-4'>
-          <div className='w-2/6 bg-[#f4f4f4] rounded-md px-2 w-full px-3 py-1.5 text-[#333533] text-md font-semibold text-center'>
-            <p>{`${(item?.category == "Social Skills") ? "👋" : ""}`}</p>
-            <p>{`${(item?.category == "Entrepreneurship") ? "💼" : ""}`}</p>
-            <p>{`${(item?.category == "Productivity") ? "👩‍💻" : ""}`}</p>
-            <p>{`${(item?.category == "Personal Finance") ? "💶" : ""}`}</p>
+        <div className='flex justify-between gap-4'>
+          <div className='w-1/3 h-max justify-center flex bg-[#f4f4f4] rounded-md px-8 w-full px-3 py-1.5 text-[#333533] text-md font-semibold text-center'>
+            <Image className={`${(item.category == "Social Skills") ? "": "hidden"}`} alt="Hi hand emoji" height={22} width={22} src={`${(item.category == "Social Skills") ? "https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fwaving_hand.webp?alt=media&token=108db640-ffc8-4adb-88c4-2a86694bccd4" : ""}`} />
+            <Image className={`${(item.category == "Entrepreneurship") ? "": "hidden"}`} alt="Briefcase emoji" height={22} width={22} src={`${(item.category == "Entrepreneurship") ? "https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fbriefcase.webp?alt=media&token=7091e5ba-9a24-43af-a956-4b82f1fc281b" : ""}`} />
+            <Image className={`${(item.category == "Productivity") ? "": "hidden"}`} alt="Man working emoji" height={22} width={22} src={`${(item.category == "Productivity") ? "https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fman_technologist.webp?alt=media&token=f0dc43d7-e713-4971-923a-cc2820bece1d" : ""}`} />
+            <Image className={`${(item.category == "Personal Finance") ? "": "hidden"}`} alt="Flying money emoji" height={22} width={22} src={`${(item.category == "Personal Finance") ? "https://firebasestorage.googleapis.com/v0/b/kualify-web-fb.appspot.com/o/emojis%2Fmoney_with_wings.webp?alt=media&token=37061431-6ed8-4109-8a76-b650601edf67" : ""}`} />          </div>
+          <div className='w-2/3 justify-center flex bg-[#f4f4f4] rounded-md px-8 w-full px-3 py-1.5 text-[#333533] text-md font-semibold text-center'>
+            <p>{`${(item?.category == "Social Skills") ? "Habilidades Sociales" : ""}`}</p>
+            <p>{`${(item?.category == "Entrepreneurship") ? "Emprendimiento" : ""}`}</p>
+            <p>{`${(item?.category == "Productivity") ? "Productividad" : ""}`}</p>
+            <p>{`${(item?.category == "Personal Finance") ? "Finanzas Personales" : ""}`}</p>
           </div>
-          <div className='w-4/6 bg-[#f4f4f4] rounded-md px-2 w-full px-3 py-1.5 text-[#333533] text-md font-semibold text-center'>
-            <p className='truncate' >{`${(item?.category == "Social Skills") ? "Habilidades Sociales" : ""}`}</p>
-            <p className='truncate'>{`${(item?.category == "Entrepreneurship") ? " Emprendimiento" : ""}`}</p>
-            <p className='truncate'>{`${(item?.category == "Productivity") ? "Productividad" : ""}`}</p>
-            <p className='truncate'>{`${(item?.category == "Personal Finance") ? "Finanzas Personales" : ""}`}</p>
-          </div>
+          
         </div>
         <div className='flex-grow'></div> {/* This div will push the button to the bottom */}
           <div className='pt-6'>
