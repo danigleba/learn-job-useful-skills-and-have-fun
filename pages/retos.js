@@ -68,11 +68,19 @@ export default function Home() {
   {challenges?.map(item => (
     <a key={item.id}>
       <div className=' h-full bg-white shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-xl p-4 flex flex-col'>
-        <div className='bg-[#f4f4f4] rounded-md px-2 w-full px-3 py-1.5 text-[#333533] text-md font-semibold text-center'>
-          <p>{`${(item?.category == "Social Skills") ? "👋 Habilidades Sociales" : ""}`}</p>
-          <p>{`${(item?.category == "Entrepreneurship") ? "💼 Emprendimiento" : ""}`}</p>
-          <p>{`${(item?.category == "Productivity") ? "👩‍💻 Productividad" : ""}`}</p>
-          <p>{`${(item?.category == "Personal Finance") ? "💶 Finanzas Personales" : ""}`}</p>
+        <div className='flex gap-4'>
+          <div className='w-1/5 bg-[#f4f4f4] rounded-md px-2 w-full px-3 py-1.5 text-[#333533] text-md font-semibold text-center'>
+            <p>{`${(item?.category == "Social Skills") ? "👋" : ""}`}</p>
+            <p>{`${(item?.category == "Entrepreneurship") ? "💼" : ""}`}</p>
+            <p>{`${(item?.category == "Productivity") ? "👩‍💻" : ""}`}</p>
+            <p>{`${(item?.category == "Personal Finance") ? "💶" : ""}`}</p>
+          </div>
+          <div className='w-4/5 bg-[#f4f4f4] rounded-md px-2 w-full px-3 py-1.5 text-[#333533] text-md font-semibold text-center'>
+            <p>{`${(item?.category == "Social Skills") ? "Habilidades Sociales" : ""}`}</p>
+            <p>{`${(item?.category == "Entrepreneurship") ? " Emprendimiento" : ""}`}</p>
+            <p>{`${(item?.category == "Productivity") ? "Productividad" : ""}`}</p>
+            <p>{`${(item?.category == "Personal Finance") ? "Finanzas Personales" : ""}`}</p>
+          </div>
         </div>
         <div className='flex-grow'></div> {/* This div will push the button to the bottom */}
           <div className='pt-6'>

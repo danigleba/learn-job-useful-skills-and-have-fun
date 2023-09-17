@@ -79,7 +79,7 @@ export default function Navbar(props) {
                     <IoIosArrowDown />
                   </div>
                   <div className=''>
-                      <p className='hidden md:flex font-semibold text-xl w-max'>{user?.displayName}</p>
+                      <p className='hidden md:flex font-semibold text-lg w-max'>{user?.displayName}</p>
                   </div>
                   <div>
                       <div style={{ backgroundImage: `url(${user?.photoURL})`}} className="bg-cover w-11 h-11 rounded-full bg-[#333533] flex items-center justify-center text-white font-extrabold text-lg">

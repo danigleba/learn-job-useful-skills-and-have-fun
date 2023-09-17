@@ -95,7 +95,7 @@ export default function Id() {
                         <button className="py-3 hover:scale-105 duration-200 rounded-lg bg-[#333533] ring-transparent text-white px-6 sm:px-12 rounded-lg font-bold text-center text-base" onClick={goIndex} >Ver más videos</button>
                     </div>
                     <Feed_Videos_Active />
-                    <p className='pt-16 md:pt-12 text-[#333533] font-extrabold text-4xl'>Explora todos los vídeos</p>
+                    <p className='pt-16 md:pt-12 text-[#333533] font-extrabold text-4xl px-6'>Explora todos los vídeos</p>
                     <Feed_Videos />
                <Footer />
             </main>
