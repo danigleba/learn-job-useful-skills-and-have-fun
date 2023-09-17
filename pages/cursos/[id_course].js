@@ -178,7 +178,7 @@ export default function Id() {
             <main className="text-center">
                 <Navbar />
                 <Bottombar />  
-                <div className="pt-12">
+                <div className="pt-10">
                     <div className="pl-6 pr-6 pb-6">
                         {course?.tags?.map(item => (
                             <a key={item}>
