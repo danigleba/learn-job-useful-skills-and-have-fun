@@ -57,7 +57,7 @@ export default function Login() {
     return (
     <>
         <Head>
-            <title>Kualify | Crea tu cuenta</title>
+            <title>Kualify | Inicia sesión</title>
             <meta name="description" content="Your meta description goes here" />
             <meta name="author" content="Kualify App" />
             <link rel="icon" href="/icon.png" />
