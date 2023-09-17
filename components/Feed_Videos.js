@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import Image from 'next/image'
 
-export default function Feed() {
+export default function Feed_Videos() {
     const [content, setContent] = useState([])
     const [selectedTag, setSelectedTag] = useState("")
     const tags = ["Emprendimiento", "Habilidades Sociales", "Finanzas Personales", "Productividad"]
@@ -18,7 +18,7 @@ export default function Feed() {
 }, [])
     return (
         <>  
-            <div className=' mx-8 md:mx-24 gap-4 flex text-center items-center pt-12 pb-2 overflow-x-scroll scrollbar-hide justify-start lg:justify-center'>   
+            <div className='mx-8 md:mx-24 gap-4 flex text-center items-center pt-8 pb-2 overflow-x-scroll scrollbar-hide justify-start lg:justify-center'>   
                 {tags?.map((item, index) => (                                
                                     <a key={`${item}-${index}`}>
                                         <button onClick={() => selectTag(item)} className={`${(selectedTag == item) ? "bg-[#333533] text-white" : "bg-[#f4f4f4] text-[#333533]"} hover:bg-[#333533] hover:text-white duration-200  cursor-pointer px-4 py-2 rounded-md font-semibold text-xs md:text-sm`}>
@@ -34,10 +34,21 @@ export default function Feed() {
                             <p className='font-extrabold text-3xl'>{item}</p>
                             <div className=' mb-10 flex gap-12 md:gap-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full mt-6 justify-start'> 
                                 {content?.map((i, index) => (                                
-                                    <a className={`${(i.tag != "" && i.tag != item || i.private) ? "hidden" : ""} hover:scale-105 duration-200`} href={`/cursos/${i.id}`} key={`${i.id}-${index}`}>
+                                    <a className={`${(i.tag != "" && i.tag != item /*|| i.private*/) ? "hidden" : ""} hover:scale-105 duration-200`} href={`/cursos/${i.id}`} key={`${i.id}-${index}`}>
                                         <div style={{
                                             backgroundImage: `url(${i?.cover_url})`,
                                             }} className="aspect-w-16 aspect-h-9 shadow-[0_8px_30px_rgb(0,0,0,0.08)]  w-full  bg-cover bg-center rounded-lg">
+                                                    <div className="flex justify-between">
+                                                        <div className="flex justify-center text-[#333533] font-extrabold text-sm px-4 py-2 w-max h-max bg-white rounded-md mx-2 my-2">
+                                                                      <p>+{i.points} pts</p>
+                                                                  </div>
+                                                                  <div className="flex justify-center items-center text-[#] font-extrabold text-base px-3 py-1.5 w-max h-max bg-white rounded-md mx-2 my-2">
+                                                                      <p>{`${(i.category == "Social Skills") ? "👋" : ""}`}</p>
+                                                                      <p>{`${(i.category == "Entrepreneurship") ? "💼" : ""}`}</p>
+                                                                      <p>{`${(i.category == "Productivity") ? "👩‍💻" : ""}`}</p>
+                                                                      <p>{`${(i.category == "Personal Finance") ? "💶" : ""}`}</p>
+                                                                  </div>
+                                                            </div>
                                         </div>
                                         <div className='pt-4 flex items-start gap-4'>
                                             <Image 

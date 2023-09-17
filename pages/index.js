@@ -2,9 +2,11 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import Feed from '@/components/Feed-Videos'
+import Feed_Videos from '@/components/Feed_Videos'
+import Feed_Videos_Active from '@/components/Feed_Videos_Active'
 import {useRouter} from 'next/router';
 import { useState } from 'react'
+import Bottombar from '@/components/Bottombar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,11 +29,13 @@ export default function Home() {
       </Head>
       <main>
         <Navbar page={page} />
+        <Bottombar page={page}/>
         <div>
-            <div className='pt-6 md:pt-12 px-8'>
-                <p className='font-extrabold text-4xl text-[#333533] text-center flex justify-center'>¿Cómo vas a mejorar hoy?</p>
+            <Feed_Videos_Active />
+            <div className='pt-12 md:pt-12 px-8'>
+                <p className='font-extrabold text-4xl text-[#333533] text-center flex justify-center'>Explora todos lo vídeos</p>
             </div>
-            <Feed/>
+            <Feed_Videos/>
         </div>
         <Footer />
       </main>

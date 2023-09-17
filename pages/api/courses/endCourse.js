@@ -2,10 +2,9 @@ import { db } from '../../../utils/firebase/index';
 import { collection, updateDoc, getDocs, query, where} from "firebase/firestore";
 
 export default async function handler(req, res) {
-    const index = req.query.index
     const id_course = req.query.id_course
     const email = req.query.email
-    const collectionRef = collection(db, "user_progress");
+    const collectionRef = collection(db, "user_progress")
     const docSnap = query(collectionRef, where("id_course", "==", id_course), where("user_email", "==", email))
 
     try {
@@ -14,7 +13,7 @@ export default async function handler(req, res) {
 
         querySnap.forEach((doc) => {
             const updatePromise = updateDoc(doc.ref, {
-                active_step: index
+                completed: true
             })
             updatePromises.push(updatePromise)
         })

@@ -7,6 +7,7 @@ import Footer from '@/components/Footer'
 import Playlist from "@/components/Playlist"
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '@/utils/firebase'
+import Bottombar from '@/components/Bottombar'
 
 import YouTubeVideo from '@/components/Youtube';
 
@@ -114,6 +115,14 @@ export default function Id() {
     router.reload()
   }
 
+  function endCourse() {   
+    const url = "/api/courses/endCourse?id_course=" + id_course + "&email=" + user?.email
+    fetch(url)
+        .then(response => response.json())
+    router.push(`/cursos/completado/${id_course}`)
+  }
+
+
     useEffect(() => {       
         handleGetCourse()
     }, [id_course])
@@ -167,7 +176,8 @@ export default function Id() {
                 <script src="https://www.youtube.com/iframe_api"></script>
             </Head>    
             <main className="text-center">
-                <Navbar />  
+                <Navbar />
+                <Bottombar />  
                 <div className="pt-12">
                     <div className="pl-6 pr-6 pb-6">
                         {course?.tags?.map(item => (
@@ -191,6 +201,8 @@ export default function Id() {
                     <div className="pb-16 pt-10 mx-6 space-y-4 space-x-2 sm:space-x-4">
                         <button className={`py-3 hover:scale-105 duration-200 rounded-lg bg-[#f4f4f4] ring-transparent text-[#333533] px-6 sm:px-12 rounded-lg font-bold text-center text-base; ${activeStep > 0 ? "inline-block" : "hidden"}`} onClick={goBack} >Atrás</button>
                         <button className={`btn-primary hover:scale-105 shadow-[0_8px_30px_rgb(0,0,0,0.08)] duration-200 ${((parseInt(activeStep)+1) >= course?.steps?.length) ? "hidden" : "inline-block"}`} onClick={openModal}>Continuar</button>
+                        <button className={`py-3 hover:scale-105 duration-200 rounded-lg bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-yellow-200 via-emerald-200 to-yellow-200 ring-transparent text-[#333533] px-6 sm:px-12 rounded-lg font-bold text-center text-base; ${((parseInt(activeStep) + 1) == course?.steps?.length) ? "" : "hidden"}`} onClick={endCourse} >Completar curso</button>
+
                     </div>
                     <Transition appear show={isOpen} as={Fragment}>
                         <Dialog as="div" className="relative z-10" onClose={closeModal}>

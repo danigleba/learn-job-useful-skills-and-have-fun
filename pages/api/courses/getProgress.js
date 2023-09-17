@@ -18,7 +18,8 @@ export default async function (req, res) {
                     user_email: email,
                     id_course: id_course,
                     active_step: 0,
-                    limit_step: 0
+                    limit_step: 0,
+                    completed: false
                 })
                 const updatedQuerySnap = await getDocs(docSnap)
                 res.status(200).json({ progress : updatedQuerySnap.docs[0].data() })
