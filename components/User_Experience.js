@@ -60,8 +60,8 @@ export default function User_Experience(props) {
       }
     return (
     <main className="w-full md:w-max pt-6 px-6">
-        <p className="text-center font-extrabold text-2xl text-[#333533] pb-4">Tus puntos</p>
-       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 flex justify-center ">
+        <p className="text-center font-extrabold text-3xl pt-4 text-[#333533] pb-4">Tus puntos</p>
+       <div className="bg-white shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-4 rounded-xl grid grid-cols-2 md:grid-cols-4 gap-4 flex justify-center ">
             <div className={` py-3 flex-col px-8 text-center justify-center h-full w-full rounded-md text-[#333533] font-bold text-lg flex space-x-2 items-center ${getBackgroundColor(entreprenerushipPoints)}`}>
                 <div className="space-y-1">
                     <div className="text-3xl flex justify-center items-center">
@@ -104,7 +104,7 @@ export default function User_Experience(props) {
             </div>
 
        </div>
-       <div className="flex justify-center bg-white shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-md p-4 mt-6">
+       <div className="flex justify-center p-4 mt-6">
         <div className="grid grid-cols-3 gap-4 font-extrabold text-sm md:text-md text-[#333533] w-full">
              
                 <div className="bg-gradient-to-r from-rose-400 to-orange-300 h-12 w-full text-center rounded-md">

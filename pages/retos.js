@@ -94,7 +94,7 @@ export default function Home() {
           </div>
         <div className='flex-grow'></div> {/* This div will push the button to the bottom */}
         <div className=''>
-          <button onClick={runConfetti} className='hover:shadow-[0_8px_30px_rgb(0,0,0,0.05)] duration-200 self-end text-center bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-yellow-200 via-emerald-200 to-yellow-200  w-full py-3 text-[#333533] font-bold rounded-md align-bottom duration-200'>
+          <button onClick={runConfetti} className='duration-200 self-end text-center bg-[#333533] hover:bg-[#f4f4f4] hover:text-[#333533]  w-full py-3 text-white font-bold rounded-md align-bottom duration-200'>
             ¡Lo he hecho!
           </button>
         </div>

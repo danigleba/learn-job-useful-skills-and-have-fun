@@ -76,11 +76,11 @@ export default function Login() {
                                 Inicia sesión
                             </h1>
                                 <div className="flex-1 flex flex-col items-center">
-                                    <button onClick={handleGoogleSignIn} className='flex items-center justify-center border-2 border-[#333533] rounded-xl py-2 w-full text-[#333533] font-bold'>
+                                    <button onClick={handleGoogleSignIn} className='flex items-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] justify-center border-2 border-[#f4f4f4] rounded-xl py-2 w-full text-[#333533] font-bold'>
                                         <Image alt="Google logo" className='mr-2' height={20} width={20} src="/logos/googlepay.webp"></Image>
                                         Entrar con Google</button>
                                 </div>
-                                <hr className="my-12 h-0.5 border-t-0 bg-[#f4f4f4]" />  
+                                <hr className="my-12 rounded-full h-0.5 border-t-0 bg-[#f4f4f4]" />  
                                 <div>
                                     <label htmlFor="email" className="block mb-2 text-sm font-medium">Email</label>
                                     <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="placeholder-[#c9c9c9] border border-[#333533] text-gray-900 sm:text-sm rounded-xl block w-full p-2.5" placeholder="email@ejemplo.com" required="" />
@@ -91,7 +91,7 @@ export default function Login() {
                                 </div>                               
                                 <div className="flex-1 flex flex-col items-center">
                                     <button onClick={handleEmailSignIn} className='flex items-center justify-center border-2 border-[#333533] rounded-xl py-2 w-full text-white bg-[#333533] font-bold'>
-                                        Entra con correo electrónico
+                                        Iniciar sesión 
                                     </button>
                                     <p className='text-center pt-2 text-sm text-red-600 font-light'>{problem}</p>
                                 </div>

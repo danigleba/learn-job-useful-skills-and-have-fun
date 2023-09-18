@@ -65,7 +65,7 @@ export default function Login() {
                             </h1>
                             
                                 <div className="flex-1 flex flex-col items-center pt-2">
-                                    <button onClick={handleGoogleSignIn} className='flex items-center justify-center border-2 border-[#333533] rounded-xl py-2 w-full text-[#333533] font-bold'>
+                                    <button onClick={handleGoogleSignIn} className='flex items-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] justify-center border-2 border-[#f4f4f4] rounded-xl py-2 w-full text-[#333533] font-bold'>
                                         <Image alt="Google logo" className='mr-2' height={20} width={20} src="/logos/googlepay.webp"></Image>
                                         Usar mi cuenta de Google</button>
                                 </div>
